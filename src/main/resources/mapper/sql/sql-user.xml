@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board.mapper.UserMapper">
+    <insert id="insertUser" parameterType="board.dto.UserDto">
+        <![CDATA[
+            INSERT INTO t_user
+                (
+                     username,
+                     password,
+                     email,
+                     nick_name,
+                     join_date
+                 )
+            VALUES
+                (
+                     #{username},
+                     #{password},
+                     #{email},
+                     #{nickName},
+                     now()
+                 )
+        ]]>
+    </insert>
+    <!--  로그인 로직 어케짜야하는거임  -->
+
+</mapper>
