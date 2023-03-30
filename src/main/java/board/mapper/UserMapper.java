@@ -5,7 +5,9 @@ import board.dto.UserDto;
 
 @Mapper
 public interface UserMapper {
-    void insertUser(UserDto userDto) throws Exception;
+    int insertUser(UserDto userDto) throws Exception;
 
     void loginProc(UserDto userDto) throws Exception;
+
+    int idCheck(String username) throws Exception;
 }

@@ -12,12 +12,23 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public void insertUser(UserDto userDto) throws Exception {
-        userMapper.insertUser(userDto);
+    public int insertUser(UserDto userDto) throws Exception {
+        int result = userMapper.insertUser(userDto);
+        System.out.println(result);
+        return result;
+    }
+
+    @Override
+    public int idCheck(String username) throws Exception {
+        int result = userMapper.idCheck(username);
+        System.out.println("result:"+result);
+        return result;
     }
 
     @Override
     public void loginProc(UserDto userDto) throws Exception {
         userMapper.loginProc(userDto);
     }
+
+
 }

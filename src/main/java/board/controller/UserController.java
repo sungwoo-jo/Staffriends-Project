@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import board.dto.UserDto;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Controller
 public class UserController {
 
@@ -18,6 +21,16 @@ public class UserController {
     @RequestMapping("/user/joinForm")
     public String join() {
         return "/user/joinForm";
+    }
+
+    @PostMapping("/user/join/idCheck")
+    @ResponseBody
+    public Map<String, Integer> idCheck(@RequestBody String username) throws Exception {
+        username = username.replace("\"", ""); // json 포맷의 쌍따옴표 치환
+        int count = userService.idCheck(username);
+        Map<String, Integer> map = new HashMap<>();
+        map.put("count", count);
+        return map;
     }
 
     @PostMapping("/user/join/insert")

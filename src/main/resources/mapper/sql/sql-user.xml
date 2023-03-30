@@ -23,6 +23,17 @@
                  )
         ]]>
     </insert>
+
+    <select id="idCheck" parameterType="String" resultType="Integer">
+        <![CDATA[
+            SELECT
+                count(*) as username
+            FROM
+                t_user
+            WHERE
+                username = #{username}
+        ]]>
+    </select>
     <!--  로그인 로직 어케짜야하는거임  -->
 
 </mapper>
