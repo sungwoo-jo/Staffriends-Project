@@ -28,32 +28,32 @@
   </button>
   <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
   <%-- 비로그인 시 --%>
-<%--      <ul class="navbar-nav">--%>
-<%--        <li class="nav-item">--%>
-<%--          <a class="nav-link" href="/auth/joinForm">회원가입</a>--%>
-<%--        </li>--%>
-<%--        <li class="nav-item">--%>
-<%--          <a class="nav-link" href="/auth/loginForm">로그인</a>--%>
-<%--        </li>--%>
-<%--      </ul>--%>
-  <%-- 로그인 시 --%>
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="/guard">보호자페이지</a>
+          <a class="nav-link" href="/user/joinForm">회원가입</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/board">커뮤니티</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/board/boardWrite">글쓰기</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/user/updateForm">~~님</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/logout">로그아웃</a>
+          <a class="nav-link" href="/user/loginForm">로그인</a>
         </li>
       </ul>
+  <%-- 로그인 시 --%>
+<%--      <ul class="navbar-nav">--%>
+<%--        <li class="nav-item">--%>
+<%--          <a class="nav-link" href="/guard">보호자페이지</a>--%>
+<%--        </li>--%>
+<%--        <li class="nav-item">--%>
+<%--          <a class="nav-link" href="/board">커뮤니티</a>--%>
+<%--        </li>--%>
+<%--        <li class="nav-item">--%>
+<%--          <a class="nav-link" href="/board/boardWrite">글쓰기</a>--%>
+<%--        </li>--%>
+<%--        <li class="nav-item">--%>
+<%--          <a class="nav-link" href="/user/updateForm">~~님</a>--%>
+<%--        </li>--%>
+<%--        <li class="nav-item">--%>
+<%--          <a class="nav-link" href="/logout">로그아웃</a>--%>
+<%--        </li>--%>
+<%--      </ul>--%>
   </div>
 </nav>
 <br>
