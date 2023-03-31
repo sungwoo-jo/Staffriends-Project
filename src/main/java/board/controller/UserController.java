@@ -50,13 +50,11 @@ public class UserController {
 
     @PostMapping("/checkUser")
     @ResponseBody
-//    public String checkUser(@RequestBody String username, @RequestBody String password) throws Exception {
-    public String checkUser(@RequestBody Map<String, String> userInfo) throws Exception {
-        System.out.println("checkUser 들어옴");
-        String username = userInfo.get("username");
-        String password = userInfo.get("password");
-        userService.checkUser(userInfo);
-        System.out.println(userService.checkUser(userInfo));
-        return "redirect:/";
+    public Map<String, Integer> checkUser(@RequestBody HashMap<String, String> userInfo) throws Exception {
+//    public Map<String, Integer> checkUser(@RequestBody HashMap<String, String> userInfo) throws Exception {
+        int count = userService.checkUser(userInfo);
+        Map<String, Integer> map = new HashMap<>();
+        map.put("count", count);
+        return map;
     }
 }
