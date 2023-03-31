@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import board.dto.UserDto;
 import board.mapper.UserMapper;
 
+import java.util.Map;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -25,8 +27,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void loginProc(UserDto userDto) throws Exception {
-        userMapper.loginProc(userDto);
+    public Integer checkUser(Map<String, String> userInfo) throws Exception {
+        return userMapper.checkUser(userInfo);
     }
 
 

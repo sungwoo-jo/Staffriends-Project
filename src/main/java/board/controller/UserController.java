@@ -43,14 +43,20 @@ public class UserController {
         userService.insertUser(userDto);
     }
 
-    @GetMapping("/login")
-    public String loginProc() throws Exception {
-        return "/user/loginProc";
+    @GetMapping("/loginForm")
+    public String login() throws Exception {
+        return "/user/loginForm";
     }
 
-    @PostMapping("/loginProc")
-    public String loginProc(UserDto userDto) throws Exception {
-        userService.loginProc(userDto);
+    @PostMapping("/checkUser")
+    @ResponseBody
+//    public String checkUser(@RequestBody String username, @RequestBody String password) throws Exception {
+    public String checkUser(@RequestBody Map<String, String> userInfo) throws Exception {
+        System.out.println("checkUser 들어옴");
+        String username = userInfo.get("username");
+        String password = userInfo.get("password");
+        userService.checkUser(userInfo);
+        System.out.println(userService.checkUser(userInfo));
         return "redirect:/";
     }
 }

@@ -35,5 +35,15 @@
         ]]>
     </select>
     <!--  로그인 로직 어케짜야하는거임  -->
+    <select id="checkUser" parameterType="hashMap" resultType="Integer">
+        <![CDATA[
+            SELECT
+                count(*)
+            FROM
+                t_user
+            WHERE
+                username = #{username} AND password = #{password}
+        ]]>
+    </select>
 
 </mapper>
