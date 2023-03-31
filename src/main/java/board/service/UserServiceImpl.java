@@ -14,7 +14,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public int insertUser(UserDto userDto) throws Exception {
         int result = userMapper.insertUser(userDto);
-        System.out.println(result);
         return result;
     }
 

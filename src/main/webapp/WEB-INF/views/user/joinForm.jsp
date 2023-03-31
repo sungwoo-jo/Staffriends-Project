@@ -10,6 +10,9 @@
         비밀번호:<input type="password" class="form-control" placeholder="비밀번호를 입력하세요." name="password" id="password">
     </div>
     <div class="form-group">
+        비밀번호확인:<input type="password" class="form-control" placeholder="비밀번호를 입력하세요." name="password" id="validPassword">
+    </div>
+    <div class="form-group">
         닉네임:<input type="text" class="form-control" placeholder="닉네임을 입력하세요." name="nickName" id="nickname">
     </div>
     <div class="form-group">
@@ -23,6 +26,7 @@
     function join() {
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
+        const validPassword = document.getElementById('validPassword').value;
         const nickname = document.getElementById('nickname').value;
         const email = document.getElementById('email').value;
         let usernameCheck = /^[a-zA-Z0-9_-]{7,20}$/;
@@ -32,6 +36,7 @@
 
         if (username.trim() === '') { // 입력값이 없는 경우
             alert('아이디를 입력해주세요.');
+            document.getElementById('username').focus();
             return false;
         };
         if (!validUsername) { // 중복확인을 안한 경우
@@ -47,6 +52,7 @@
 
         if (password.trim() === '') { // 입력값이 없는 경우
             alert('비밀번호를 입력해주세요.');
+            document.getElementById('password').focus();
             return false;
         };
         if (!passwordCheck.test(password)) { // 양식에 맞지 않는 경우
@@ -55,8 +61,20 @@
             return false;
         };
 
+        if (validPassword.trim() === '') {
+            alert('비밀번호를 한번 더 입력해주세요.');
+            document.getElementById('validPassword').focus();
+            return false;
+        }
+        if (password != validPassword) {
+            alert('입력한 비밀번호가 다릅니다. \n다시 확인해주세요.');
+            document.getElementById('validPassword').focus();
+            return false;
+        }
+
         if (nickname.trim() === '') { // 입력값이 없는 경우
             alert('닉네임을 입력해주세요.');
+            document.getElementById('nickname').focus();
             return false;
         };
         if (!nicknameCheck.test(nickname)) { // 양식에 맞지 않는 경우
@@ -67,6 +85,7 @@
 
         if (email.trim() === '') { // 입력값이 없는 경우
             alert('이메일을 입력해주세요.');
+            document.getElementById('email').focus();
             return false;
         };
         if (!emailCheck.test(email)) { // 양식에 맞지 않는 경우
@@ -75,14 +94,41 @@
             return false;
         };
 
-        document.getElementById("joinFrm").sub
+        // 유효성 검사 완료 후 실행할 로직
+        // json 데이터로 변환
+        let data = {
+            username:username,
+            password:password,
+            nickname:nickname,
+            email:email
+        };
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "/user/join/insert");
+        xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+        xhr.onload = function() {
+            if (xhr.status === 200 || xhr.status === 201) {
+                let resp = xhr.responseText;
+                if (resp.status === 500) {
+                    alert("에러가 발생했습니다.");
+                } else {
+                    alert("회원가입이 완료되었습니다.");
+                    location.href = "/";
+                }
+            } else {
+                console.log(xhr.responseText);
+                alert("Request failed. Status: " + xhr.status);
+            }
+        };
+        xhr.onerror = function() {
+            alert("Request failed. Status: " + xhr.status);
+        };
+        xhr.send(JSON.stringify(data));
     }
 
-    function idCheck() {
-        let username = document.querySelector("#username").value;
-        if(username == null || username == undefined || username == ""){ alert('아이디를 입력해주세요.'); document.getElementById('username').focus(); return;}
+    function idCheck() { // 아이디 중복확인
+        let username = document.getElementById('username').value;
 
-        // 유효성 검사 완료 후 실행할 로직
         // json 데이터로 변환
         let data = {username:username};
 
@@ -93,17 +139,16 @@
             if (xhr.status === 200 || xhr.status === 201) {
                 let resp = xhr.responseText;
                 if (resp.status === 500) {
-                    alert("회원가입실패");
+                    alert("에러가 발생했습니다.");
                 } else {
                     let result = JSON.parse(resp);
                     let divElement = document.getElementById('chkDiv');
                     let aElement = document.createElement('a');
                     if(result.count > 0) {
-                        console.log("아이디 존재");
-                        aElement.innerHTML = '사용 불가.';
+                        aElement.innerHTML = '이미 존재하는 아이디입니다.';
                     } else {
                         console.log(result.count);
-                        aElement.innerHTML = '사용 가능.';
+                        aElement.innerHTML = '사용이 가능한 아이디입니다.';
                     }
                     divElement.innerHTML = '';
                     divElement.appendChild(aElement);

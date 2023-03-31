@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import board.dto.UserDto;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,7 +36,10 @@ public class UserController {
     @PostMapping("/join/insert")
     @ResponseBody
     public void joinUser(@RequestBody UserDto userDto) throws Exception{
-        System.out.println(userDto);
+        MessageDigest md = MessageDigest.getInstance("SHA-512");
+        md.reset();
+        md.update(userDto.getPassword().getBytes("UTF8"));
+        userDto.setPassword(String.format("%0128x", new BigInteger(1, md.digest())));
         userService.insertUser(userDto);
     }
 
