@@ -1,9 +1,9 @@
-package board.dto;
+package board.vo;
 
 import lombok.Data;
 
 @Data
-public class BoardDto {
+public class BoardVo {
     private int boardIdx;
     private String title;
     private String contents;

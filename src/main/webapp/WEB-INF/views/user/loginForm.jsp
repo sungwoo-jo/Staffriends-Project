@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="../layout/header.jsp"%>
 <form method="post">
     <div class="form-group">
         아이디:<input type="text" class="form-control" placeholder="아이디를 입력하세요." name="username" id="username">
@@ -6,7 +7,7 @@
     <div class="form-group">
         비밀번호:<input type="password" class="form-control" placeholder="비밀번호를 입력하세요." name="password" id="password">
     </div>
-    <input type="button" value="전송" onclick="loginCheck()" >
+    <input type="button" value="로그인" onclick="loginCheck()" >
 </form>
 
 <script>
@@ -40,7 +41,7 @@
                     alert("에러가 발생했습니다.");
                 } else {
                     let result = JSON.parse(resp);
-                    if (result.count) {
+                    if (result.result) {
                         alert("로그인이 완료되었습니다.");
                         location.href = "/";
                     } else {
@@ -58,7 +59,4 @@
         };
         xhr.send(JSON.stringify(data));
     }
-
-
-
 </script>

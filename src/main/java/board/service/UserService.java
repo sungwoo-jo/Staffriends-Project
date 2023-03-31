@@ -1,16 +1,17 @@
 package board.service;
 
-import board.dto.UserDto;
+import board.vo.UserVo;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.Map;
 
 @Service
 public interface UserService {
-    int insertUser(UserDto userDto) throws Exception;
+    int insertUser(UserVo userVo) throws Exception;
 
     Integer checkUser(HashMap<String, String> userInfo) throws Exception;
 
     int idCheck(String username) throws Exception;
+
+    UserVo getUserInfo(int count);
 }

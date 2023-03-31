@@ -2,11 +2,10 @@ package board.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import board.dto.UserDto;
+import board.vo.UserVo;
 import board.mapper.UserMapper;
 
 import java.util.HashMap;
-import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -15,8 +14,8 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public int insertUser(UserDto userDto) throws Exception {
-        int result = userMapper.insertUser(userDto);
+    public int insertUser(UserVo userVo) throws Exception {
+        int result = userMapper.insertUser(userVo);
         return result;
     }
 
@@ -32,5 +31,8 @@ public class UserServiceImpl implements UserService {
         return userMapper.checkUser(userInfo);
     }
 
-
+    @Override
+    public UserVo getUserInfo(int count) {
+        return userMapper.getUserInfo(count);
+    }
 }

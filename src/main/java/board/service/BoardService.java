@@ -1,17 +1,17 @@
 package board.service;
 
-import board.dto.BoardDto;
+import board.vo.BoardVo;
 
 import java.util.List;
 
 public interface BoardService {
-    List<BoardDto> selectBoardList() throws Exception;
+    List<BoardVo> selectBoardList() throws Exception;
 
-    void insertBoard(BoardDto boardDto) throws Exception;
+    void insertBoard(BoardVo boardVo) throws Exception;
 
-    BoardDto selectBoardDetail(int boardIdx) throws Exception;
+    BoardVo selectBoardDetail(int boardIdx) throws Exception;
 
-    void updateBoard(BoardDto boardDto) throws Exception;
+    void updateBoard(BoardVo boardVo) throws Exception;
 
-    void deleteBoard(BoardDto boardDto) throws Exception;
+    void deleteBoard(BoardVo boardVo) throws Exception;
 }

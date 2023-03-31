@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="../layout/header.jsp"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

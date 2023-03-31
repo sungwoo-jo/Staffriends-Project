@@ -1,5 +1,5 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="../layout/header.jsp"%>
 <html>
 <body>
 <form id="joinFrm" method="post">
@@ -19,7 +19,7 @@
         이메일:<input type="text" class="form-control" placeholder="이메일을 입력하세요." name="email" id="email">
     </div>
 </form>
-<input type="button" value="전송" onclick="join()">
+<input type="button" value="회원가입" onclick="join()">
 
 <script>
     let validUsername = false;

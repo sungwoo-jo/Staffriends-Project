@@ -4,8 +4,9 @@ import board.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import board.dto.UserDto;
+import board.vo.UserVo;
 
+import javax.servlet.http.HttpSession;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.util.HashMap;
@@ -35,12 +36,12 @@ public class UserController {
 
     @PostMapping("/join/insert")
     @ResponseBody
-    public void joinUser(@RequestBody UserDto userDto) throws Exception{
+    public void joinUser(@RequestBody UserVo userVo) throws Exception{
         MessageDigest md = MessageDigest.getInstance("SHA-512");
         md.reset();
-        md.update(userDto.getPassword().getBytes("UTF8"));
-        userDto.setPassword(String.format("%0128x", new BigInteger(1, md.digest())));
-        userService.insertUser(userDto);
+        md.update(userVo.getPassword().getBytes("UTF8"));
+        userVo.setPassword(String.format("%0128x", new BigInteger(1, md.digest())));
+        userService.insertUser(userVo);
     }
 
     @GetMapping("/loginForm")
@@ -50,11 +51,12 @@ public class UserController {
 
     @PostMapping("/checkUser")
     @ResponseBody
-    public Map<String, Integer> checkUser(@RequestBody HashMap<String, String> userInfo) throws Exception {
-//    public Map<String, Integer> checkUser(@RequestBody HashMap<String, String> userInfo) throws Exception {
-        int count = userService.checkUser(userInfo);
+    public Map<String, Integer> checkUser(@RequestBody HashMap<String, String> userInfo, HttpSession session) throws Exception {
+        int result = userService.checkUser(userInfo);
+        UserVo userVo = userService.getUserInfo(result);
+        session.setAttribute("signIn", userVo);
         Map<String, Integer> map = new HashMap<>();
-        map.put("count", count);
+        map.put("result", result);
         return map;
     }
 }
