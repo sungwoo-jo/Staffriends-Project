@@ -14,4 +14,6 @@ public interface UserMapper {
     int idCheck(String username) throws Exception;
 
     UserVo getUserInfo(int count);
+
+    void updateProc(HashMap<String, String> map);
 }

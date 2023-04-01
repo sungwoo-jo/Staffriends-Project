@@ -16,13 +16,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public int insertUser(UserVo userVo) throws Exception {
         int result = userMapper.insertUser(userVo);
+        System.out.println(result);
         return result;
     }
 
     @Override
     public int idCheck(String username) throws Exception {
         int result = userMapper.idCheck(username);
-        System.out.println("result:"+result);
         return result;
     }
 
@@ -34,5 +34,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserVo getUserInfo(int count) {
         return userMapper.getUserInfo(count);
+    }
+
+    @Override
+    public void updateProc(HashMap<String, String> map) {
+        userMapper.updateProc(map);
     }
 }

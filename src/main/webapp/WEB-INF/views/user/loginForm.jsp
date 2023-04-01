@@ -55,6 +55,7 @@
             }
         };
         xhr.onerror = function() {
+            console.log(xhr.responseText);
             alert("Request failed. Status: " + xhr.status);
         };
         xhr.send(JSON.stringify(data));

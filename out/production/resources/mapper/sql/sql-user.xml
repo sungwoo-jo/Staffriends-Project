@@ -56,4 +56,17 @@
                 id = #{id}
         ]]>
     </select>
+
+    <update id="updateProc" parameterType="hashMap">
+        <![CDATA[
+            UPDATE
+                t_user
+            SET
+                password = #{password},
+                nickname = #{nickname},
+                email = #{email}
+            WHERE
+                id = #{id}
+        ]]>
+    </update>
 </mapper>

@@ -4,16 +4,16 @@
 <body>
 <form id="joinFrm" method="post">
     <div class="form-group">
-        아이디:<input type="text" class="form-control" placeholder="아이디를 입력하세요." name="username" id="username"> <button type="button" onclick="idCheck()">중복확인</button><div id="chkDiv"></div>
+        아이디:<input type="text" class="form-control" placeholder="영문 대/소문자, 숫자, 언더바/하이픈 포함 7~20자" name="username" id="username"> <button type="button" onclick="idCheck()">중복확인</button><div id="chkDiv"></div>
     </div>
     <div class="form-group">
-        비밀번호:<input type="password" class="form-control" placeholder="비밀번호를 입력하세요." name="password" id="password">
+        비밀번호:<input type="password" class="form-control" placeholder="문자/숫자 포함 8자리 이상" name="password" id="password">
     </div>
     <div class="form-group">
-        비밀번호확인:<input type="password" class="form-control" placeholder="비밀번호를 입력하세요." name="password" id="validPassword">
+        비밀번호확인:<input type="password" class="form-control" placeholder="비밀번호를 한번 더 입력하세요." name="password" id="validPassword">
     </div>
     <div class="form-group">
-        닉네임:<input type="text" class="form-control" placeholder="닉네임을 입력하세요." name="nickName" id="nickname">
+        닉네임:<input type="text" class="form-control" placeholder="한글, 영문 대/소문자, 숫자 포함 2~15자" name="nickName" id="nickname">
     </div>
     <div class="form-group">
         이메일:<input type="text" class="form-control" placeholder="이메일을 입력하세요." name="email" id="email">
@@ -117,17 +117,29 @@
                 }
             } else {
                 console.log(xhr.responseText);
-                alert("Request failed. Status: " + xhr.status);
+                alert("에러가 발생했습니다. \n에러 코드: " + xhr.status);
             }
         };
         xhr.onerror = function() {
-            alert("Request failed. Status: " + xhr.status);
+            alert("에러가 발생했습니다. \n에러 코드: " + xhr.status);
         };
         xhr.send(JSON.stringify(data));
     }
 
     function idCheck() { // 아이디 중복확인
         let username = document.getElementById('username').value;
+        let usernameCheck = /^[a-zA-Z0-9_-]{7,20}$/;
+        if (username.trim() === '') { // 입력값이 없는 경우
+            alert('아이디를 입력해주세요.');
+            document.getElementById('username').focus();
+            return false;
+        };
+        if (!usernameCheck.test(username)) { // 양식에 맞지 않는 경우
+            alert('아이디는 영문 대/소문자, 숫자, 언더바/하이픈을 포함하여 7~20자로 입력해야합니다.');
+            document.getElementById('username').focus();
+            validUsername = false;
+            return false;
+        }
 
         // json 데이터로 변환
         let data = {username:username};
@@ -158,11 +170,11 @@
                 }
             } else {
                 console.log(xhr.responseText);
-                alert("Request failed. Status: " + xhr.status);
+                alert("에러가 발생했습니다. \n에러 코드: " + xhr.status);
             }
         };
         xhr.onerror = function() {
-            alert("Request failed. Status: " + xhr.status);
+            alert("에러가 발생했습니다. \n에러 코드: " + xhr.status);
         };
         xhr.send(JSON.stringify(data.username));
     }

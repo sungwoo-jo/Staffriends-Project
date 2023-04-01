@@ -7,9 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:if test="${signIn != null}">
-  <h1>세션이 있습니다.</h1>
-</c:if>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,33 +26,39 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
-  <%-- 비로그인 시 --%>
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="/user/joinForm">회원가입</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/user/loginForm">로그인</a>
-        </li>
-      </ul>
-  <%-- 로그인 시 --%>
-<%--      <ul class="navbar-nav">--%>
-<%--        <li class="nav-item">--%>
-<%--          <a class="nav-link" href="/guard">보호자페이지</a>--%>
-<%--        </li>--%>
-<%--        <li class="nav-item">--%>
-<%--          <a class="nav-link" href="/board">커뮤니티</a>--%>
-<%--        </li>--%>
-<%--        <li class="nav-item">--%>
-<%--          <a class="nav-link" href="/board/boardWrite">글쓰기</a>--%>
-<%--        </li>--%>
-<%--        <li class="nav-item">--%>
-<%--          <a class="nav-link" href="/user/updateForm">~~님</a>--%>
-<%--        </li>--%>
-<%--        <li class="nav-item">--%>
-<%--          <a class="nav-link" href="/logout">로그아웃</a>--%>
-<%--        </li>--%>
-<%--      </ul>--%>
+    <c:choose>
+      <c:when test="${signIn != null}">
+        <%-- 로그인 시 --%>
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="/guard">보호자페이지</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/board">커뮤니티</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/board/boardWrite">글쓰기</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/user/updateForm">${signIn.nickname}님</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/user/logout">로그아웃</a>
+                </li>
+              </ul>
+      </c:when>
+      <c:otherwise>
+        <%-- 비로그인 시 --%>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/user/joinForm">회원가입</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/user/loginForm">로그인</a>
+          </li>
+        </ul>
+      </c:otherwise>
+    </c:choose>
   </div>
 </nav>
 <br>
