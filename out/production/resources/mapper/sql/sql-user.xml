@@ -35,7 +35,7 @@
         ]]>
     </select>
 
-    <select id="checkUser" parameterType="hashMap" resultType="Integer">
+    <select id="checkUser" parameterType="board.vo.UserVo" resultType="Integer">
         <![CDATA[
             SELECT
                 id
@@ -57,7 +57,7 @@
         ]]>
     </select>
 
-    <update id="updateProc" parameterType="hashMap">
+    <update id="updateProc" parameterType="board.vo.UserVo">
         <![CDATA[
             UPDATE
                 t_user

@@ -37,11 +37,11 @@
         xhr.onload = function() {
             if (xhr.status === 200 || xhr.status === 201) {
                 let resp = xhr.responseText;
+                let result = JSON.parse(resp);
                 if (resp.status === 500) {
                     alert("에러가 발생했습니다.");
                 } else {
-                    let result = JSON.parse(resp);
-                    if (result.result) {
+                    if (result) {
                         alert("로그인이 완료되었습니다.");
                         location.href = "/";
                     } else {
@@ -51,12 +51,12 @@
                 }
             } else {
                 console.log(xhr.responseText);
-                alert("Request failed. Status: " + xhr.status);
+                alert("에러가 발생했습니다. \n에러 코드: " + xhr.status);
             }
         };
         xhr.onerror = function() {
             console.log(xhr.responseText);
-            alert("Request failed. Status: " + xhr.status);
+            alert("에러가 발생했습니다. \n에러 코드: " + xhr.status);
         };
         xhr.send(JSON.stringify(data));
     }

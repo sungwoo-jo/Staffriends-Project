@@ -8,9 +8,6 @@ import board.vo.UserVo;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,10 +36,6 @@ public class UserController {
     @PostMapping("/join/insert") // 회원 가입
     @ResponseBody
     public void joinUser(@RequestBody UserVo userVo) throws Exception{
-        MessageDigest md = MessageDigest.getInstance("SHA-512");
-        md.reset();
-        md.update(userVo.getPassword().getBytes("UTF8"));
-        userVo.setPassword(String.format("%0128x", new BigInteger(1, md.digest())));
         userService.insertUser(userVo);
     }
 
@@ -53,22 +46,14 @@ public class UserController {
 
     @PostMapping("/checkUser") // 존재하는 회원인지 확인
     @ResponseBody
-    public Map<String, Integer> checkUser(@RequestBody HashMap<String, String> userInfo, HttpSession session) throws Exception {
-        MessageDigest md = MessageDigest.getInstance("SHA-512");
-        md.reset();
-        md.update(userInfo.get("password").getBytes("UTF8"));
-        userInfo.put("password",String.format("%0128x", new BigInteger(1, md.digest())));
-        Map<String, Integer> map = new HashMap<>();
-
-        Integer result = userService.checkUser(userInfo);
+    public boolean checkUser(@RequestBody UserVo userVo, HttpSession session) throws Exception {
+        Integer result = userService.checkUser(userVo); // 회원 조회. 반환 타입: 회원의 id
         if (result == null) { // 일치하는 회원의 id 정보가 조회되지 않으면 result의 값을 설정하지 않고 리턴
-            return map;
+            return false;
         }
-
-        UserVo userVo = userService.getUserInfo(result);
+        userVo = userService.getUserInfo(result); // 회원의 id로 회원 정보를 조회하여 담아줌
         session.setAttribute("signIn", userVo);
-        map.put("result", result);
-        return map;
+        return true;
     }
 
     @GetMapping("/logout") // 로그아웃
@@ -85,14 +70,7 @@ public class UserController {
 
     @PostMapping("/updateProc") // 정보 업데이트
     @ResponseBody
-    public void updateProc(@RequestBody HashMap<String, String> userInfo) throws Exception {
-        System.out.println(userInfo);
-        MessageDigest md = MessageDigest.getInstance("SHA-512");
-        md.reset();
-        md.update(userInfo.get("password").getBytes("UTF8"));
-        userInfo.put("password", String.format("%0128x", new BigInteger(1, md.digest())));
-        System.out.println(userInfo);
-
-        userService.updateProc(userInfo);
+    public void updateProc(@RequestBody UserVo userVo) throws Exception {
+        userService.updateProc(userVo);
     }
 }

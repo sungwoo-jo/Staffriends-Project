@@ -9,11 +9,11 @@ import java.util.HashMap;
 public interface UserMapper {
     int insertUser(UserVo userVo) throws Exception;
 
-    Integer checkUser(HashMap<String, String> userInfo) throws Exception;
+    Integer checkUser(UserVo userVo) throws Exception;
 
     int idCheck(String username) throws Exception;
 
     UserVo getUserInfo(int count);
 
-    void updateProc(HashMap<String, String> map);
+    void updateProc(UserVo userVo);
 }
