@@ -1,8 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link rel="stylesheet" type="text/css" href="/css/loglayout.css"/>
 <script>
     function createDiv(id) {
-        return '<div class="logtooltip" id="data' + id + '"></div>';
+        return '<div class="logToolTip" id="data' + id + '"></div>';
     }
 
     function getAddr(latitude, longitude, txTime, index) {
@@ -19,8 +20,8 @@
         geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
     };
 
-    for (let i = 0; i < <%= latitude %>.length; i++) {
-        document.write(createDiv(i));
-        getAddr(<%= latitude %>[i], <%= longitude %>[i], <%= txTime %>[i], i);
-    }
+    <c:forEach var="history" items="${history}" varStatus="status">
+        document.write(createDiv(${status.index}));
+        getAddr(${history.h_lat}, ${history.h_long}, '<fmt:formatDate value="${history.tx_time}" pattern="yyyy-MM-dd HH:mm:ss"/>', ${status.index});
+    </c:forEach>
 </script>
