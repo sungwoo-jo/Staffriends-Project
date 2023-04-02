@@ -24,7 +24,9 @@ public class GuardController {
     public String guard(@RequestParam("serial_num") String serialNum, Model model) {
         List<HistoryVo> map = guardService.getHistory(serialNum);
         model.addAttribute("history", map);
-        System.out.println("after:"+map);
+        if (map.size() == 0) {
+            return "/guard/guardError";
+        }
         return "/guard/guardIndex";
     }
 }

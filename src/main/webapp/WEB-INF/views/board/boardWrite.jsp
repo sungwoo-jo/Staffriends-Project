@@ -5,6 +5,10 @@
 <head>
     <meta charset="UTF-8">
     <title>board</title>
+    <style>
+      .ck-editor__editable { height: 400px; }
+      .ck-content { font-size: 12px; }
+    </style>
 </head>
 <body>
   <div class="container">
@@ -17,12 +21,16 @@
         </tr>
         <tr>
           <td colspan="2">
-            <textarea id="contents" name="contents"></textarea>
+            <textarea name="contents" id="editor"></textarea>
           </td>
         </tr>
       </table>
-      <input type="submit" id="submit" value="저장" class="btn">
+      <input type="submit" id="submit" value="저장">
     </form>
+    <script src="/js/ckeditor.js"></script>
+    <script>
+      ClassicEditor.create( document.querySelector( '#editor' ) );
+    </script>
   </div>
 </body>
 </html>

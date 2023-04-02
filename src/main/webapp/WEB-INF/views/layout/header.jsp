@@ -40,7 +40,7 @@
                   <a class="nav-link" href="/board/boardWrite">글쓰기</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/user/updateForm">${signIn.nickname}님${signIn.joinDate}</a>
+                  <a class="nav-link" href="/user/updateForm">${signIn.nickname}님</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/user/logout">로그아웃</a>
