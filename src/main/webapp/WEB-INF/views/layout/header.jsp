@@ -31,7 +31,7 @@
         <%-- 로그인 시 --%>
               <ul class="navbar-nav">
                 <li class="nav-item">
-                  <a class="nav-link" href="/guard">보호자페이지</a>
+                  <a class="nav-link" href="/guard/guardIndex?serial_num=${signIn.serialNum}">보호자페이지</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/board">커뮤니티</a>
@@ -40,7 +40,7 @@
                   <a class="nav-link" href="/board/boardWrite">글쓰기</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/user/updateForm">${signIn.nickname}님</a>
+                  <a class="nav-link" href="/user/updateForm">${signIn.nickname}님${signIn.joinDate}</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/user/logout">로그아웃</a>

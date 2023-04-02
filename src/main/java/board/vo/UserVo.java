@@ -10,5 +10,5 @@ public class UserVo {
     private String nickname;
     private String email;
     private String joinDate;
-    private String sessionId;
+    private String serialNum;
 }

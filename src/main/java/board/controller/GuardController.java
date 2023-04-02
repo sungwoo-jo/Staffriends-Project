@@ -1,26 +1,30 @@
 package board.controller;
 
+import board.service.GuardService;
+import board.vo.HistoryVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 @Controller
 @RequestMapping("/guard")
 public class GuardController {
 
-    @GetMapping("")
-    public String guard(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        System.out.println(session.getCreationTime());
-        if (session == null) {
-            // 데이터가 없으면 에러 페이지 출력
-            return "/guard/guardError";
-        } else {
-            // 데이터가 있으면 지도 화면 출력
-            return "/guard/guardIndex";
-        }
+    @Autowired
+    private GuardService guardService;
+
+    @GetMapping("/guardIndex")
+    public String guard(@RequestParam("serial_num") String serialNum, Model model) {
+        List<HistoryVo> map = guardService.getHistory(serialNum);
+        model.addAttribute("history", map);
+        System.out.println("after:"+map);
+        return "/guard/guardIndex";
     }
 }

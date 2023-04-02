@@ -1,0 +1,13 @@
+.logtooltip {
+    font-size: 0.7em;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background-color: #8A9BB5;
+    color: white;
+    font-weight: 700;
+    vertical-align: middle;
+    font-family: 'MesloLGS', sans-serif;
+    line-height: 20px;
+    margin-bottom: 3px;
+    text-align: center;
+}
