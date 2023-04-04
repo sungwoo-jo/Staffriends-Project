@@ -2,25 +2,30 @@
 <%@ include file="../layout/header.jsp"%>
 <html>
 <body>
+<section class="bg-light">
+<div class="container py-4">
 <form id="joinFrm" method="post">
     <div class="form-group">
-        아이디:<input type="text" class="form-control" placeholder="영문 대/소문자, 숫자, 언더바/하이픈 포함 7~20자" name="username" id="username"> <button type="button" onclick="idCheck()">중복확인</button><div id="chkDiv"></div>
+        아이디<input type="text" class="form-control col-md-8" placeholder="영문 대/소문자, 숫자, 언더바/하이픈 포함 7~20자" name="username" id="username"> <button type="button" class="col-md-3" onclick="idCheck()">중복확인</button><div id="chkDiv"></div>
     </div>
     <div class="form-group">
-        비밀번호:<input type="password" class="form-control" placeholder="문자/숫자 포함 8자리 이상" name="password" id="password">
+        비밀번호<input type="password" class="form-control" placeholder="문자/숫자 포함 8자리 이상" name="password" id="password">
     </div>
     <div class="form-group">
-        비밀번호확인:<input type="password" class="form-control" placeholder="비밀번호를 한번 더 입력하세요." name="password" id="validPassword">
+        비밀번호확인<input type="password" class="form-control" placeholder="비밀번호를 한번 더 입력하세요." name="password" id="validPassword">
     </div>
     <div class="form-group">
-        닉네임:<input type="text" class="form-control" placeholder="한글, 영문 대/소문자, 숫자 포함 2~15자" name="nickName" id="nickname">
+        닉네임<input type="text" class="form-control" placeholder="한글, 영문 대/소문자, 숫자 포함 2~15자" name="nickName" id="nickname">
     </div>
     <div class="form-group">
-        이메일:<input type="text" class="form-control" placeholder="이메일을 입력하세요." name="email" id="email">
+        이메일<input type="text" class="form-control" placeholder="이메일을 입력하세요." name="email" id="email">
     </div>
 </form>
-<input type="button" value="회원가입" onclick="join()">
+    <input class="btn btn-staffriends btn-lg" type="button" value="회원가입" style="width: inherit" onclick="join()">
+</div>
 
+</section>
+</body>
 <script>
     let validUsername = false;
     function join() {
@@ -179,6 +184,4 @@
         xhr.send(JSON.stringify(data.username));
     }
 </script>
-
-</body>
 </html>

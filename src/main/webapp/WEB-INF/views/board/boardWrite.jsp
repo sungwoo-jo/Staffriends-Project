@@ -12,6 +12,7 @@
 </head>
 <body>
   <div class="container">
+    <div class="container justify-content-center">
     <h2>게시판 등록</h2>
     <form id="frm" name="frm" method="post" action="/board/insertBoard">
       <table>
@@ -20,8 +21,8 @@
           <td><input type="text" id="title" name="title"></td>
         </tr>
         <tr>
-          <td colspan="2">
-            <textarea name="contents" id="editor"></textarea>
+          <td colspan="2">내용
+            <input type="text" name="contents" id="editor"></input>
           </td>
         </tr>
       </table>
@@ -31,6 +32,7 @@
     <script>
       ClassicEditor.create( document.querySelector( '#editor' ) );
     </script>
+    </div>
   </div>
 </body>
 </html>

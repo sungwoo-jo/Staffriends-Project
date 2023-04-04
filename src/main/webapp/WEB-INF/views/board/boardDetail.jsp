@@ -8,6 +8,7 @@
     <title>board</title>
 </head>
 <body>
+  <div class="container justify-content-center">
   <h2>게시판 상세 화면</h2>
   <form id="frm" method="post">
   <table>
@@ -33,17 +34,22 @@
       <tr>
         <th scope="row">내용</th>
           <td colspan="4" class="view_text">
-            <textarea title="내용" id="contents" name="contents">${board.contents}</textarea>
+            <textarea title="내용" id="editor" name="contents">${board.contents}</textarea>
           </td>
       </tr>
     </tbody>
   </table>
   <input type="hidden" name="boardIdx" value="${board.boardIdx}">
   </form>
-  <input type="button" id="list" value="목록으로">
-  <input type="button" id="edit" value="수정하기">
-  <input type="button" id="delete" value="삭제하기">
-
+    <input type="button" id="list" value="목록으로">
+    <input type="button" id="edit" value="수정하기">
+    <input type="button" id="delete" value="삭제하기">
+  </div>
   <script src="/js/board.js"></script>
+  <script src="/js/ckeditor.js"></script>
+  <script>
+    ClassicEditor.create( document.querySelector( '#editor' ) );
+  </script>
+
 </body>
 </html>
