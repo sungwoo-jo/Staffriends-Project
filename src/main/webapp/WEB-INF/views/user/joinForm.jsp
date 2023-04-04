@@ -2,26 +2,28 @@
 <%@ include file="../layout/header.jsp"%>
 <html>
 <body>
+<h2 style="text-align: center">회원가입</h2>
 <section class="bg-light">
-<div class="container py-4">
+<div class="container">
 <form id="joinFrm" method="post">
     <div class="form-group">
-        아이디<input type="text" class="form-control col-md-8" placeholder="영문 대/소문자, 숫자, 언더바/하이픈 포함 7~20자" name="username" id="username"> <button type="button" class="col-md-3" onclick="idCheck()">중복확인</button><div id="chkDiv"></div>
+        <h5>아이디</h5><input type="text" class="form-control col-md-8" placeholder="영문 대/소문자, 숫자, 언더바/하이픈 포함 7~20자" name="username" id="username" style="float: left; text-align: center"><button type="button" class="col-md-1 btn btn-warning" onclick="idCheck()" id="chkDiv">중복확인</button>
+
     </div>
     <div class="form-group">
-        비밀번호<input type="password" class="form-control" placeholder="문자/숫자 포함 8자리 이상" name="password" id="password">
+        <h5>비밀번호</h5><input type="password" class="form-control col-md-8" placeholder="문자/숫자 포함 8자리 이상" name="password" id="password" style="text-align: center">
     </div>
     <div class="form-group">
-        비밀번호확인<input type="password" class="form-control" placeholder="비밀번호를 한번 더 입력하세요." name="password" id="validPassword">
+        <h5>비밀번호확인</h5><input type="password" class="form-control col-md-8" placeholder="비밀번호를 한번 더 입력하세요." name="password" id="validPassword" style="text-align: center">
     </div>
     <div class="form-group">
-        닉네임<input type="text" class="form-control" placeholder="한글, 영문 대/소문자, 숫자 포함 2~15자" name="nickName" id="nickname">
+        <h5>닉네임</h5><input type="text" class="form-control col-md-8" placeholder="한글, 영문 대/소문자, 숫자 포함 2~15자" name="nickName" id="nickname" style="text-align: center">
     </div>
     <div class="form-group">
-        이메일<input type="text" class="form-control" placeholder="이메일을 입력하세요." name="email" id="email">
+        <h5>이메일</h5><input type="text" class="form-control col-md-8" placeholder="이메일을 입력하세요." name="email" id="email" style="text-align: center">
     </div>
 </form>
-    <input class="btn btn-staffriends btn-lg" type="button" value="회원가입" style="width: inherit" onclick="join()">
+    <input class="btn btn-staffriends btn-lg col-md-8" type="button" value="회원가입" style="width: inherit;" onclick="join()">
 </div>
 
 </section>
@@ -184,4 +186,5 @@
         xhr.send(JSON.stringify(data.username));
     }
 </script>
+<%@ include file="../layout/footer.jsp"%>
 </html>

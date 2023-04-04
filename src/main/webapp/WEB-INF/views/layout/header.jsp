@@ -19,7 +19,7 @@
   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 </head>
-<body class="bg-light">
+<body>
 <section class="border-bottom bg-white">
 <nav class="navbar navbar-expand-md navbar-white container">
   <a href="/"><img src="/img/mainlogo3.png" height="40" width="195"></a>
