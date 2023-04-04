@@ -4,26 +4,26 @@
 <body>
 <h2 style="text-align: center">회원가입</h2>
 <section class="bg-light">
-<div class="container">
+<div class="container joinForm">
 <form id="joinFrm" method="post">
     <div class="form-group">
-        <h5>아이디</h5><input type="text" class="form-control col-md-8" placeholder="영문 대/소문자, 숫자, 언더바/하이픈 포함 7~20자" name="username" id="username" style="float: left; text-align: center"><button type="button" class="col-md-1 btn btn-warning" onclick="idCheck()" id="chkDiv">중복확인</button>
-
+        <h5>아이디</h5><input type="text" class="form-control" placeholder="영문 대/소문자, 숫자, 언더바/하이픈 포함 7~20자" name="username" id="username" style="text-align: center">
+        <button type="button" class="btn btn-warning btn-lg" onclick="idCheck()" id="chkDiv">중복확인</button>
     </div>
     <div class="form-group">
-        <h5>비밀번호</h5><input type="password" class="form-control col-md-8" placeholder="문자/숫자 포함 8자리 이상" name="password" id="password" style="text-align: center">
+        <h5>비밀번호</h5><input type="password" class="form-control" placeholder="문자/숫자 포함 8자리 이상" name="password" id="password" style="text-align: center">
     </div>
     <div class="form-group">
-        <h5>비밀번호확인</h5><input type="password" class="form-control col-md-8" placeholder="비밀번호를 한번 더 입력하세요." name="password" id="validPassword" style="text-align: center">
+        <h5>비밀번호확인</h5><input type="password" class="form-control" placeholder="비밀번호를 한번 더 입력하세요." name="password" id="validPassword" style="text-align: center">
     </div>
     <div class="form-group">
-        <h5>닉네임</h5><input type="text" class="form-control col-md-8" placeholder="한글, 영문 대/소문자, 숫자 포함 2~15자" name="nickName" id="nickname" style="text-align: center">
+        <h5>닉네임</h5><input type="text" class="form-control" placeholder="한글, 영문 대/소문자, 숫자 포함 2~15자" name="nickName" id="nickname" style="text-align: center">
     </div>
     <div class="form-group">
-        <h5>이메일</h5><input type="text" class="form-control col-md-8" placeholder="이메일을 입력하세요." name="email" id="email" style="text-align: center">
+        <h5>이메일</h5><input type="text" class="form-control" placeholder="이메일을 입력하세요." name="email" id="email" style="text-align: center">
     </div>
 </form>
-    <input class="btn btn-staffriends btn-lg col-md-8" type="button" value="회원가입" style="width: inherit;" onclick="join()">
+    <input class="btn btn-staffriends btn-lg justify-content-center" type="button" value="회원가입" style="width: -webkit-fill-available;" onclick="join()">
 </div>
 
 </section>

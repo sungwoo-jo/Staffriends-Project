@@ -519,6 +519,11 @@ pre code {
     margin-left: auto
 }
 
+.container.joinForm{
+    /*margin: 0 auto;*/
+    width : 500px;
+}
+
 @media (min-width: 576px) {
     .container, .container-sm {
         max-width: 540px
