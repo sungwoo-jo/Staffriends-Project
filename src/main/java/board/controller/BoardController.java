@@ -22,7 +22,7 @@ public class BoardController {
         return "/index";
     }
 
-    @RequestMapping("/board") // 게시글 목록
+    @RequestMapping("/board") // 커뮤니티
     public String openBoardList(Model model) throws Exception {
         List<BoardVo> list = boardService.selectBoardList();
 

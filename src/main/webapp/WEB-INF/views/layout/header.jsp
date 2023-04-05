@@ -32,7 +32,7 @@
         <%-- 로그인 시 --%>
               <ul class="navbar-nav">
                 <li class="nav-item">
-                  <a class="nav-link" href="/guard/guardIndex?serial_num=${signIn.serialNum}"><h4>보호자페이지</h4></a>
+                  <a class="nav-link" href="javascript:transUserInfo('${signIn.serialNum}')"><h4>보호자페이지</h4></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/board"><h4>커뮤니티</h4></a>
@@ -64,3 +64,20 @@
 </nav>
 </section>
 <br>
+<script>
+  function transUserInfo(serialNum) {
+    let f = document.createElement('form'); // form element 생성
+
+    let obj;
+    obj = document.createElement('input'); // input element 생성
+    obj.setAttribute('type', 'hidden'); // type을 hidden으로,
+    obj.setAttribute('name', 'serialNum'); // name을 serialNum으로,
+    obj.setAttribute('value', serialNum); // value를 serialNum으로 설정
+
+    f.appendChild(obj); // form element의 자식 요소로 obj(input element)를 추가
+    f.setAttribute('method', 'post'); // method를 post 방식으로,
+    f.setAttribute('action', '/guard/guardIndex'); // action은 /guardIndex로 전송되도록
+    document.body.appendChild(f); // body의 자식 요소로 form을 추가
+    f.submit(); // form 전송
+  }
+</script>

@@ -12,6 +12,6 @@
     <title>Title</title>
 </head>
 <body>
-<h1>로그인 후 이용가능합니다.</h1>
+<h1 style="text-align: center">로그인 후 이용가능합니다.</h1>
 </body>
 </html>

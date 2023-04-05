@@ -163,6 +163,7 @@
             const password = document.getElementById('password').value;
             const nickname = document.getElementById('nickname').value;
             const email = document.getElementById('email').value;
+            const serialNum = document.getElementById('serialNum').value;
             const id = document.getElementById('id').value;
 
             // 유효성 검사 완료 후 실행할 로직
@@ -171,6 +172,7 @@
                 password:password,
                 nickname:nickname,
                 email:email,
+                serialNum:serialNum,
                 id:id
             };
 
