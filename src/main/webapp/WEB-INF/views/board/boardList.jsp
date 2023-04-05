@@ -52,4 +52,5 @@
         <a href="/board/boardWrite" class="btn">글 쓰기</a>
     </div>
 </body>
+<%@ include file="../layout/footer.jsp"%>
 </html>
