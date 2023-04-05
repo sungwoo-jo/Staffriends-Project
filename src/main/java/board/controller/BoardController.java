@@ -5,6 +5,7 @@ import board.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -59,6 +60,11 @@ public class BoardController {
     public String deleteBoard(BoardVo boardVo) throws Exception {
         boardService.deleteBoard(boardVo);
         return "redirect:/board";
+    }
+
+    @GetMapping("/needLogin") // 로그인 안내 페이지
+    public String needLogin() {
+        return "redirect:/needLogin";
     }
 
 }

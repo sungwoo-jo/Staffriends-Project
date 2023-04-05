@@ -64,7 +64,8 @@
             SET
                 password = #{password},
                 nickname = #{nickname},
-                email = #{email}
+                email = #{email},
+                serial_num = ${serialNum}
             WHERE
                 id = #{id}
         ]]>

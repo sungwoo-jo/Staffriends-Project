@@ -60,8 +60,12 @@ body {
     font-weight: 400;
     line-height: 1.5;
     color: #212529;
-    text-align: left;
-    background-color: #fff
+    background-color: #fff;
+    min-width: 450px;
+}
+
+.body-center-text {
+    text-align: center;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -2246,7 +2250,7 @@ textarea.form-control {
 }
 
 .form-group {
-    margin-bottom: 3rem
+    margin-bottom: 2rem
 }
 
 .form-text {
@@ -2646,7 +2650,7 @@ a.btn.disabled, fieldset:disabled a.btn {
 .btn-staffriends {
     color: #fff;
     background-color: #70ad47;
-    border-color: #70ad47
+    border-color: #70ad47;
 }
 
 .btn-staffriends:hover {
@@ -4356,6 +4360,16 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     justify-content: space-between
 }
 
+.center-div {
+    margin: 0 auto;
+    width:100%;
+}
+
+.container-size {
+    max-width: 690px;
+    min-width: 330px;
+}
+
 .navbar-brand {
     display: inline-block;
     padding-top: .3125rem;
@@ -4485,7 +4499,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 @media (max-width: 767.98px) {
     .navbar-expand-md > .container, .navbar-expand-md > .container-fluid, .navbar-expand-md > .container-lg, .navbar-expand-md > .container-md, .navbar-expand-md > .container-sm, .navbar-expand-md > .container-xl {
         padding-right: 0;
-        padding-left: 0
+        padding-left: 0;
     }
 }
 
@@ -6828,10 +6842,9 @@ a.bg-danger:focus, a.bg-danger:hover, button.bg-danger:focus, button.bg-danger:h
 }
 
 .bg-light {
-    background-color: #f8f9fa !important;
-    height: 703px;
+    height: 900px;
     padding-top:55px;
-    padding-bottom:750px;
+
 }
 
 a.bg-light:focus, a.bg-light:hover, button.bg-light:focus, button.bg-light:hover {

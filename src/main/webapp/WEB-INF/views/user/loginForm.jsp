@@ -1,11 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../layout/header.jsp"%>
-<form method="post">
-    <div class="form-group">
-        아이디:<input type="text" class="form-control" placeholder="아이디를 입력하세요." name="username" id="username">
+<h2 style="text-align: center">로그인</h2>
+<form method="post" class="container center-div">
+    <div class="form-group" style="margin-bottom: 10px;">
+        <h5 style="text-align: left">아이디</h5><input type="text" class="form-control" placeholder="아이디를 입력하세요." name="username" id="username">
     </div>
     <div class="form-group">
-        비밀번호:<input type="password" class="form-control" placeholder="비밀번호를 입력하세요." name="password" id="password">
+        <h5 style="text-align: left">비밀번호</h5><input type="password" class="form-control" placeholder="비밀번호를 입력하세요." name="password" id="password">
     </div>
     <input type="button" value="로그인" onclick="loginCheck()" >
 </form>

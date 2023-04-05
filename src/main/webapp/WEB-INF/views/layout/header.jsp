@@ -19,32 +19,32 @@
   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 </head>
-<body>
+<body class="center-div">
 <section class="border-bottom bg-white">
 <nav class="navbar navbar-expand-md navbar-white container">
   <a href="/"><img src="/img/mainlogo3.png" height="40" width="195"></a>
-  <button class="navbar-toggler navbar-light" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+  <button class="navbar-toggler navbar-light" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" style="text-align: center">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+  <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar" style="text-align: center">
     <c:choose>
       <c:when test="${signIn != null}">
         <%-- 로그인 시 --%>
               <ul class="navbar-nav">
                 <li class="nav-item">
-                  <a class="nav-link" href="/guard/guardIndex?serial_num=${signIn.serialNum}">보호자페이지</a>
+                  <a class="nav-link" href="/guard/guardIndex?serial_num=${signIn.serialNum}"><h4>보호자페이지</h4></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/board">커뮤니티</a>
+                  <a class="nav-link" href="/board"><h4>커뮤니티</h4></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/board/boardWrite">글쓰기</a>
+                  <a class="nav-link" href="/board/boardWrite"><h4>글쓰기</h4></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/user/updateForm">${signIn.nickname}님</a>
+                  <a class="nav-link" href="/user/updateForm"><h4>${signIn.nickname}님</h4></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/user/logout">로그아웃</a>
+                  <a class="nav-link" href="/user/logout"><h4>로그아웃</h4></a>
                 </li>
               </ul>
       </c:when>
@@ -52,10 +52,10 @@
         <%-- 비로그인 시 --%>
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="/user/joinForm">회원가입</a>
+            <a class="nav-link" href="/user/joinForm"><h4>회원가입</h4></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/user/loginForm">로그인</a>
+            <a class="nav-link" href="/user/loginForm"><h4>로그인</h4></a>
           </li>
         </ul>
       </c:otherwise>

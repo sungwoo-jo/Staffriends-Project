@@ -3,103 +3,65 @@
 <html>
 <body>
 <h2 style="text-align: center">회원가입</h2>
-<section class="bg-light">
-<div class="container joinForm">
-<form id="joinFrm" method="post">
+<section style="padding-bottom: 50px;">
+<div class="container center-div">
+<form id="joinFrm" method="post" class="container center-div container-size">
     <div class="form-group">
-        <h5>아이디</h5><input type="text" class="form-control" placeholder="영문 대/소문자, 숫자, 언더바/하이픈 포함 7~20자" name="username" id="username" style="text-align: center">
-        <button type="button" class="btn btn-warning btn-lg" onclick="idCheck()" id="chkDiv">중복확인</button>
+        <h5>아이디</h5><input type="text" class="form-control" placeholder="영문 대/소문자, 숫자, 언더바/하이픈 포함 7~20자" name="username" id="username" style="text-align: center" oninput="idCheck(), activateSignupBtn()">
+        <span style="display: none; text-align: center; color: red; " id="invalidId">영문 대/소문자, 숫자, 언더바/하이픈 포함 7~20자로 입력해야합니다.</span>
+        <span style="display: none; text-align: center; color: red; " id="duplicateId">이미 사용중인 ID입니다.</span>
+        <span style="display: none; text-align: center; color: red; " id="notInputId">ID를 입력해주세요.</span>
+        <span style="display: none; text-align: center; color: green; " id="validId">사용이 가능한 ID입니다.</span>
     </div>
     <div class="form-group">
-        <h5>비밀번호</h5><input type="password" class="form-control" placeholder="문자/숫자 포함 8자리 이상" name="password" id="password" style="text-align: center">
+        <h5>비밀번호</h5><input type="password" class="form-control" placeholder="문자/숫자 포함 8자리 이상" name="password" id="password" style="text-align: center" oninput="pwCheck()">
+        <span style="display: none; text-align: center; color: red; " id="notInputPw">비밀번호를 입력해주세요.</span>
+        <span style="display: none; text-align: center; color: red; " id="invalidPw">문자/숫자 포함 8자리 이상 입력해야합니다.</span>
     </div>
     <div class="form-group">
-        <h5>비밀번호확인</h5><input type="password" class="form-control" placeholder="비밀번호를 한번 더 입력하세요." name="password" id="validPassword" style="text-align: center">
+        <h5>비밀번호확인</h5><input type="password" class="form-control" placeholder="비밀번호를 한번 더 입력하세요." name="samePassword" id="samePassword" style="text-align: center" oninput="samePwCheck(), activateSignupBtn()">
+        <span style="display: none; text-align: center; color: red; " id="notInputSamePw">비밀번호를 한번 더 입력해주세요.</span>
+        <span style="display: none; text-align: center; color: red; " id="invalidSamePw">문자/숫자 포함 8자리 이상 입력해야합니다.</span>
+        <span style="display: none; text-align: center; color: red;" id="notSamePw">비밀번호가 일치하지 않습니다.</span>
+        <span style="display: none; text-align: center; color: green;" id="validSamePw">비밀번호가 일치합니다.</span>
     </div>
     <div class="form-group">
-        <h5>닉네임</h5><input type="text" class="form-control" placeholder="한글, 영문 대/소문자, 숫자 포함 2~15자" name="nickName" id="nickname" style="text-align: center">
+        <h5>닉네임</h5><input type="text" class="form-control" placeholder="한글, 영문 대/소문자, 숫자 포함 2~15자" name="nickName" id="nickname" style="text-align: center" oninput="nicknameCheck(), activateSignupBtn()">
+        <span style="display: none; text-align: center; color: red;" id="notInputNickname">닉네임을 입력해주세요.</span>
+        <span style="display: none; text-align: center; color: red;" id="invalidNickname">한글, 영문 대/소문자, 숫자 포함 2~15자로 입력해야합니다.</span>
+        <span style="display: none; text-align: center; color: green;" id="validNickname">사용 가능한 닉네임입니다.</span>
     </div>
     <div class="form-group">
-        <h5>이메일</h5><input type="text" class="form-control" placeholder="이메일을 입력하세요." name="email" id="email" style="text-align: center">
+        <h5>이메일</h5><input type="text" class="form-control" placeholder="이메일을 입력하세요." name="email" id="email" style="text-align: center" oninput="emailCheck(), activateSignupBtn()">
+        <span style="display: none; text-align: center; color: red;" id="notInputEmail">이메일을 입력해주세요.</span>
+        <span style="display: none; text-align: center; color: red;" id="invalidEmail">이메일 형식이 올바르지 않습니다.</span>
+        <span style="display: none; text-align: center; color: green;" id="validEmail">사용 가능한 이메일입니다.</span>
+    </div>
+    <div class="form-group">
+        <h5>시리얼번호</h5><input type="text" class="form-control" placeholder="시리얼번호를 입력하세요(선택)" name="serialNum" id="serialNum" style="text-align: center">
+    </div>
+    <div class="form-group text-center">
+        <input class="btn btn-staffriends  btn-lg center-div" type="button" value="회원가입" id="joinBtn" onclick="join()" disabled>
     </div>
 </form>
-    <input class="btn btn-staffriends btn-lg justify-content-center" type="button" value="회원가입" style="width: -webkit-fill-available;" onclick="join()">
 </div>
 
 </section>
 </body>
 <script>
     let validUsername = false;
+    let validPassword = false;
+    let validSamePassword = false;
+    let validNickname = false;
+    let validEmail = false;
+
+
     function join() {
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
-        const validPassword = document.getElementById('validPassword').value;
         const nickname = document.getElementById('nickname').value;
         const email = document.getElementById('email').value;
-        let usernameCheck = /^[a-zA-Z0-9_-]{7,20}$/;
-        let passwordCheck = /(?=.*\d)(?=.*[a-zA-ZS]).{8,}/;
-        let nicknameCheck = /^[가-힇a-zA-Z0-9]{2,15}$/;
-        let emailCheck = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
-
-        if (username.trim() === '') { // 입력값이 없는 경우
-            alert('아이디를 입력해주세요.');
-            document.getElementById('username').focus();
-            return false;
-        };
-        if (!validUsername) { // 중복확인을 안한 경우
-            alert('아이디 중복확인이 완료되지 않았습니다.');
-            return false;
-        };
-        if (!usernameCheck.test(username)) { // 양식에 맞지 않는 경우
-            alert('아이디는 영문 대/소문자, 숫자, 언더바/하이픈을 포함하여 7~20자로 입력해야합니다.');
-            document.getElementById('username').focus();
-            validUsername = false;
-            return false;
-        };
-
-        if (password.trim() === '') { // 입력값이 없는 경우
-            alert('비밀번호를 입력해주세요.');
-            document.getElementById('password').focus();
-            return false;
-        };
-        if (!passwordCheck.test(password)) { // 양식에 맞지 않는 경우
-            alert('비밀번호는 문자와 숫자 1개 이상을 포함하여 8자리 이상 입력해야합니다.');
-            document.getElementById('password').focus();
-            return false;
-        };
-
-        if (validPassword.trim() === '') {
-            alert('비밀번호를 한번 더 입력해주세요.');
-            document.getElementById('validPassword').focus();
-            return false;
-        }
-        if (password != validPassword) {
-            alert('입력한 비밀번호가 다릅니다. \n다시 확인해주세요.');
-            document.getElementById('validPassword').focus();
-            return false;
-        }
-
-        if (nickname.trim() === '') { // 입력값이 없는 경우
-            alert('닉네임을 입력해주세요.');
-            document.getElementById('nickname').focus();
-            return false;
-        };
-        if (!nicknameCheck.test(nickname)) { // 양식에 맞지 않는 경우
-            alert('닉네임은 한글, 영문 대/소문자, 숫자를 포함하여 2~15자로 입력해야합니다.');
-            document.getElementById('nickname').focus();
-            return false;
-        };
-
-        if (email.trim() === '') { // 입력값이 없는 경우
-            alert('이메일을 입력해주세요.');
-            document.getElementById('email').focus();
-            return false;
-        };
-        if (!emailCheck.test(email)) { // 양식에 맞지 않는 경우
-            alert('이메일 형식이 올바르지 않습니다.');
-            document.getElementById('email').focus();
-            return false;
-        };
+        const serialNum = document.getElementById('serialNum').value;
 
         // 유효성 검사 완료 후 실행할 로직
         // json 데이터로 변환
@@ -107,7 +69,8 @@
             username:username,
             password:password,
             nickname:nickname,
-            email:email
+            email:email,
+            serialNum:serialNum
         };
 
         let xhr = new XMLHttpRequest();
@@ -133,58 +96,174 @@
         xhr.send(JSON.stringify(data));
     }
 
-    function idCheck() { // 아이디 중복확인
-        let username = document.getElementById('username').value;
-        let usernameCheck = /^[a-zA-Z0-9_-]{7,20}$/;
+    function idCheck() { // 아이디 체크
+        let username = document.getElementById('username').value; // username 값을 담아줌
+        let usernameCheck = /^[a-zA-Z0-9_-]{7,20}$/; // 아이디의 정규표현식
         if (username.trim() === '') { // 입력값이 없는 경우
-            alert('아이디를 입력해주세요.');
-            document.getElementById('username').focus();
-            return false;
-        };
-        if (!usernameCheck.test(username)) { // 양식에 맞지 않는 경우
-            alert('아이디는 영문 대/소문자, 숫자, 언더바/하이픈을 포함하여 7~20자로 입력해야합니다.');
-            document.getElementById('username').focus();
+            document.getElementById("notInputId").style.display = "block"; // 아이디를 입력하라는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+            document.getElementById("invalidId").style.display = "none";
+            document.getElementById("duplicateId").style.display = "none";
+            document.getElementById("validId").style.display = "none";
+            document.getElementById("username").style.backgroundColor="#FFCECE";
             validUsername = false;
-            return false;
-        }
+        } else if (usernameCheck.test(username) === false || username.length > 20) { // 양식에 맞지 않고 길이 초과 시
+            document.getElementById("notInputId").style.display = "none";
+            document.getElementById("invalidId").style.display = "block"; // 양식에 맞지 않는다는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+            document.getElementById("duplicateId").style.display = "none";
+            document.getElementById("validId").style.display = "none";
+            document.getElementById("username").style.backgroundColor="#FFCECE";
+            validUsername = false;
+        } else { // 중복값 검사
+            // json 데이터로 변환
+            let data = {username:username};
 
-        // json 데이터로 변환
-        let data = {username:username};
-
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", "/user/join/idCheck");
-        xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-        xhr.onload = function() {
-            if (xhr.status === 200 || xhr.status === 201) {
-                let resp = xhr.responseText;
-                if (resp.status === 500) {
-                    alert("에러가 발생했습니다.");
-                } else {
-                    let result = JSON.parse(resp);
-                    let divElement = document.getElementById('chkDiv');
-                    let aElement = document.createElement('a');
-                    if(result.count > 0) {
-                        aElement.innerHTML = '이미 존재하는 아이디입니다.';
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "/user/join/idCheck");
+            xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+            xhr.onload = function() {
+                if (xhr.status === 200 || xhr.status === 201) {
+                    let resp = xhr.responseText;
+                    if (resp.status === 500) {
+                        alert("에러가 발생했습니다.");
                     } else {
-                        console.log(result.count);
-                        aElement.innerHTML = '사용이 가능한 아이디입니다.';
+                        let result = JSON.parse(resp);
+                        if(result.count > 0) {
+                            document.getElementById("notInputId").style.display = "none";
+                            document.getElementById("invalidId").style.display = "none";
+                            document.getElementById("duplicateId").style.display = "block"; // 중복된 아이디라는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+                            document.getElementById("validId").style.display = "none";
+                            document.getElementById("username").style.backgroundColor="#FFCECE";
+                            validUsername = false;
+                        } else {
+                            document.getElementById("notInputId").style.display = "none";
+                            document.getElementById("invalidId").style.display = "none";
+                            document.getElementById("duplicateId").style.display = "none";
+                            document.getElementById("validId").style.display = "block"; // 사용 가능하다는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+                            document.getElementById("username").style.backgroundColor="#B0F6AC";
+                            validUsername = true;
+                        }
                     }
-                    divElement.innerHTML = '';
-                    divElement.appendChild(aElement);
-                    validUsername = true;
-                    // alert("회원가입완료");
-                    // location.href = "/";
+                } else {
+                    console.log(xhr.responseText);
+                    alert("에러가 발생했습니다. \n에러 코드: " + xhr.status);
                 }
-            } else {
-                console.log(xhr.responseText);
+            };
+            xhr.onerror = function() {
                 alert("에러가 발생했습니다. \n에러 코드: " + xhr.status);
-            }
-        };
-        xhr.onerror = function() {
-            alert("에러가 발생했습니다. \n에러 코드: " + xhr.status);
-        };
-        xhr.send(JSON.stringify(data.username));
+            };
+            xhr.send(JSON.stringify(data.username));
+        }
     }
+
+    function pwCheck() { // 비밀번호 체크
+        let password = document.getElementById('password').value; // password 값을 담아줌
+        let passwordCheck = /(?=.*\d)(?=.*[a-zA-ZS]).{8,}/; // 비밀번호의 정규표현식
+        if (password.trim() === '') { // 입력값이 없는 경우
+            document.getElementById("notInputPw").style.display = "block"; // 비밀번호를 입력하라는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+            document.getElementById("invalidPw").style.display = "none";
+            document.getElementById("password").style.backgroundColor="#FFCECE";
+            validPassword = false;
+        } else if (passwordCheck.test(password) === false || password.length > 128) { // 양식에 맞지 않고 길이 초과 시
+            document.getElementById("notInputPw").style.display = "none";
+            document.getElementById("invalidPw").style.display = "block"; // 양식에 맞지 않는다는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+            document.getElementById("password").style.backgroundColor="#FFCECE";
+            validPassword = false;
+        } else { // 사용 가능한 비밀번호
+            document.getElementById("notInputPw").style.display = "none";
+            document.getElementById("invalidPw").style.display = "none";
+            document.getElementById("password").style.backgroundColor="#FFFFFF"; // 사용 가능한 경우 다른효과 없이 흰색 배경으로 마무리
+            validPassword = true;
+        }
+    }
+
+    function samePwCheck() { // 비밀번호 확인 체크
+        let password = document.getElementById('password').value; // 원래 비밀번호 값을 담아줌
+        let passwordCheck = /(?=.*\d)(?=.*[a-zA-ZS]).{8,}/; // 비밀번호의 정규표현식
+        let samePassword = document.getElementById('samePassword').value; // 비밀번호 확인 값을 담아줌
+        if (samePassword.trim() === '') { // 입력값이 없는 경우
+            document.getElementById("notInputSamePw").style.display = "block"; // 비밀번호를 한번 더 입력하라는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+            document.getElementById("invalidSamePw").style.display = "none";
+            document.getElementById("notSamePw").style.display = "none";
+            document.getElementById("validSamePw").style.display = "none";
+            document.getElementById("samePassword").style.backgroundColor="#FFCECE";
+            validSamePassword = false;
+        } else if (passwordCheck.test(samePassword) === false || password.length > 128) { // 양식에 맞지 않고 길이 초과 시
+            document.getElementById("notInputSamePw").style.display = "none";
+            document.getElementById("invalidSamePw").style.display = "block"; // 양식에 맞지 않는다는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+            document.getElementById("notSamePw").style.display = "none";
+            document.getElementById("validSamePw").style.display = "none";
+            document.getElementById("samePassword").style.backgroundColor="#FFCECE";
+            validSamePassword = false;
+        } else if (password !== samePassword) { // 일치하지 않는 경우
+            document.getElementById("notInputSamePw").style.display = "none";
+            document.getElementById("invalidSamePw").style.display = "none";
+            document.getElementById("notSamePw").style.display = "block"; // 비밀번호가 같지 않다는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+            document.getElementById("validSamePw").style.display = "none";
+            document.getElementById("samePassword").style.backgroundColor="#FFCECE";
+            validSamePassword = false;
+        } else { // 사용 가능한 비밀번호
+            document.getElementById("notInputSamePw").style.display = "none";
+            document.getElementById("invalidSamePw").style.display = "none";
+            document.getElementById("notSamePw").style.display = "none";
+            document.getElementById("validSamePw").style.display = "block"; // 비밀번호가 일치한다는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+            document.getElementById("samePassword").style.backgroundColor="#B0F6AC";
+            validSamePassword = true;
+        }
+    }
+
+    function nicknameCheck() { // 닉네임 체크
+        let nickname = document.getElementById('nickname').value; // nickname 값을 담아줌
+        let nicknameCheck = /^[가-힇a-zA-Z0-9]{2,15}$/; // 닉네임의 정규표현식
+        if (nickname.trim() === '') { // 입력값이 없는 경우
+            document.getElementById("notInputNickname").style.display = "block"; // 비밀번호를 입력하라는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+            document.getElementById("invalidNickname").style.display = "none";
+            document.getElementById("nickname").style.backgroundColor="#FFCECE";
+            validNickname = false;
+        } else if (nicknameCheck.test(nickname) === false || nickname.length > 15) { // 양식에 맞지 않고 길이 초과 시
+            document.getElementById("notInputNickname").style.display = "none";
+            document.getElementById("invalidNickname").style.display = "block"; // 양식에 맞지 않는다는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+            document.getElementById("nickname").style.backgroundColor="#FFCECE";
+            validNickname = false;
+        } else { // 사용 가능한 닉네임
+            document.getElementById("notInputNickname").style.display = "none";
+            document.getElementById("invalidNickname").style.display = "none";
+            document.getElementById("nickname").style.backgroundColor="#B0F6AC";
+            validNickname = true;
+        }
+    }
+
+    function emailCheck() { // 이메일 체크
+        let email = document.getElementById('email').value; // password 값을 담아줌
+        let emailCheck = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/; // 이메일의 정규표현식
+        if (email.trim() === '') { // 입력값이 없는 경우
+            document.getElementById("notInputEmail").style.display = "block"; // 이메일을 입력하라는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+            document.getElementById("invalidEmail").style.display = "none";
+            document.getElementById("email").style.backgroundColor="#FFCECE";
+            validEmail = false;
+        } else if (emailCheck.test(email) === false) { // 양식에 맞지 않을 시
+            document.getElementById("notInputEmail").style.display = "none";
+            document.getElementById("invalidEmail").style.display = "block"; // 양식에 맞지 않는다는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+            document.getElementById("email").style.backgroundColor="#FFCECE";
+            validEmail = false;
+        } else { // 사용 가능한 이메일
+            document.getElementById("notInputEmail").style.display = "none";
+            document.getElementById("invalidEmail").style.display = "none";
+            document.getElementById("email").style.backgroundColor="#B0F6AC";
+            validEmail = true;
+        }
+    }
+
+    function activateSignupBtn() { // 전체 폼 요소들 정규화 후 회원가입 버튼 활성화
+        if (validUsername === true && validPassword === true && validSamePassword === true && validNickname === true && validEmail === true) {
+            document.getElementById("joinBtn").disabled = false;
+            document.getElementById("joinBtn").backgroundColor = "#70ad47";
+        } else {
+            document.getElementById("joinBtn").disabled = true;
+            document.getElementById("joinBtn").backgroundColor = "#70ad478f";
+        }
+    }
+
+
 </script>
 <%@ include file="../layout/footer.jsp"%>
 </html>
