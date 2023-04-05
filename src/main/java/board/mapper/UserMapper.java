@@ -15,5 +15,5 @@ public interface UserMapper {
 
     UserVo getUserInfo(int count);
 
-    void updateProc(UserVo userVo);
+    void updateUser(UserVo userVo);
 }

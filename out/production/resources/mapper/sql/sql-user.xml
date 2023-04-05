@@ -57,7 +57,7 @@
         ]]>
     </select>
 
-    <update id="updateProc" parameterType="board.vo.UserVo">
+    <update id="updateUser" parameterType="board.vo.UserVo">
         <![CDATA[
             UPDATE
                 t_user
@@ -65,7 +65,7 @@
                 password = #{password},
                 nickname = #{nickname},
                 email = #{email},
-                serial_num = ${serialNum}
+                serial_num = #{serialNum}
             WHERE
                 id = #{id}
         ]]>

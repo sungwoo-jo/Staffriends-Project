@@ -9,13 +9,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="../layout/header.jsp"%>
+<c:if test="${signIn == null}"><c:redirect url="http://localhost:8080/user/needLogin"/></c:if>
 <head>
     <title>board</title>
 </head>
 <body>
     <div class="container">
         <h2>게시판 목록</h2>
-        <table>
+        <table class="table table-striped">
             <colgroup>
                 <col width="15%"/>
                 <col width="*"/>
@@ -24,10 +25,10 @@
             </colgroup>
             <thead>
                 <tr>
-                    <th scope="col">글번호</th>
-                    <th scope="col">제목</th>
-                    <th scope="col">조회수</th>
-                    <th scope="col">작성일</th>
+                    <th scope="col" style="text-align: center">글번호</th>
+                    <th scope="col" style="text-align: center">제목</th>
+                    <th scope="col" style="text-align: center">조회수</th>
+                    <th scope="col" style="text-align: center">작성일</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,10 +36,10 @@
                 <c:when test="${fn:length(list) > 0}">
                     <c:forEach var="li" items="${list}">
                     <tr>
-                        <td><c:out value="${li.boardIdx}"/></td>
-                        <td><a href="/board/boardDetail?boardIdx=${li.boardIdx}"><c:out value="${li.title}"></c:out></a></td>
-                        <td><c:out value="${li.hitCnt}"/></td>
-                        <td><c:out value="${li.createdDateTime}"/></td>
+                        <td style="text-align: center"><c:out value="${li.boardIdx}"/></td>
+                        <td style="text-align: center"><a href="/board/boardDetail?boardIdx=${li.boardIdx}"><c:out value="${li.title}"></c:out></a></td>
+                        <td style="text-align: center"><c:out value="${li.hitCnt}"/></td>
+                        <td style="text-align: center"><c:out value="${li.createdDateTime}"/></td>
                     </tr>
                     </c:forEach>
                 </c:when>

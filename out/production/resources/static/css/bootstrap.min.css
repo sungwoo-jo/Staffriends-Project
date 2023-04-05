@@ -61,7 +61,7 @@ body {
     line-height: 1.5;
     color: #212529;
     background-color: #fff;
-    min-width: 450px;
+    min-width: 350px;
 }
 
 .body-center-text {
@@ -4366,7 +4366,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 }
 
 .container-size {
-    max-width: 690px;
+    max-width: 500px;
     min-width: 330px;
 }
 

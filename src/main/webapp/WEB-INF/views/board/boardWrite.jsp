@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../layout/header.jsp"%>
+<c:if test="${signIn == null}"><c:redirect url="http://localhost:8080/user/needLogin"/></c:if>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +23,7 @@
         </tr>
         <tr>
           <td colspan="2">내용
-            <input type="text" name="contents" id="editor"></input>
+            <input type="text" name="contents" id="editor" style="width: 100%; margin: 0 auto;"></input>
           </td>
         </tr>
       </table>

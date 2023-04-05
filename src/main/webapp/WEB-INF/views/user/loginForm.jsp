@@ -1,16 +1,24 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../layout/header.jsp"%>
-<h2 style="text-align: center">로그인</h2>
-<form method="post" class="container center-div">
-    <div class="form-group" style="margin-bottom: 10px;">
+<html>
+<body>
+
+<h2 style="text-align: center; margin-top: 30px; margin-bottom: 70px; font-family: KakaoBold;">로그인</h2>
+<section style="padding-bottom: 50px;">
+<div class="container center-div">
+<form method="post" class="container center-div container-size">
+    <div class="form-group" style="margin-bottom: 32px;">
         <h5 style="text-align: left">아이디</h5><input type="text" class="form-control" placeholder="아이디를 입력하세요." name="username" id="username">
     </div>
     <div class="form-group">
         <h5 style="text-align: left">비밀번호</h5><input type="password" class="form-control" placeholder="비밀번호를 입력하세요." name="password" id="password">
     </div>
-    <input type="button" value="로그인" onclick="loginCheck()" >
+    <input class="btn btn-staffriends btn-lg center-div" type="button" value="로그인" onclick="loginCheck()" >
 </form>
-
+</div>
+</section>
+</body>
+</html>
 <script>
     function loginCheck() {
         let username = document.getElementById('username').value.trim();
@@ -62,3 +70,4 @@
         xhr.send(JSON.stringify(data));
     }
 </script>
+<%@ include file="../layout/footer.jsp"%>

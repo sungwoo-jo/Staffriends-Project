@@ -7,14 +7,16 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../layout/header.jsp"%>
-<c:if test="${signIn == null}"><c:redirect url="http://localhost:8080/needLogin"/></c:if>
+<c:if test="${signIn == null}"><c:redirect url="http://localhost:8080/user/needLogin"/></c:if>
 <html>
 <head>
     <title>정보수정</title>
 </head>
 <body>
-<h2 style="text-align: center">정보수정</h2>
-<form method="post" class="container center-div">
+<h2 style="text-align: center; margin-top: 30px; margin-bottom: 70px; font-family: KakaoBold;">정보수정</h2>
+<section style="padding-bottom: 50px;">
+    <div class="container center-div">
+<form method="post" class="container center-div container-size">
     <input type="hidden" id="id" value="${signIn.id}">
     <div class="form-group">
         <h5>아이디</h5><input type="text" name="username" class="form-control" disabled style="text-align: center" value="${signIn.username}"><p/>
@@ -47,55 +49,17 @@
         <h5>시리얼번호</h5><input type="text" class="form-control" placeholder="시리얼번호를 입력하세요." name="serialNum" id="serialNum" value="${signIn.serialNum}" style="text-align: center">
     </div>
     <div class="form-group text-center">
-        <input class="btn btn-staffriends  btn-lg center-div" type="button" value="정보수정" id="joinBtn" onclick="updateInfo()">
+        <input class="btn btn-staffriends btn-lg center-div" type="button" value="정보수정" id="updateBtn" onclick="updateInfo()">
     </div>
 </form>
-
+    </div>
+</section>
 
 <script>
     let validPassword = false;
     let validSamePassword = false;
     let validNickname = false;
     let validEmail = false;
-
-    function updateInfo() {
-        const password = document.getElementById('password').value;
-        const nickname = document.getElementById('nickname').value;
-        const email = document.getElementById('email').value;
-        const serialNum = document.getElementById('serialNum').value;
-
-        // 유효성 검사 완료 후 실행할 로직
-        // json 데이터로 변환
-        let data = {
-            password:password,
-            nickname:nickname,
-            email:email,
-            serialNum:serialNum
-        };
-
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", "/user/updateProc");
-        xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-        xhr.onload = function() {
-            if (xhr.status === 200 || xhr.status === 201) {
-                let resp = xhr.responseText;
-                if (resp.status === 500) {
-                    alert("에러가 발생했습니다.");
-                } else {
-                    alert("정보수정이 완료되었습니다.");
-                    location.href = "/";
-                }
-            } else {
-                console.log(xhr.responseText);
-                alert("에러가 발생했습니다. \n에러 코드: " + xhr.status);
-            }
-        };
-        xhr.onerror = function() {
-            alert("에러가 발생했습니다. \n에러 코드: " + xhr.status);
-        };
-        xhr.send(JSON.stringify(data));
-    }
-
     function pwCheck() { // 비밀번호 체크
         let password = document.getElementById('password').value; // password 값을 담아줌
         let passwordCheck = /(?=.*\d)(?=.*[a-zA-ZS]).{8,}/; // 비밀번호의 정규표현식
@@ -174,7 +138,7 @@
     }
 
     function emailCheck() { // 이메일 체크
-        let email = document.getElementById('email').value; // password 값을 담아줌
+        let email = document.getElementById('email').value; // email 값을 담아줌
         let emailCheck = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/; // 이메일의 정규표현식
         if (email.trim() === '') { // 입력값이 없는 경우
             document.getElementById("notInputEmail").style.display = "block"; // 이메일을 입력하라는 메시지를 block으로 표시해 화면에 띄워지게 한다.
@@ -191,6 +155,48 @@
             document.getElementById("invalidEmail").style.display = "none";
             document.getElementById("email").style.backgroundColor="#B0F6AC";
             validEmail = true;
+        }
+    }
+
+    function updateInfo() {
+        if(validPassword === true && validSamePassword === true && validNickname === true && validEmail === true) {
+            const password = document.getElementById('password').value;
+            const nickname = document.getElementById('nickname').value;
+            const email = document.getElementById('email').value;
+            const id = document.getElementById('id').value;
+
+            // 유효성 검사 완료 후 실행할 로직
+            // json 데이터로 변환
+            let data = {
+                password:password,
+                nickname:nickname,
+                email:email,
+                id:id
+            };
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "/user/updateProc");
+            xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+            xhr.onload = function() {
+                if (xhr.status === 200 || xhr.status === 201) {
+                    let resp = xhr.responseText;
+                    if (resp.status === 500) {
+                        alert("에러가 발생했습니다.");
+                    } else {
+                        alert("정보수정이 완료되었습니다.");
+                        location.href = "/";
+                    }
+                } else {
+                    console.log(xhr.responseText);
+                    alert("에러가 발생했습니다. \n에러 코드: " + xhr.status);
+                }
+            };
+            xhr.onerror = function() {
+                alert("에러가 발생했습니다. \n에러 코드: " + xhr.status);
+            };
+            xhr.send(JSON.stringify(data));
+        } else {
+            alert('입력하신 정보를 다시 한 번 확인해주세요.');
         }
     }
 </script>

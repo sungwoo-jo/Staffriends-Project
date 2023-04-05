@@ -64,13 +64,18 @@ public class UserController {
     }
 
     @GetMapping("/updateForm") // 정보수정 페이지
-    public String updateUser() {
+    public String updateForm() {
         return "/user/updateForm";
     }
 
     @PostMapping("/updateProc") // 정보 업데이트
     @ResponseBody
-    public void updateProc(@RequestBody UserVo userVo) throws Exception {
-        userService.updateProc(userVo);
+    public void updateUser(@RequestBody UserVo userVo) throws Exception {
+        userService.updateUser(userVo);
+    }
+
+    @GetMapping("/needLogin") // 로그인 안내 페이지
+    public String needLogin() {
+        return "/user/needLogin";
     }
 }

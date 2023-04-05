@@ -2,7 +2,7 @@
 <%@ include file="../layout/header.jsp"%>
 <html>
 <body>
-<h2 style="text-align: center">회원가입</h2>
+<h2 style="text-align: center; margin-top: 30px; margin-bottom: 70px; font-family: KakaoBold;">회원가입</h2>
 <section style="padding-bottom: 50px;">
 <div class="container center-div">
 <form id="joinFrm" method="post" class="container center-div container-size">
@@ -233,7 +233,7 @@
     }
 
     function emailCheck() { // 이메일 체크
-        let email = document.getElementById('email').value; // password 값을 담아줌
+        let email = document.getElementById('email').value; // email 값을 담아줌
         let emailCheck = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/; // 이메일의 정규표현식
         if (email.trim() === '') { // 입력값이 없는 경우
             document.getElementById("notInputEmail").style.display = "block"; // 이메일을 입력하라는 메시지를 block으로 표시해 화면에 띄워지게 한다.

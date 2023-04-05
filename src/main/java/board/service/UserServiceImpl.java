@@ -7,7 +7,6 @@ import board.mapper.UserMapper;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
-import java.util.HashMap;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -16,10 +15,9 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public int insertUser(UserVo userVo) throws Exception {
+    public void insertUser(UserVo userVo) throws Exception {
         messageDigest(userVo, userVo.getPassword());
         int result = userMapper.insertUser(userVo);
-        return result;
     }
 
     @Override
@@ -40,16 +38,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateProc(UserVo userVo) throws Exception {
+    public void updateUser(UserVo userVo) throws Exception {
         messageDigest(userVo, userVo.getPassword());
-        userMapper.updateProc(userVo);
+        userMapper.updateUser(userVo);
     }
 
-    public UserVo messageDigest(UserVo userVo, String oldPassword) throws Exception { // SHA-512 해시함수
+    public void messageDigest(UserVo userVo, String oldPassword) throws Exception { // SHA-512 해시함수
         MessageDigest md = MessageDigest.getInstance("SHA-512");
         md.reset();
         md.update(oldPassword.getBytes("UTF8"));
         userVo.setPassword(String.format("%0128x", new BigInteger(1, md.digest())));
-        return userVo;
     }
 }

@@ -62,9 +62,6 @@ public class BoardController {
         return "redirect:/board";
     }
 
-    @GetMapping("/needLogin") // 로그인 안내 페이지
-    public String needLogin() {
-        return "redirect:/needLogin";
-    }
+
 
 }
