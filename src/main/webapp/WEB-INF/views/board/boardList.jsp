@@ -15,8 +15,8 @@
 </head>
 <body>
     <div class="container">
-        <h2>게시판 목록</h2>
-        <table class="table table-striped">
+        <h2 style="text-align: center; margin-top: 30px; margin-bottom: 70px; font-family: KakaoBold;">게시글 목록</h2>
+        <table class="table table-striped" >
             <colgroup>
                 <col width="15%"/>
                 <col width="*"/>

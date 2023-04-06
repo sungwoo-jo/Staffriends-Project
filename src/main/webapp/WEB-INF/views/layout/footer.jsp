@@ -6,9 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-<footer class="py-5 bg-white border-top m-0 text-center text-success">
+<footer class="py-5 bg-white border-top m-0 text-center" style="color: #70ad47">
     <p>이용약관 | 이메일 무단수집 거부 | 개인정보 처리방침 | 문의하기</p>
-    <div><p>Copyright &copy; GMANH Website 2022</p></div>
+    <div><p>Copyright &copy; GMANH Staffriends 2023</p></div>
 </footer>
 </body>
 </html>

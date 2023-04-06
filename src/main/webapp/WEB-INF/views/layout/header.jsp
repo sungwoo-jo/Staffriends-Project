@@ -32,19 +32,19 @@
         <%-- 로그인 시 --%>
               <ul class="navbar-nav">
                 <li class="nav-item">
-                  <a class="nav-link" href="javascript:transUserInfo('${signIn.serialNum}')"><h4>보호자페이지</h4></a>
+                  <a class="nav-link" href="javascript:transUserInfo('${signIn.serialNum}')"><h5>보호자페이지</h5></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/board"><h4>커뮤니티</h4></a>
+                  <a class="nav-link" href="/board"><h5>커뮤니티</h5></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/board/boardWrite"><h4>글쓰기</h4></a>
+                  <a class="nav-link" href="/board/boardWrite"><h5>글쓰기</h5></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/user/updateForm"><h4>${signIn.nickname}님</h4></a>
+                  <a class="nav-link" href="/user/updateForm"><h5>${signIn.nickname}님</h5></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/user/logout"><h4>로그아웃</h4></a>
+                  <a class="nav-link" href="/user/logout"><h5>로그아웃</h5></a>
                 </li>
               </ul>
       </c:when>
@@ -52,10 +52,10 @@
         <%-- 비로그인 시 --%>
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="/user/joinForm"><h4>회원가입</h4></a>
+            <a class="nav-link" href="/user/joinForm"><h5>회원가입</h5></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/user/loginForm"><h4>로그인</h4></a>
+            <a class="nav-link" href="/user/loginForm"><h5>로그인</h5></a>
           </li>
         </ul>
       </c:otherwise>

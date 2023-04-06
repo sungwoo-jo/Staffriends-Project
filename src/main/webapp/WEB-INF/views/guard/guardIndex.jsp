@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/css/guardlayout.css"/>
 </head>
 <title>보호자페이지</title>
-<h2 style="text-align: center">보호자페이지</h2><br/>
+<h2 style="text-align: center; margin-top: 30px; margin-bottom: 70px; font-family: KakaoBold;">보호자페이지</h2>
 <div>
 <div class="full">
     <div class="screen_top">
@@ -42,7 +42,8 @@
         marker = new kakao.maps.Marker({ position: markerPosition, image : markerImage });
         // 마커가 지도 위에 표시되도록 설정합니다.
         marker.setMap(map);
-        iwContent ='<div style="padding: 4px; font-size:5px;">'+'${history.serial_num}'+':&nbsp' +'${history.tx_time}'+'</div>';
+        // JSTL 태그로 tx_time을 원하는 포맷대로 출력
+        iwContent ='<div style="padding: 4px; font-size:0.6rem;">'+'<b style="color: blue">'+'${history.serial_num}'+'</b>'+':&nbsp' +'<fmt:formatDate value="${history.tx_time}" pattern="yyyy-MM-dd HH:mm:ss"/>'+'</div>';
         iwPosition = new kakao.maps.LatLng(${history.h_lat}, ${history.h_long});
         infowindow = new kakao.maps.InfoWindow({ position : iwPosition, content : iwContent });
         // 인포 윈도우 오픈

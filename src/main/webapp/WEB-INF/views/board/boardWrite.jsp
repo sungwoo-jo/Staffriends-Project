@@ -14,12 +14,12 @@
 <body>
   <div class="container">
     <div class="container justify-content-center">
-    <h2>게시판 등록</h2>
+    <h2 style="text-align: center; margin-top: 30px; margin-bottom: 70px; font-family: KakaoBold;">게시글 등록</h2>
     <form id="frm" name="frm" method="post" action="/board/insertBoard">
-      <table>
+      <table style="margin-left:auto;margin-right:auto;">
         <tr>
-          <td>제목</td>
-          <td><input type="text" id="title" name="title"></td>
+          <td>제목
+          <input type="text" id="title" name="title"></td><td><input class="btn btn-success" type="submit" id="submit" value="저장"></td>
         </tr>
         <tr>
           <td colspan="2">내용
@@ -27,7 +27,6 @@
           </td>
         </tr>
       </table>
-      <input type="submit" id="submit" value="저장">
     </form>
     <script src="/js/ckeditor.js"></script>
     <script>
