@@ -18,6 +18,15 @@
         ]]>
     </select>
 
+    <select id="getTotalRows" resultType="int"> -- 총 데이터 개수 구하기
+        <![CDATA[
+            SELECT
+                count(*)
+            FROM
+                t_board
+        ]]>
+    </select>
+
     <insert id="insertBoard" parameterType="board.vo.BoardVo"> -- 글쓰기
         <![CDATA[
             INSERT INTO t_board

@@ -41,4 +41,9 @@ public class BoardServiceImpl implements BoardService{
     public void deleteBoard(BoardVo boardVo) throws Exception{ // 글 삭제
         boardMapper.deleteBoard(boardVo);
     }
+
+    @Override
+    public int getTotalRows(BoardVo boardVo) {
+        return boardMapper.getTotalRows(boardVo);
+    }
 }

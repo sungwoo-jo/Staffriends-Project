@@ -4,6 +4,7 @@
     height: 800px;
     margin: 0 auto;
     padding-bottom: 40px;
+    max-width: 900px;
 }
 .screen_top {
     width: 100%;
