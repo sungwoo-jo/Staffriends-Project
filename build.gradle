@@ -32,6 +32,8 @@ dependencies {
 	implementation 'javax.servlet:jstl:1.2'
 
 	implementation 'org.springframework.boot:spring-boot-devtools'
+
+	implementation group: 'org.bgee.log4jdbc-log4j2', name: 'log4jdbc-log4j2-jdbc4', version: '1.16'
 }
 
 tasks.named('test') {
