@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="board.mapper.BoardMapper">
-    <select id="selectBoardList" resultType="board.vo.BoardVo"> -- 게시판 목록
+    <select id="selectBoardList" resultType="board.vo.BoardVo" parameterType="Map"> -- 게시판 목록
         <![CDATA[
             SELECT
                 board_idx,
@@ -15,6 +15,7 @@
             WHERE
                 deleted_yn = 'N'
             ORDER BY board_idx DESC
+            LIMIT #{start}, #{pageLength}
         ]]>
     </select>
 
@@ -26,7 +27,7 @@
                 t_board
         ]]>
     </select>
-
+    
     <insert id="insertBoard" parameterType="board.vo.BoardVo"> -- 글쓰기
         <![CDATA[
             INSERT INTO t_board

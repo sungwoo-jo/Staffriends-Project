@@ -3,9 +3,10 @@ package board.service;
 import board.vo.BoardVo;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BoardService {
-    List<BoardVo> selectBoardList() throws Exception;
+    List<BoardVo> selectBoardList(Map<String, Integer> map) throws Exception;
 
     void insertBoard(BoardVo boardVo) throws Exception;
 
@@ -15,5 +16,5 @@ public interface BoardService {
 
     void deleteBoard(BoardVo boardVo) throws Exception;
 
-    int getTotalRows(BoardVo boardVo);
+    int getTotalRows();
 }

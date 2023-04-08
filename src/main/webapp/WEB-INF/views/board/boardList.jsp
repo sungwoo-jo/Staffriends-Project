@@ -49,6 +49,38 @@
             </c:choose>
             </tbody>
         </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <c:choose>
+                    <c:when test="${startPage == 1}">
+                        <li class="page-item disabled"><a class="page-link" href="#" aria-disabled="true">Previous</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="page-item"><a class="page-link" href="board?page=${startPage-1}" aria-disabled="true">Previous</a></li>
+                    </c:otherwise>
+                </c:choose>
+                <c:choose>
+                    <c:when test="${startPage <= endPage}">
+                        <c:forEach var="start" begin="${startPage}" end="${endPage}" step="1">
+                    <li class="page-item">
+                        <a class="page-link" href="board?page=${start}">${start}</a></li>
+                        </c:forEach>
+                    </c:when>
+                </c:choose>
+                <c:choose>
+                    <%-- 마지막 페이지 숫자와 startPage에서 pageLength 더해준 값이 일치할 때 --%>
+                    <%-- (즉 마지막 페이지 블럭일 때) --%>
+                    <c:when test="${totalPages == endPage}">
+                        <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                    </c:when>
+                    <c:otherwise>
+                <li class="page-item">
+                    <a class="page-link" href="board?page=${endPage+1}">Next</a>
+                </li>
+                    </c:otherwise>
+                </c:choose>
+            </ul>
+        </nav>
         <a href="/board/boardWrite" class="btn">글 쓰기</a>
     </div>
 </body>

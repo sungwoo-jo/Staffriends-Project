@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -14,8 +15,8 @@ public class BoardServiceImpl implements BoardService{
     private BoardMapper boardMapper;
 
     @Override
-    public List<BoardVo> selectBoardList() throws Exception { // 게시판 목록 출력
-        return boardMapper.selectBoardList();
+    public List<BoardVo> selectBoardList(Map<String, Integer> map) throws Exception { // 게시판 목록 출력
+        return boardMapper.selectBoardList(map);
     }
 
     @Override
@@ -43,7 +44,7 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public int getTotalRows(BoardVo boardVo) {
-        return boardMapper.getTotalRows(boardVo);
+    public int getTotalRows() { // 전체 행 조회
+        return boardMapper.getTotalRows();
     }
 }

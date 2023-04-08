@@ -4,10 +4,11 @@ import board.vo.BoardVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface BoardMapper {
-    List<BoardVo> selectBoardList() throws Exception;
+    List<BoardVo> selectBoardList(Map<String, Integer> map) throws Exception;
 
     void insertBoard(BoardVo boardVo) throws Exception;
 
@@ -19,5 +20,5 @@ public interface BoardMapper {
 
     void deleteBoard(BoardVo boardVo) throws Exception;
 
-    int getTotalRows(BoardVo boardVo);
+    int getTotalRows();
 }
