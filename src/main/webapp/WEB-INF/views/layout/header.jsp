@@ -21,7 +21,7 @@
 </head>
 <body class="center-div">
 <section class="border-bottom bg-white">
-<nav class="navbar navbar-expand-md navbar-white container">
+<nav class="navbar navbar-expand-md navbar-white">
   <a href="/"><img src="/img/mainlogo3.png" height="40" width="195"></a>
   <button class="navbar-toggler navbar-light" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" style="text-align: center">
     <span class="navbar-toggler-icon"></span>
