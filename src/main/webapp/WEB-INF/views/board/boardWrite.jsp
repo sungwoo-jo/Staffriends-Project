@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>board</title>
+    <title>게시글 등록</title>
     <style>
       .ck-editor__editable { height: 400px; }
       .ck-content { font-size: 12px; }
@@ -15,24 +15,33 @@
   <div class="container">
     <div class="container justify-content-center">
     <h2 style="text-align: center; margin-top: 30px; margin-bottom: 70px; font-family: KakaoBold;">게시글 등록</h2>
-    <form id="frm" name="frm" method="post" action="/board/insertBoard">
+    <form id="frm" name="frm" method="post">
       <table style="margin-left:auto;margin-right:auto;">
         <tr>
           <td>제목
-          <input type="text" id="title" name="title"></td><td><input class="btn btn-success" type="submit" id="submit" value="저장"></td>
+          <input type="text" id="title" name="title"></td>
         </tr>
         <tr>
           <td colspan="2">내용
-            <input type="text" name="contents" id="editor" style="width: 100%; margin: 0 auto;"></input>
+            <textarea class="form-control" id="contents" name="contents"></textarea>
+            <script type="text/javascript">
+              CKEDITOR.replace('contents', {
+                        filebrowserUploadUrl: '/fileUpload'
+                      });
+            </script>
           </td>
         </tr>
         <input type="hidden" value="${signIn.username}" name="username" id="username">
       </table>
     </form>
+    <button class="btn btn-success" id="save">저장</button>
     <script src="/js/ckeditor.js"></script>
-    <script>
-      ClassicEditor.create( document.querySelector( '#editor' ) );
-    </script>
+      <script>
+        document.getElementById("save").onclick = function(event) {
+          frm.action = "/board/insertBoard";
+          frm.submit();
+        }
+      </script>
     </div>
   </div>
 </body>
