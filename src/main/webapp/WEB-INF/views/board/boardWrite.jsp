@@ -26,6 +26,7 @@
             <input type="text" name="contents" id="editor" style="width: 100%; margin: 0 auto;"></input>
           </td>
         </tr>
+        <input type="hidden" value="${signIn.username}" name="username" id="username">
       </table>
     </form>
     <script src="/js/ckeditor.js"></script>

@@ -93,7 +93,8 @@ public class BoardController {
     }
 
     @RequestMapping("/board/insertBoard") // 글 작성 로직
-    public String insertBoard(BoardVo boardVo) throws Exception {
+    public String insertBoard(BoardVo boardVo, @RequestParam String username) throws Exception {
+        boardVo.setCreatorId(username);
         boardService.insertBoard(boardVo);
         return "redirect:/board";
     }
