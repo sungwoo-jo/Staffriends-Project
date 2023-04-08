@@ -7,12 +7,13 @@
     <meta charset="UTF-8">
     <title>게시글 등록</title>
     <style>
-      .ck-editor__editable { height: 400px; }
+      .ck-editor__editable { height: 1000px; }
       .ck-content { font-size: 12px; }
+      .cke_chrome {max-width: 90%; height: auto; margin: auto;}
     </style>
 </head>
-<body>
-  <div class="container">
+<body class="center-div">
+
     <div class="container justify-content-center">
     <h2 style="text-align: center; margin-top: 30px; margin-bottom: 70px; font-family: KakaoBold;">게시글 등록</h2>
     <form id="frm" name="frm" method="post">
@@ -43,7 +44,7 @@
         }
       </script>
     </div>
-  </div>
+
 </body>
 <%@ include file="../layout/footer.jsp"%>
 </html>
