@@ -17,6 +17,7 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
   <script type="text/javascript" src="/js/ckeditor/ckeditor.js"></script>
+
 </head>
 <body class="center-div">
 <section class="border-bottom bg-white">
