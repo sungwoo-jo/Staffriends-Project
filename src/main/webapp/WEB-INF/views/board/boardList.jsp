@@ -61,9 +61,18 @@
                 </c:choose>
                 <c:choose>
                     <c:when test="${startPage <= endPage}">
-                        <c:forEach var="start" begin="${startPage}" end="${endPage}" step="1">
-                    <li class="page-item">
-                        <a class="page-link" href="board?page=${start}">${start}</a></li>
+                        <c:forEach var="start" begin="${startPage}" end="${endPage}" step="1"> <%-- 페이지 번호 출력 --%>
+                            <c:choose>
+                                <c:when test="${start != cPage}"> <%-- 클릭한 페이지 번호 비활성화 하기 --%>
+                                    <li class="page-item">
+                                        <a class="page-link" href="board?page=${start}">${start}</a></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li class="page-item">
+                                    <li class="page-item disabled"><a class="page-link" href="#" aria-disabled="true" style="background: #e9ecef; color: #8B4513">${start}</a></li>
+                                </c:otherwise>
+                            </c:choose>
+
                         </c:forEach>
                     </c:when>
                 </c:choose>

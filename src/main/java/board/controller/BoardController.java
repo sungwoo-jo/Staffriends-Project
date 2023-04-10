@@ -83,6 +83,7 @@ public class BoardController {
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
         model.addAttribute("totalPages", totalPages);
+        model.addAttribute("cPage", cPage);
 
         return "/board/boardList";
     }
