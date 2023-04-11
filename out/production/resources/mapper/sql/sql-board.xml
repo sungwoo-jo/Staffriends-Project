@@ -79,7 +79,7 @@
                 title = #{title},
                 contents = #{contents},
                 updated_datetime = now(),
-                updater_id = 'admin'
+                updater_id = #{creatorId}
             WHERE
                 board_idx = #{boardIdx}
         ]]>

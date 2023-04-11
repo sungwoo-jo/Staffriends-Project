@@ -5,7 +5,6 @@ import board.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -111,9 +110,17 @@ public class BoardController {
         return "/board/boardDetail";
     }
 
-    @RequestMapping("/board/updateBoard") // 글 수정
-    public String updateBoard(BoardVo boardVo) throws Exception {
+    @RequestMapping("/board/updateForm") // 글 수정 폼 요청
+    public String updateForm(@RequestParam int boardIdx, Model model) throws Exception {
+        BoardVo boardVo = boardService.selectBoardDetail(boardIdx);
+        model.addAttribute("boardVo", boardVo);
+        return "/board/updateForm";
+    }
+
+    @RequestMapping("/board/modifyBoard") // 글 수정 요청
+    public String modifyBoard(@RequestParam int boardIdx, Model model, BoardVo boardVo) throws Exception {
         boardService.updateBoard(boardVo);
+        model.addAttribute("boardVo", boardVo);
         return "redirect:/board";
     }
 
