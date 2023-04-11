@@ -39,7 +39,7 @@
                 </table>
                 <input type="hidden" name="boardIdx" value="${board.boardIdx}">
             </form>
-            <input type="button" id="list" value="목록으로">
+            <input type="button" id="list" value="목록으로" style="margin-top: 20px; margin-bottom: 20px;">
         </div>
     </div>
     <script src="/js/ckeditor.js"></script>

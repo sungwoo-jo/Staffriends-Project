@@ -39,12 +39,13 @@
         <input type="hidden" value="${signIn.username}" name="username" id="username">
       </table>
     </form>
-    <h5 style="text-align: center"><button class="btn btn-success" id="save">글 작성 완료</button></h5>
+    <h5 style="text-align: center"><button class="btn btn-success" id="save" style="margin-top: 20px; margin-bottom: 20px;">글 작성 완료</button></h5>
     <script src="/js/ckeditor.js"></script>
       <script>
         document.getElementById("save").onclick = function(event) {
           frm.action = "/board/insertBoard";
           frm.submit();
+          alert('글 작성이 완료되었습니다.');
         }
       </script>
     </div>

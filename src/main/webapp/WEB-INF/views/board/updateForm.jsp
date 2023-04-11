@@ -20,7 +20,10 @@
     <table style="margin-left:auto;margin-right:auto; margin: 0 auto">
     <tbody>
       <tr>
-        <td colspan="4"><textarea class="textarea" id="title" name="title" placeholder="제목을 입력해주세요." style="font-size: 30px">${boardVo.title}</textarea></td>
+          <td>
+              <textarea class="textarea" id="title" name="title" placeholder="제목을 입력해주세요." style="font-size: 30px">${boardVo.title}</textarea>
+              <hr style="margin-top: 0;"/>
+          </td>
       </tr>
       <tr>
           <td colspan="4" class="view_text" style="max-width: 30%; height: auto">
@@ -37,13 +40,14 @@
   </table>
   <input type="hidden" id="boardIdx" name="boardIdx" value="${boardVo.boardIdx}">
   </form>
-    <input type="button" id="list" value="되돌아가기">
-    <input type="button" id="successEdit" value="수정완료">
+    <input type="button" id="list" value="되돌아가기" style="margin-top: 20px; margin-bottom: 20px;">
+    <input type="button" id="successEdit" value="수정완료" style="margin-top: 20px; margin-bottom: 20px;">
     <script>
       document.getElementById("successEdit").onclick = function(event) {
         let boardIdx = document.getElementById('boardIdx');
         frm.action = "/board/modifyBoard";
         frm.submit();
+        alert('수정이 완료되었습니다.');
       }
 
       document.getElementById("list").onclick = function(event) {
