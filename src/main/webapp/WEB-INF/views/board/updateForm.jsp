@@ -8,6 +8,7 @@
     <title>board</title>
     <style>
       .ck.ck-editor {max-width: 90%; height: auto; margin: 0 auto;}
+      .textarea {width: 100%; border: none; resize: none; height: 3.1rem;}
     </style>
 </head>
 <body class="center-div">
@@ -19,29 +20,15 @@
     <table style="margin-left:auto;margin-right:auto; margin: 0 auto">
     <tbody>
       <tr>
-        <th scope="row" style="min-width: 50px; max-width: 50px;text-align: center; ">글 번호</th>
-        <td>${boardVo.boardIdx}</td>
-        <th scope="row" style="min-width: 50px; max-width: 50px;text-align: center; ">조회수</th>
-        <td>${boardVo.hitCnt}</td>
-      </tr>
-      <tr>
-        <th scope="row" style="min-width: 50px; max-width: 50px;text-align: center; ">작성자</th>
-        <td>${boardVo.creatorId}</td>
-        <th scope="row" style="min-width: 50px; max-width: 50px;text-align: center; ">작성일</th>
-        <td>${boardVo.createdDateTime}</td>
-      </tr>
-      <tr>
-        <th scope="row" style="min-width: 50px; max-width: 50px;text-align: center; ">제목</th>
-          <td colspan="3">
-            <input type="text" id="title" name="title" style="text-align: center; " value="${boardVo.title}"/>
-          </td>
+        <td colspan="4"><textarea class="textarea" id="title" name="title" placeholder="제목을 입력해주세요." style="font-size: 30px">${boardVo.title}</textarea></td>
       </tr>
       <tr>
           <td colspan="4" class="view_text" style="max-width: 30%; height: auto">
             <textarea title="내용" id="contents" name="contents" style="text-align: center; ">${boardVo.contents}</textarea>
             <script type="text/javascript">
               CKEDITOR.replace('contents', {
-                filebrowserUploadUrl: '/fileUpload'
+                filebrowserUploadUrl: '/fileUpload',
+                height: '500px'
               });
             </script>
           </td>

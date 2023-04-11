@@ -15,8 +15,9 @@
 </head>
 <body>
     <div class="container">
-        <h2 style="text-align: center; margin-top: 30px; margin-bottom: 70px; font-family: KakaoBold;">게시글 목록</h2>
-        <table class="table table-striped" >
+        <h2 style="text-align: center; margin-top: 30px; margin-bottom: 20px; font-family: KakaoBold;">게시글 목록</h2>
+            <h5 style="text-align: right"><a href="/board/boardWrite" class="btn btn-success justify-content-end">글 쓰기</a></h5>
+        <table class="table table-striped border-bottom" >
             <colgroup>
                 <col width="15%"/>
                 <col width="*"/>
@@ -90,7 +91,6 @@
                 </c:choose>
             </ul>
         </nav>
-        <a href="/board/boardWrite" class="btn">글 쓰기</a>
     </div>
 </body>
 <%@ include file="../layout/footer.jsp"%>

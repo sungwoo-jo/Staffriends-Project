@@ -9,7 +9,8 @@
     <style>
       .ck-editor__editable { height: 1000px; }
       .ck-content { font-size: 12px; }
-      .cke_chrome {max-width: 90%; height: auto; margin: auto;}
+      .cke_chrome {max-width: 90%; height: auto; margin: auto; }
+      .textarea {width: 100%; border: none; resize: none; height: 3.1rem;}
     </style>
 </head>
 <body class="center-div">
@@ -19,15 +20,18 @@
     <form id="frm" name="frm" method="post">
       <table style="margin-left:auto;margin-right:auto;">
         <tr>
-          <td>제목
-          <input type="text" id="title" name="title"></td>
+          <td>
+              <textarea class="textarea" id="title" name="title" placeholder="제목을 입력해주세요." style="font-size: 30px"></textarea>
+              <hr style="margin-top: 0;"/>
+          </td>
         </tr>
         <tr>
-          <td colspan="2">내용
+          <td colspan="2">
             <textarea class="form-control" id="contents" name="contents"></textarea>
             <script type="text/javascript">
               CKEDITOR.replace('contents', {
-                        filebrowserUploadUrl: '/fileUpload'
+                        filebrowserUploadUrl: '/fileUpload',
+                        height: '500px'
                       });
             </script>
           </td>
@@ -35,7 +39,7 @@
         <input type="hidden" value="${signIn.username}" name="username" id="username">
       </table>
     </form>
-    <button class="btn btn-success" id="save">저장</button>
+    <h5 style="text-align: center"><button class="btn btn-success" id="save">글 작성 완료</button></h5>
     <script src="/js/ckeditor.js"></script>
       <script>
         document.getElementById("save").onclick = function(event) {
