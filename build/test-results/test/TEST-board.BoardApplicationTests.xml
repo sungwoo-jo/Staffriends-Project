@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="board.BoardApplicationTests" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-04-11T13:17:59" hostname="DESKTOP-IDK0A1A" time="0.315">
+  <properties/>
+  <testcase name="testSqlSession()" classname="board.BoardApplicationTests" time="0.312"/>
+  <testcase name="contextLoads()" classname="board.BoardApplicationTests" time="0.002"/>
+  <system-out><![CDATA[22:17:57.183 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+22:17:57.192 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+22:17:57.215 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [board.BoardApplicationTests] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
+22:17:57.223 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [board.BoardApplicationTests], using SpringBootContextLoader
+22:17:57.225 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [board.BoardApplicationTests]: class path resource [board/BoardApplicationTests-context.xml] does not exist
+22:17:57.225 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [board.BoardApplicationTests]: class path resource [board/BoardApplicationTestsContext.groovy] does not exist
+22:17:57.226 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [board.BoardApplicationTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+22:17:57.226 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [board.BoardApplicationTests]: BoardApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+22:17:57.254 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [board.BoardApplicationTests]
+22:17:57.290 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [C:\board\build\classes\java\main\board\BoardApplication.class]
+22:17:57.291 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration board.BoardApplication for test class board.BoardApplicationTests
+22:17:57.354 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [board.BoardApplicationTests]: using defaults.
+22:17:57.355 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+22:17:57.366 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@6d0b5baf, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@631e06ab, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@2a3591c5, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@34a75079, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@346a361, org.springframework.test.context.support.DirtiesContextTestExecutionListener@107ed6fc, org.springframework.test.context.transaction.TransactionalTestExecutionListener@1643d68f, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@186978a6, org.springframework.test.context.event.EventPublishingTestExecutionListener@2e029d61, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@482d776b, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@4052274f, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@132ddbab, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@297ea53a, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@acb0951, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@5bf22f18]
+22:17:57.368 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@3faf2e7d testClass = BoardApplicationTests, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@4648ce9 testClass = BoardApplicationTests, locations = '{}', classes = '{class board.BoardApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@19b93fa8, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@5e4bd84a, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@53fd0d10, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@1fde5d22, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@dbd8e44, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@48974e45], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> true]], class annotated with @DirtiesContext [false] with mode [null].
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::               (v2.7.10)
+
+2023-04-11 22:17:57.561  INFO 12376 --- [    Test worker] board.BoardApplicationTests              : Starting BoardApplicationTests using Java 18.0.1.1 on DESKTOP-IDK0A1A with PID 12376 (started by user in C:\board)
+2023-04-11 22:17:57.562  INFO 12376 --- [    Test worker] board.BoardApplicationTests              : No active profile set, falling back to 1 default profile: "default"
+2023-04-11 22:17:58.146  INFO 12376 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-04-11 22:17:58.365  INFO 12376 --- [    Test worker] jdbc.connection                          : 1. Connection opened
+2023-04-11 22:17:58.365  INFO 12376 --- [    Test worker] jdbc.audit                               : 1. Connection.new Connection returned 
+2023-04-11 22:17:58.365  INFO 12376 --- [    Test worker] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Driver does not support get/set network timeout for connections. (Receiver class net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy does not define or inherit an implementation of the resolved method 'abstract int getNetworkTimeout()' of interface java.sql.Connection.)
+2023-04-11 22:17:58.365  INFO 12376 --- [    Test worker] jdbc.audit                               : 1. Connection.isReadOnly() returned false
+2023-04-11 22:17:58.366  INFO 12376 --- [    Test worker] jdbc.audit                               : 1. Connection.getAutoCommit() returned true
+2023-04-11 22:17:58.369  INFO 12376 --- [    Test worker] jdbc.audit                               : 1. Statement.new Statement returned 
+2023-04-11 22:17:58.369  INFO 12376 --- [    Test worker] jdbc.audit                               : 1. Connection.createStatement() returned net.sf.log4jdbc.sql.jdbcapi.StatementSpy@4351ed61
+2023-04-11 22:17:58.369  INFO 12376 --- [    Test worker] jdbc.sqlonly                             : SELECT 1 
+
+2023-04-11 22:17:58.376  INFO 12376 --- [    Test worker] jdbc.sqltiming                           : SELECT 1 
+ {executed in 7 msec}
+2023-04-11 22:17:58.376  INFO 12376 --- [    Test worker] jdbc.audit                               : 1. Statement.execute(SELECT 1) returned true
+2023-04-11 22:17:58.376  INFO 12376 --- [    Test worker] jdbc.audit                               : 1. Statement.close() returned 
+2023-04-11 22:17:58.376  INFO 12376 --- [    Test worker] jdbc.audit                               : 1. Connection.getTransactionIsolation() returned 4
+2023-04-11 22:17:58.378  INFO 12376 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-04-11 22:17:58.503  INFO 12376 --- [onnection adder] jdbc.connection                          : 2. Connection opened
+2023-04-11 22:17:58.503  INFO 12376 --- [onnection adder] jdbc.audit                               : 2. Connection.new Connection returned 
+2023-04-11 22:17:58.503  INFO 12376 --- [onnection adder] jdbc.audit                               : 2. Connection.isReadOnly() returned false
+2023-04-11 22:17:58.503  INFO 12376 --- [onnection adder] jdbc.audit                               : 2. Connection.getAutoCommit() returned true
+2023-04-11 22:17:58.513  INFO 12376 --- [onnection adder] jdbc.connection                          : 3. Connection opened
+2023-04-11 22:17:58.513  INFO 12376 --- [onnection adder] jdbc.audit                               : 3. Connection.new Connection returned 
+2023-04-11 22:17:58.513  INFO 12376 --- [onnection adder] jdbc.audit                               : 3. Connection.isReadOnly() returned false
+2023-04-11 22:17:58.513  INFO 12376 --- [onnection adder] jdbc.audit                               : 3. Connection.getAutoCommit() returned true
+2023-04-11 22:17:58.523  INFO 12376 --- [onnection adder] jdbc.connection                          : 4. Connection opened
+2023-04-11 22:17:58.523  INFO 12376 --- [onnection adder] jdbc.audit                               : 4. Connection.new Connection returned 
+2023-04-11 22:17:58.523  INFO 12376 --- [onnection adder] jdbc.audit                               : 4. Connection.isReadOnly() returned false
+2023-04-11 22:17:58.523  INFO 12376 --- [onnection adder] jdbc.audit                               : 4. Connection.getAutoCommit() returned true
+2023-04-11 22:17:58.532  INFO 12376 --- [onnection adder] jdbc.connection                          : 5. Connection opened
+2023-04-11 22:17:58.532  INFO 12376 --- [onnection adder] jdbc.audit                               : 5. Connection.new Connection returned 
+2023-04-11 22:17:58.533  INFO 12376 --- [onnection adder] jdbc.audit                               : 5. Connection.isReadOnly() returned false
+2023-04-11 22:17:58.533  INFO 12376 --- [onnection adder] jdbc.audit                               : 5. Connection.getAutoCommit() returned true
+2023-04-11 22:17:58.541  INFO 12376 --- [onnection adder] jdbc.connection                          : 6. Connection opened
+2023-04-11 22:17:58.541  INFO 12376 --- [onnection adder] jdbc.audit                               : 6. Connection.new Connection returned 
+2023-04-11 22:17:58.541  INFO 12376 --- [onnection adder] jdbc.audit                               : 6. Connection.isReadOnly() returned false
+2023-04-11 22:17:58.541  INFO 12376 --- [onnection adder] jdbc.audit                               : 6. Connection.getAutoCommit() returned true
+2023-04-11 22:17:58.551  INFO 12376 --- [onnection adder] jdbc.connection                          : 7. Connection opened
+2023-04-11 22:17:58.551  INFO 12376 --- [onnection adder] jdbc.audit                               : 7. Connection.new Connection returned 
+2023-04-11 22:17:58.551  INFO 12376 --- [onnection adder] jdbc.audit                               : 7. Connection.isReadOnly() returned false
+2023-04-11 22:17:58.551  INFO 12376 --- [onnection adder] jdbc.audit                               : 7. Connection.getAutoCommit() returned true
+2023-04-11 22:17:58.559  INFO 12376 --- [onnection adder] jdbc.connection                          : 8. Connection opened
+2023-04-11 22:17:58.559  INFO 12376 --- [onnection adder] jdbc.audit                               : 8. Connection.new Connection returned 
+2023-04-11 22:17:58.560  INFO 12376 --- [onnection adder] jdbc.audit                               : 8. Connection.isReadOnly() returned false
+2023-04-11 22:17:58.560  INFO 12376 --- [onnection adder] jdbc.audit                               : 8. Connection.getAutoCommit() returned true
+2023-04-11 22:17:58.568  INFO 12376 --- [onnection adder] jdbc.connection                          : 9. Connection opened
+2023-04-11 22:17:58.568  INFO 12376 --- [onnection adder] jdbc.audit                               : 9. Connection.new Connection returned 
+2023-04-11 22:17:58.569  INFO 12376 --- [onnection adder] jdbc.audit                               : 9. Connection.isReadOnly() returned false
+2023-04-11 22:17:58.569  INFO 12376 --- [onnection adder] jdbc.audit                               : 9. Connection.getAutoCommit() returned true
+2023-04-11 22:17:58.576  INFO 12376 --- [onnection adder] jdbc.connection                          : 10. Connection opened
+2023-04-11 22:17:58.576  INFO 12376 --- [onnection adder] jdbc.audit                               : 10. Connection.new Connection returned 
+2023-04-11 22:17:58.577  INFO 12376 --- [onnection adder] jdbc.audit                               : 10. Connection.isReadOnly() returned false
+2023-04-11 22:17:58.577  INFO 12376 --- [onnection adder] jdbc.audit                               : 10. Connection.getAutoCommit() returned true
+2023-04-11 22:17:59.086  INFO 12376 --- [    Test worker] board.BoardApplicationTests              : Started BoardApplicationTests in 1.694 seconds (JVM running for 2.454)
+org.mybatis.spring.SqlSessionTemplate@4641f66c
+]]></system-out>
+  <system-err><![CDATA[Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.
+]]></system-err>
+</testsuite>

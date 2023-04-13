@@ -1,6 +1,7 @@
 package board.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import board.vo.UserVo;
 import board.mapper.UserMapper;
@@ -8,6 +9,7 @@ import board.mapper.UserMapper;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 
+@Repository
 @Service
 public class UserServiceImpl implements UserService {
 

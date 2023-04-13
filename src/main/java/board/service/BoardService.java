@@ -1,10 +1,12 @@
 package board.service;
 
 import board.vo.BoardVo;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 
+@Service
 public interface BoardService {
     List<BoardVo> selectBoardList(Map<String, Integer> map) throws Exception;
 

@@ -1,0 +1,28 @@
+
+.full {
+    width: 90%;
+    height: 800px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+    max-width: 900px;
+}
+.screen_top {
+    width: 100%;
+    height: 60%;
+}
+.screen_bottom {
+    margin-top: 3px;
+    width: 100%;
+    height: 70%;
+}
+.screen_bottom_1{
+    width: 50%;
+    height: 100%;
+    float: left;
+    overflow: auto;
+}
+.screen_bottom_2 {
+    width: 50%;
+    height: 100%;
+    float: right;
+}
