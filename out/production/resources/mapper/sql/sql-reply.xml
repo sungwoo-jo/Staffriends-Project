@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board.mapper.ReplyMapper">
+    <select id="getAllReply" parameterType="Integer" resultType="board.vo.ReplyVo">
+        <![CDATA[
+            SELECT
+                *
+            FROM
+                reply
+            WHERE
+                board_idx = #{boardIdx}
+        ]]>
+    </select>
+
+    <insert id="insertReply" parameterType="board.vo.ReplyVo">
+        <![CDATA[
+            INSERT INTO
+                reply
+                    (
+                        creator_id,
+                        reply_content,
+                        board_idx
+                    )
+            VALUES
+                    (
+                        #{creatorId},
+                        #{replyContent},
+                        #{boardIdx}
+                    )
+        ]]>
+    </insert>
+
+    <update id="deleteReply" parameterType="int">
+        <![CDATA[
+            UPDATE
+                reply
+            SET
+                deleted_yn = 'Y'
+            WHERE
+                reply_idx = #{replyIdx}
+        ]]>
+    </update>
+
+    <select id="countReply" parameterType="int" resultType="Integer">
+        <![CDATA[
+            SELECT
+                count(*)
+            FROM
+                reply
+            WHERE
+                board_idx = #{boardIdx}
+        ]]>
+    </select>
+</mapper>
