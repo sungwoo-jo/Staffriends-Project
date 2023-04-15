@@ -88,10 +88,14 @@
 <div class="card" style="margin: 0 auto; width: 80%; height: auto;">
     <h5 class="card-header">댓글 작성</h5>
     <div class="card-body">
-        <form id="replyForm"><textarea id="contents" style="width: 100%" placeholder="내용을 입력해주세요."></textarea></form>
+        <form id="replyForm">
+            <textarea id="replyContent" style="width: 100%" placeholder="내용을 입력해주세요."/></textarea>
+            <input type="hidden" value="${board.boardIdx}" id="boardIdx">
+            <input type="hidden" value="${signIn.username}" id="creatorId">
+        </form>
     </div>
     <div class="card-footer">
-        <a href="#" class="btn btn-primary float-right">작성 완료</a>
+        <input type="button" class="btn btn-primary float-right" onclick="insertReply()" value="작성 완료">
     </div>
 </div>
 <br/>
@@ -115,6 +119,47 @@
         </div>
     </div>
 </div>
+
+<script>
+    function insertReply() { // 댓글 등록
+        const creatorId = document.getElementById('creatorId').value;
+        const replyContent = document.getElementById('replyContent').value;
+        const boardIdx = document.getElementById('boardIdx').value;
+        if (replyContent.trim() === '' || replyContent.length === 0) {
+            alert('댓글 내용을 입력해주세요.');
+        }
+        let data = {
+            creatorId: creatorId,
+            boardIdx: boardIdx,
+            replyContent: replyContent
+        };
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "/reply/insertReply");
+        xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+        xhr.onload = function () {
+            if (xhr.status === 200 || xhr.status === 201) {
+                let resp = xhr.responseText;
+                if (resp.status === 500) {
+                    alert('에러가 발생했습니다.');
+                } else {
+                    if (resp == "insertSuccess") {
+                        alert('댓글 작성이 완료되었습니다.');
+                    } else {
+                        alert('댓글 작성에 실패하였습니다.');
+                    }
+                }
+            } else {
+                console.log(xhr.responseText);
+                alert('에러가 발생했습니다. \n에러 코드: ' + xhr.status);
+            }
+        };
+        xhr.onerror = function () {
+            alert('에러가 발생했습니다. \n에러 코드: ' + xhr.status);
+        };
+        xhr.send(JSON.stringify(data));
+    }
+
+</script>
 
 </body>
 <%@ include file="../layout/footer.jsp"%>
