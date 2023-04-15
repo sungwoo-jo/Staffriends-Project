@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="../layout/header.jsp"%>
-<c:if test="${signIn == null}"><c:redirect url="http://localhost:8080/user/needLogin"/></c:if>
+<c:if test="${signIn == null}"><c:redirect url="http://localhost:80/user/needLogin"/></c:if>
 <head>
     <title>board</title>
 </head>
@@ -33,8 +33,8 @@
                 </tr>
             </thead>
             <tbody>
-            <c:choose>
-                <c:when test="${fn:length(list) > 0}">
+<%--            <c:choose>--%>
+                <c:if test="${fn:length(list) > 0}">
                     <c:forEach var="li" items="${list}">
                     <tr>
                         <td style="text-align: center"><c:out value="${li.boardIdx}"/></td>
@@ -43,11 +43,11 @@
                         <td style="text-align: center"><c:out value="${li.createdDateTime}"/></td>
                     </tr>
                     </c:forEach>
-                </c:when>
-                <c:otherwise> <%-- 게시글 정보가 없으면 조회 결과 없음 출력 --%>
-                    <h1>조회결과없음</h1>
-                </c:otherwise>
-            </c:choose>
+                </c:if>
+<%--                <c:otherwise> &lt;%&ndash; 게시글 정보가 없으면 조회 결과 없음 출력 &ndash;%&gt;--%>
+<%--                    <h1>조회결과없음</h1>--%>
+<%--                </c:otherwise>--%>
+<%--            </c:choose>--%>
             </tbody>
         </table>
         <nav aria-label="Page navigation example">

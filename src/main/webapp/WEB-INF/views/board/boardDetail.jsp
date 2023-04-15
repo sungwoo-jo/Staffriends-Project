@@ -21,12 +21,12 @@
                     <tr>
                         <th scope="row" style="min-width: 50px; max-width: 50px;text-align: center; ">글 번호</th>
                         <td>${board.boardIdx}</td>
-                        <th scope="row" style="min-width: 50px; max-width: 50px;text-align: center; ">조회수</th>
-                        <td>${board.hitCnt}</td>
-                    </tr>
-                    <tr>
                         <th scope="row" style="min-width: 50px; max-width: 50px;text-align: center; ">작성자</th>
                         <td>${board.creatorId}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" style="min-width: 50px; max-width: 50px;text-align: center; ">조회수</th>
+                        <td>${board.hitCnt}</td>
                         <th scope="row" style="min-width: 50px; max-width: 50px;text-align: center; ">작성일</th>
                         <td>${board.createdDateTime}</td>
                     </tr>
@@ -82,6 +82,40 @@
     </c:if>
     <script src="/js/board.js"></script>
 </div>
+
+
+<%-- 댓글 작성 --%>
+<div class="card" style="margin: 0 auto; width: 80%; height: auto;">
+    <h5 class="card-header">댓글 작성</h5>
+    <div class="card-body">
+        <form id="replyForm"><textarea id="contents" style="width: 100%" placeholder="내용을 입력해주세요."></textarea></form>
+    </div>
+    <div class="card-footer">
+        <a href="#" class="btn btn-primary float-right">작성 완료</a>
+    </div>
+</div>
+<br/>
+<div class="card" style="margin: 0 auto; width: 80%; height: auto; margin-bottom:100px;">
+    <h7 class="card-header">작성자: 조성우</h7>
+    <div class="border-bottom">
+        <div class="card-body">
+            <tr><td><h6 class="card-title">내용이 들어갈 부분입니다.</h6></td>
+        </div>
+        <div style="text-align: right">
+            <td><span class="card-text text-right" style="text-align: right">2023-04-13 오후 11:08:32</span></td></tr>
+        </div>
+    </div>
+    <h7 class="card-header">작성자: 조성우</h7>
+    <div class="border-bottom">
+        <div class="card-body">
+            <tr><td><h6 class="card-title">내용이 들어갈 부분입니다.</h6></td>
+        </div>
+        <div style="text-align: right">
+            <td><span class="card-text text-right" style="text-align: right">2023-04-13 오후 11:08:32</span></td></tr>
+        </div>
+    </div>
+</div>
+
 </body>
 <%@ include file="../layout/footer.jsp"%>
 </html>

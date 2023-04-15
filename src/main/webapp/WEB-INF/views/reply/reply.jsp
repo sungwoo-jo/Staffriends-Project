@@ -9,8 +9,8 @@
 <%@ include file="../layout/header.jsp"%>
 <html>
 <body>
-<div class="card" style="margin: 0 auto; width: 55%; height: auto;">
-    <h5 class="card-header">작성자: 조성우</h5>
+<div class="card" style="margin: 0 auto; width: 80%; height: auto;">
+    <h5 class="card-header">댓글 작성</h5>
     <div class="card-body">
         <form id="replyForm"><textarea id="contents" style="width: 100%" placeholder="내용을 입력해주세요."></textarea></form>
     </div>
@@ -19,11 +19,24 @@
     </div>
 </div>
 <br/>
-<div class="card" style="margin: 0 auto; width: 55%; height: auto; margin-bottom:100px;">
-    <h5 class="card-header">작성자: 조성우</h5>
-    <div class="card-body">
-        <h5 class="card-title">내용이 들어갈 부분입니다.</h5>
-        <p class="card-text">작성 시간: 2023-04-13 오후 11:08:32</p>
+<div class="card" style="margin: 0 auto; width: 80%; height: auto; margin-bottom:100px;">
+    <h7 class="card-header">작성자: 조성우</h7>
+    <div class="border-bottom">
+        <div class="card-body">
+            <tr><td><h6 class="card-title">내용이 들어갈 부분입니다.</h6></td>
+        </div>
+        <div style="text-align: right">
+            <td><span class="card-text text-right" style="text-align: right">2023-04-13 오후 11:08:32</span></td></tr>
+        </div>
+    </div>
+    <h7 class="card-header">작성자: 조성우</h7>
+    <div class="border-bottom">
+        <div class="card-body">
+            <tr><td><h6 class="card-title">내용이 들어갈 부분입니다.</h6></td>
+        </div>
+        <div style="text-align: right">
+            <td><span class="card-text text-right" style="text-align: right">2023-04-13 오후 11:08:32</span></td></tr>
+        </div>
     </div>
 </div>
 
