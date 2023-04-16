@@ -21,13 +21,15 @@
                     (
                         creator_id,
                         reply_content,
-                        board_idx
+                        board_idx,
+                        created_datetime
                     )
             VALUES
                     (
                         #{creatorId},
                         #{replyContent},
-                        #{boardIdx}
+                        #{boardIdx},
+                        now()
                     )
         ]]>
     </insert>

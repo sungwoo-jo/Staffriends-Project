@@ -4,9 +4,11 @@ import board.vo.BoardVo;
 import board.vo.ReplyVo;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface ReplyService {
-    ReplyVo getAllReply(Integer boardIdx); // 댓글 목록
+    List<ReplyVo> getAllReply(Integer boardIdx); // 댓글 목록
     
     void insertReply(ReplyVo replyVo); // 댓글 작성
     

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Repository
 @Service
 public class ReplyServiceImpl implements ReplyService {
@@ -14,7 +16,7 @@ public class ReplyServiceImpl implements ReplyService {
     private ReplyMapper replyMapper;
 
     @Override
-    public ReplyVo getAllReply(Integer boardIdx) {
+    public List<ReplyVo> getAllReply(Integer boardIdx) {
         return replyMapper.getAllReply(boardIdx);
     }
 

@@ -3,9 +3,11 @@ package board.mapper;
 import board.vo.ReplyVo;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface ReplyMapper {
-    ReplyVo getAllReply(Integer boardIdx); // 댓글 목록
+    List<ReplyVo> getAllReply(Integer boardIdx); // 댓글 목록
 
     void insertReply(ReplyVo replyVo); // 댓글 작성
 
