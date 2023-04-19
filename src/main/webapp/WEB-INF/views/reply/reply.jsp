@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="../layout/header.jsp" %>
+<%--<%@ include file="../layout/header.jsp" %>--%>
 <div class="card" style="margin: 0 auto; width: 80%; height: auto;">
     <h5 class="card-header">댓글 작성</h5>
     <div class="card-body">
@@ -21,6 +21,9 @@
     </div>
 </div>
 <br/>
+
+
+
 <div class="card" style="margin: 0 auto; width: 80%; height: auto; margin-bottom:100px;">
     <h7 class="card-header">작성자: 조성우</h7>
     <div class="border-bottom">
@@ -31,19 +34,19 @@
             <td><span class="card-text text-right" style="text-align: right">2023-04-13 오후 11:08:32</span></td></tr>
         </div>
     </div>
-    <h7 class="card-header">작성자: 조성우</h7>
-    <div class="border-bottom">
-        <div class="card-body">
-            <tr><td><h6 class="card-title">내용이 들어갈 부분입니다.</h6></td>
-        </div>
-        <div style="text-align: right">
-            <td><span class="card-text text-right" style="text-align: right">2023-04-13 오후 11:08:32</span></td></tr>
-        </div>
-    </div>
+<%--    <h7 class="card-header">작성자: 조성우</h7>--%>
+<%--    <div class="border-bottom">--%>
+<%--        <div class="card-body">--%>
+<%--            <tr><td><h6 class="card-title">내용이 들어갈 부분입니다.</h6></td>--%>
+<%--        </div>--%>
+<%--        <div style="text-align: right">--%>
+<%--            <td><span class="card-text text-right" style="text-align: right">2023-04-13 오후 11:08:32</span></td></tr>--%>
+<%--        </div>--%>
+<%--    </div>--%>
 </div>
 
 <script>
-    window.onload = function () {
+    window.onload = function () { // 댓글 목록 출력
         const boardIdx = document.getElementById('boardIdx').value;
         let data = {boardIdx: boardIdx};
 
@@ -68,6 +71,7 @@
         };
         xhr.send(JSON.stringify(data));
     }
+
 </script>
 
 <script>
