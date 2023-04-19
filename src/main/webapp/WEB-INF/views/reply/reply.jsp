@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ include file="../layout/header.jsp" %>
 <div class="card" style="margin: 0 auto; width: 80%; height: auto;">
     <h5 class="card-header">댓글 작성</h5>
     <div class="card-body">
