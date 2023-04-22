@@ -29,29 +29,16 @@ public class ReplyController {
     }
 
 
-    @ResponseBody
     @PostMapping("/getAllReply")
-    public Map<String, Object> getAllReply(@RequestBody String boardIdx, Model model) throws ParseException {
-//        System.out.println("댓글목록 컨트롤러 들어옴");
-        Map<String, Object> map = new HashMap<>();
-        JSONParser parser = new JSONParser();
-        JSONObject jsonObject = (JSONObject)parser.parse(boardIdx);
+    public List<ReplyVo> getAllReply(@RequestBody String boardIdx, Model model) throws ParseException {
 
-        String strIdx = (String) jsonObject.get("boardIdx");
-        Integer idx = Integer.parseInt(strIdx);
-
-        List<ReplyVo> list = replyService.getAllReply(idx);
+        List<ReplyVo> list = replyService.getAllReply(Integer.parseInt(boardIdx));
 
         System.out.println("list:"+list);
 
         System.out.println("size:"+list.size());
 
-        for(int i=0; i<list.size(); i++) {
-            System.out.println("list.get(i):"+list.get(i));
-        }
-
-        map.put("list", list);
-        map.put("size", list.size());
-        return map;
+        model.addAttribute("list", list);
+        return list;
     }
 }
