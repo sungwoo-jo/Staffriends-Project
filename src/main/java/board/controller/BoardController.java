@@ -133,7 +133,7 @@ public class BoardController {
 
     @GetMapping("/reply") // 댓글 확인
     public String reply() {
-        return "/reply/reply";
+        return "/reply/replyTest";
     }
 
 }

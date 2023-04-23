@@ -74,6 +74,7 @@
 
     function getAllReply() { // 댓글 목록 출력
         const boardIdx = document.getElementById('boardIdx').value;
+        const creatorId = document.getElementById('creatorId').value;
 
         let data = boardIdx;
         let xhr = new XMLHttpRequest();
@@ -90,7 +91,12 @@
 
                     for(let i=0; i<parseData.length; i++) {
                         reply += '<div class="card" style="margin: 0 auto; width: 80%; height: auto; margin-bottom:10px;" id="card">';
-                        reply += '<h7 class="card-header">'+'작성자: '+parseData[i].creatorId+'</h7>';
+                        reply += '<div class="card-header">';
+                        reply += '<h7>'+'작성자: '+parseData[i].creatorId+'</h7>';
+                        if (creatorId === parseData[i].creatorId) { // 댓글 작성자인 경우 삭제하기 버튼 생성
+                            reply += '<span style="float: right"><a href="javascript:deleteReply('+parseData[i].replyIdx+');">삭제하기</a></span>';
+                        }
+                        reply += '</div>';
                         reply += '<div class="border-bottom">';
                         reply += '<div class="card-body">';
                         reply += '<tr><td><h6 class="card-title">'+ parseData[i].replyContent +'</h6></td>';
@@ -115,4 +121,31 @@
         xhr.send(data);
     }
 
+    function deleteReply(replyIdx) { // 댓글 삭제
+        let data = replyIdx;
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "/reply/deleteReply", "true");
+        xhr.onload = function () {
+            if (xhr.status === 200 || xhr.status === 201) {
+                let resp = xhr.responseText;
+                if (resp.status === 500) {
+                    alert('에러가 발생했습니다.');
+                } else {
+                    if (resp === "deleteSuccess") {
+                        alert('댓글이 삭제되었습니다.');
+                        getAllReply();
+                    } else {
+                        alert('댓글을 삭제하지 못했습니다.');
+                    }
+                }
+            } else {
+                console.log(xhr.responseText);
+                alert('에러가 발생했습니다. \n에러 코드: ' + xhr.status);
+            }
+        };
+        xhr.onerror = function () {
+            alert('에러가 발생했습니다. \n에러 코드: ' + xhr.status);
+        };
+        xhr.send(data);
+    }
 </script>

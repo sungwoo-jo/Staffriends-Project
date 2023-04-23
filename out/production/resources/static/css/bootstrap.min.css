@@ -4835,7 +4835,8 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 }
 
 .card-title {
-    margin-bottom: .75rem
+    margin-bottom: .75rem;
+    padding-left: 10px;
 }
 
 .card-subtitle {
@@ -4844,7 +4845,8 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 }
 
 .card-text:last-child {
-    margin-bottom: 0
+    margin-bottom: 0;
+    padding-right: 10px;
 }
 
 .card-link:hover {

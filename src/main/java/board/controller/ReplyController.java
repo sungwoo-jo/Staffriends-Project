@@ -41,4 +41,11 @@ public class ReplyController {
         model.addAttribute("list", list);
         return list;
     }
+
+    @PostMapping("/deleteReply")
+    public String deleteReply(@RequestBody String replyIdx) {
+        replyService.deleteReply(Integer.parseInt(replyIdx));
+
+        return "deleteSuccess";
+    }
 }

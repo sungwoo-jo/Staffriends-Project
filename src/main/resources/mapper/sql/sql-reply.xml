@@ -10,7 +10,7 @@
             FROM
                 reply
             WHERE
-                board_idx = #{boardIdx}
+                board_idx = #{boardIdx} AND deleted_yn = 'N'
         ]]>
     </select>
 
