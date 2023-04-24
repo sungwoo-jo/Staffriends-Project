@@ -43,10 +43,26 @@
     <span style="float: right"><a href="#">삭제하기</a></span>
     <span style="float: right; margin-right: 10px;"><a href="#">댓글달기</a></span>
   </div>
-  <div class="border-bottom">
+  <div class="border-bottom" style="border-left: none">
     <div class="card-body">
       <tr>
         <span>두 번째 댓글입니다.</span>
+    </div>
+    <div style="text-align: right">
+      <td><span class="card-text text-right" style="text-align: right">2023-04-23 21:50:53</span></td></tr>
+    </div>
+
+  </div>
+
+  <div class="card-header" style="margin-left: 50px; border: none"> <!-- 대댓글 작성 -->
+    <h7>작성자: sungwoo1122</h7>
+    <span style="float: right"><a href="#">삭제하기</a></span>
+    <span style="float: right; margin-right: 10px;"><a href="#">댓글달기</a></span>
+  </div>
+  <div class="border-bottom" style="margin-left: 50px">
+    <div class="card-body">
+      <tr>
+        <span>두 번째 답글입니다.</span>
     </div>
     <div style="text-align: right">
       <td><span class="card-text text-right" style="text-align: right">2023-04-23 21:50:53</span></td></tr>
