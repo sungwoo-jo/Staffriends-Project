@@ -11,7 +11,7 @@
   <h5 class="card-header">댓글 작성</h5>
   <div class="card-body">
     <form id="replyForm">
-      <textarea id="replyContent" style="width: 100%" placeholder="내용을 입력해주세요."></textarea>
+      <textarea id="replyContent" style="width: 100%; resize: none" placeholder="내용을 입력해주세요."></textarea>
       <input type="hidden" id="creatorId" value="${signIn.username}">
       <input type="hidden" id="boardIdx" value="${board.boardIdx}">
     </form>
@@ -27,7 +27,6 @@
   <h7>작성자: sungwoo11</h7>
   <span style="float: right"><a href="#">삭제하기</a></span>
   </div>
-
   <div class="border-bottom">
     <div class="card-body">
       <tr>
@@ -38,8 +37,22 @@
     </div>
   </div>
 </div>
-
-<reply>123123</reply>
+<div class="card" style="margin: 0 auto; width: 80%; height: auto; margin-bottom:10px;" id="card">
+  <div class="card-header">
+    <h7>작성자: sungwoo11</h7>
+    <span style="float: right"><a href="#">삭제하기</a></span>
+    <span style="float: right; margin-right: 10px;"><a href="#">댓글달기</a></span>
+  </div>
+  <div class="border-bottom">
+    <div class="card-body">
+      <tr>
+        <span>두 번째 댓글입니다.</span>
+    </div>
+    <div style="text-align: right">
+      <td><span class="card-text text-right" style="text-align: right">2023-04-23 21:50:53</span></td></tr>
+    </div>
+  </div>
+</div>
 
 <script>
   window.onload = function() {

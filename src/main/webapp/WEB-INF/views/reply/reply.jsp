@@ -10,7 +10,7 @@
     <h5 class="card-header">댓글 작성</h5>
     <div class="card-body">
         <form id="replyForm">
-            <textarea id="replyContent" style="width: 100%" placeholder="내용을 입력해주세요."></textarea>
+            <textarea id="replyContent" style="width: 100%; resize: none" placeholder="내용을 입력해주세요."></textarea>
             <input type="hidden" id="creatorId" value="${signIn.username}">
             <input type="hidden" id="boardIdx" value="${board.boardIdx}">
         </form>
