@@ -47,18 +47,14 @@
       <tr>
         <span>두 번째 댓글입니다.</span>
     </div>
-    <div style="text-align: right; padding-right: 10px;">
-      <span style="float: right"><a href="#" style="color: #007bff">삭제하기</a></span>
-      <span style="float: right; margin-right: 10px;"><a href="#" style="color: #007bff">댓글달기</a></span>
+    <div style="text-align: right; padding-right: 10px;" id="replyControl">
+      <span style="float: right"><a href="#" style="color: #007bff" id="deleteReply">삭제하기</a></span>
+      <span style="float: right; margin-right: 10px;"><a href="javascript:showReplyForm()" style="color: #007bff" id="addReply">댓글달기</a></span>
     </div>
-
   </div>
-
-  <div class="card-header" style="border: none;"> <!-- 대댓글 작성 시 추가되는 부분 -->
+  <replyAdd></replyAdd>
+  <div class="card-header" style="border: none;"> <!-- 대댓글 작성 시 추가되는 부분 시작 -->
     <strong style="padding-right: 5px;">└</strong>&nbsp;<h7 class="text-left">작성자: sungwoo1122</h7>
-
-<%--    <span style="float: right"><a href="#">삭제하기</a></span>--%>
-<%--    <span style="float: right; margin-right: 10px;"><a href="#">댓글달기</a></span>--%>
     <td><span class="card-text text-right" style="font-size: small; float: right">2023-04-23 21:50:53</span></td></tr>
   </div>
   <div class="border-bottom"  style="background: rgba(0, 0, 0, .03); border-style: hidden">
@@ -70,11 +66,45 @@
       <span style="float: right"><a href="#" style="color: #007bff">삭제하기</a></span>
       <span style="float: right; margin-right: 10px;"><a href="#" style="color: #007bff">댓글달기</a></span>
     </div>
+  </div> <!-- 대댓글 작성 시 추가되는 부분 시작 -->
+
+</div>
   </div>
+
+
+
 </div>
 
 <script>
   window.onload = function() {
     getAllReply();
   }
+
+  function showReplyForm() { // 댓글 작성 폼 보여주기
+    let replyAddForm = ""; // 댓글 작성 폼
+    replyAddForm += '<div class="card-header" style="border: none; padding-bottom: 0"> <!-- 대댓글 헤더 -->';
+    replyAddForm += '<strong style="padding-right: 5px; margin-bottom: 0">└</strong>&nbsp;';
+    replyAddForm += '</div>';
+    replyAddForm += '<div class="border-bottom" style="background: rgba(0, 0, 0, .03); border-style: hidden; padding-right: 10px">';
+    replyAddForm += '  <div class="card-body" style="padding-left: 40px;">';
+    replyAddForm += '    <td><textarea style="width: 80%; resize: none" placeholder="댓글 내용을 입력해주세요."></textarea></td>';
+    replyAddForm += '  </div>';
+    replyAddForm += '  <div style="text-align: right; padding-left: 40px;">';
+    replyAddForm += '    <span style="float: right; margin-right: 10px;"><a href="#" style="color: #007bff">작성완료</a></span>';
+    replyAddForm += '  </div>';
+    replyAddForm += '</div>';
+    document.querySelector('replyAdd').innerHTML = replyAddForm;
+    document.getElementById('addReply').innerText = "취소하기";
+    document.getElementById('addReply').href = "javascript:deleteReplyForm()";
+  }
+
+  function deleteReplyForm() { // 댓글 작성 폼 삭제하기
+    let replyAddForm = ""; // 댓글 작성 폼
+    document.querySelector('replyAdd').innerHTML = replyAddForm;
+    document.getElementById('addReply').innerText = "댓글달기";
+    document.getElementById('addReply').href = "javascript:showReplyForm()";
+  }
 </script>
+
+
+

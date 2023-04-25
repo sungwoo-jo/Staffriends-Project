@@ -10,9 +10,10 @@
     <h5 class="card-header">댓글 작성</h5>
     <div class="card-body">
         <form id="replyForm">
-            <textarea id="replyContent" style="width: 100%; resize: none" placeholder="내용을 입력해주세요."></textarea>
-            <input type="hidden" id="creatorId" value="${signIn.username}">
+            <textarea id="replyContents" style="width: 100%; resize: none" placeholder="내용을 입력해주세요."></textarea>
+            <input type="hidden" id="userId" value="${signIn.id}">
             <input type="hidden" id="boardIdx" value="${board.boardIdx}">
+            <input type="hidden" id="username" value="${signIn.username}">
         </form>
     </div>
     <div class="card-footer">
@@ -20,7 +21,7 @@
     </div>
 </div>
 <br/>
-<reply>123123</reply>
+<reply></reply>
 
 <script>
     window.onload = function() {
@@ -31,18 +32,20 @@
 
 <script>
     function insertReply() { // 댓글 등록
-        const creatorId = document.getElementById('creatorId').value;
-        const replyContent = document.getElementById('replyContent').value;
+        const userId = document.getElementById('userId').value;
+        const username = document.getElementById('username').value;
+        const replyContents = document.getElementById('replyContents').value;
         const boardIdx = document.getElementById('boardIdx').value;
 
-        if (replyContent.trim() === '' || replyContent.length === 0) {
+        if (replyContents.trim() === '' || replyContents.length === 0) {
             alert('댓글 내용을 입력해주세요.');
             return;
         }
         let data = {
-            creatorId: creatorId,
+            userId: userId,
+            username: username,
             boardIdx: boardIdx,
-            replyContent: replyContent
+            replyContents: replyContents
         };
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "/reply/insertReply");
@@ -74,7 +77,8 @@
 
     function getAllReply() { // 댓글 목록 출력
         const boardIdx = document.getElementById('boardIdx').value;
-        const creatorId = document.getElementById('creatorId').value;
+        const userId = document.getElementById('userId').value;
+        const username = document.getElementById('username').value;
 
         let data = boardIdx;
         let xhr = new XMLHttpRequest();
@@ -92,14 +96,14 @@
                     for(let i=0; i<parseData.length; i++) {
                         reply += '<div class="card" style="margin: 0 auto; width: 80%; height: auto; margin-bottom:10px;" id="card">';
                         reply += '<div class="card-header">';
-                        reply += '<h7>'+'작성자: '+parseData[i].creatorId+'</h7>';
-                        if (creatorId === parseData[i].creatorId) { // 댓글 작성자인 경우 삭제하기 버튼 생성
+                        reply += '<h7>'+'작성자: '+parseData[i].username+'</h7>';
+                        if (username === parseData[i].username) { // 댓글 작성자인 경우 삭제하기 버튼 생성
                             reply += '<span style="float: right"><a href="javascript:deleteReply('+parseData[i].replyIdx+');">삭제하기</a></span>';
                         }
                         reply += '</div>';
                         reply += '<div class="border-bottom">';
                         reply += '<div class="card-body">';
-                        reply += '<tr><td><h6 class="card-title">'+ parseData[i].replyContent +'</h6></td>';
+                        reply += '<tr><td><h6 class="card-title">'+ parseData[i].replyContents +'</h6></td>';
                         reply += '</div>';
                         reply += '<div style="text-align: right">';
                         reply += '<td><span class="card-text text-right" style="text-align: right">'+parseData[i].createdDatetime+'</span></td></tr>';

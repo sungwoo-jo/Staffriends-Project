@@ -19,16 +19,22 @@
             INSERT INTO
                 reply
                     (
-                        creator_id,
-                        reply_content,
+                        user_id,
+                        username,
+                        reply_contents,
                         board_idx,
+                        reply_parent,
+                        reply_order,
                         created_datetime
                     )
             VALUES
                     (
-                        #{creatorId},
-                        #{replyContent},
+                        #{userId},
+                        #{username},
+                        #{replyContents},
                         #{boardIdx},
+                        #{replyIdx},
+                        #{replyIdx},
                         now()
                     )
         ]]>
