@@ -34,4 +34,19 @@ public class ReplyServiceImpl implements ReplyService {
     public int countReply(int boardIdx) {
         return replyMapper.countReply(boardIdx);
     }
+
+    @Override
+    public ReplyVo getReplyParent(String replyParent) {
+        return replyMapper.getReplyParent(replyParent);
+    }
+
+    @Override
+    public void updateReplyOrder(ReplyVo replyInfo) {
+        replyMapper.updateReplyOrder(replyInfo);
+    }
+
+    @Override
+    public Integer getMaxOrder(int boardIdx) {
+        return replyMapper.getMaxOrder(boardIdx);
+    }
 }

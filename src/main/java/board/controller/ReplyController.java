@@ -24,10 +24,23 @@ public class ReplyController {
 
     @PostMapping("/insertReply")
     public String insertReply(@RequestBody ReplyVo replyVo) {
-        replyService.insertReply(replyVo);
+//        replyService.insertReply(replyVo); // original insertReply method
+        if(replyVo.getReplyIdx() == null || "".equals(replyVo.getReplyIdx())) {
+            if (replyVo.getReplyParent() != null) {
+                ReplyVo replyInfo = replyService.getReplyParent(replyVo.getReplyParent().toString());
+                replyVo.setReplyDepth(replyInfo.getReplyDepth());
+                replyVo.setReplyOrder(replyInfo.getReplyOrder() + 1);
+                replyService.updateReplyOrder(replyInfo);
+            } else {
+                Integer maxReplyOrder = replyService.getMaxOrder(replyVo.getBoardIdx());
+                replyVo.setReplyOrder(maxReplyOrder);
+            }
+            replyService.insertReply(replyVo);
+        } else {
+            replyService.updateReplyOrder(replyVo);
+        }
         return "insertSuccess";
     }
-
 
     @PostMapping("/getAllReply")
     public List<ReplyVo> getAllReply(@RequestBody String boardIdx, Model model) throws ParseException {

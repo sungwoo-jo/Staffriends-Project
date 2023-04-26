@@ -14,29 +14,63 @@
         ]]>
     </select>
 
+<!--    <insert id="insertReply" parameterType="board.vo.ReplyVo"> &#45;&#45; original insert method-->
+<!--        <![CDATA[-->
+<!--            INSERT INTO-->
+<!--                reply-->
+<!--                    (-->
+<!--                        user_id,-->
+<!--                        username,-->
+<!--                        reply_contents,-->
+<!--                        board_idx,-->
+<!--                        reply_parent,-->
+<!--                        reply_order,-->
+<!--                        created_datetime-->
+<!--                    )-->
+<!--            VALUES-->
+<!--                    (-->
+<!--                        #{userId},-->
+<!--                        #{username},-->
+<!--                        #{replyContents},-->
+<!--                        #{boardIdx},-->
+<!--                        #{replyIdx},-->
+<!--                        #{replyIdx},-->
+<!--                        now()-->
+<!--                    )-->
+<!--        ]]>-->
+<!--    </insert>-->
+
     <insert id="insertReply" parameterType="board.vo.ReplyVo">
         <![CDATA[
             INSERT INTO
                 reply
-                    (
-                        user_id,
-                        username,
-                        reply_contents,
-                        board_idx,
-                        reply_parent,
-                        reply_order,
-                        created_datetime
-                    )
+                (
+                  board_idx,
+                  reply_idx,
+                  username,
+                  deleted_yn,
+                  reply_contents,
+                  created_datetime,
+                  reply_order,
+                  reply_parent,
+                  reply_depth
+                )
             VALUES
-                    (
-                        #{userId},
-                        #{username},
-                        #{replyContents},
-                        #{boardIdx},
-                        #{replyIdx},
-                        #{replyIdx},
-                        now()
-                    )
+                (
+                  #{boardIdx},
+                  #{replyIdx},
+                  #{username},
+                  'N'
+                  #{replyContents},
+                  now(),
+                  #{replyOrder},
+                  #{replyParent},
+                  #{replyDepth},
+                 <choose>
+                   <when test="replyParent == null">#{replyIdx},0</when>
+                   <otherwise>#{replyParent}, #{replyDepth}</otherwise>
+                 </choose>
+                )
         ]]>
     </insert>
 
@@ -55,6 +89,39 @@
         <![CDATA[
             SELECT
                 count(*)
+            FROM
+                reply
+            WHERE
+                board_idx = #{boardIdx}
+        ]]>
+    </select>
+
+    <select id="getReplyParent" parameterType="String" resultType="board.vo.ReplyVo">
+        <![CDATA[
+            SELECT
+                board_idx, reply_depth+1 reply_depth, reply_order
+            FROM
+                reply
+            WHERE
+                reply_idx = #{replyParent}
+        ]]>
+    </select>
+
+    <update id="updateReplyOrder" parameterType="board.vo.ReplyVo">
+        <![CDATA[
+            UPDATE
+                reply
+            SET
+                reply_order = reply_order + 1
+            WHERE
+                board_idx = #{boardIdx} AND reply_order > #{replyOrder}
+        ]]>
+    </update>
+
+    <select id="getMaxOrder" parameterType="int" resultType="Integer">
+        <![CDATA[
+            SELECT
+                IFNULL(MAX(reply_order),0)+1
             FROM
                 reply
             WHERE
