@@ -92,11 +92,10 @@
                     console.log(resp);
                     let reply = "";
                     let parseData = JSON.parse(resp);
-
                     for(let i=0; i<parseData.length; i++) {
-                        reply += '<div class="card" style="margin: 0 auto; width: 80%; height: auto; margin-bottom:10px;" id="card">';
+                        reply += '<div class="card" style="margin: 0 auto; width: 80%; height: auto; margin-bottom:10px; left: ' + parseData[i].replyDepth * 10 + 'px;" id="card">';
                         reply += '<div class="card-header">';
-                        reply += '<h7>'+'작성자: '+parseData[i].username+'</h7>';
+                        reply += '->'+'<h7>'+'작성자: '+parseData[i].username+'</h7>';
                         if (username === parseData[i].username) { // 댓글 작성자인 경우 삭제하기 버튼 생성
                             reply += '<span style="float: right"><a href="javascript:deleteReply('+parseData[i].replyIdx+');">삭제하기</a></span>';
                         }
