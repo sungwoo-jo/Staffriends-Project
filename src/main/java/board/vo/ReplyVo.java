@@ -11,7 +11,7 @@ public class ReplyVo {
     private int boardIdx; // 게시글 번호
     private String deletedYn; // 삭제 여부
     private String createdDatetime; // 작성 시간
-    private Integer replyParent; // 모 댓글 idx
-    private Integer replyDepth; // 댓글 or 대댓글 여부, 0:댓글 / 1: 대댓글
-    private Integer replyOrder; // 댓글 출력 순서(높은 댓글일수록 아래에 정렬)
+    private String replyParent; // 모 댓글 idx
+    private String replyDepth; // 댓글 or 대댓글 여부, 0:댓글 / 1: 대댓글
+    private String replyOrder; // 댓글 출력 순서(높은 댓글일수록 아래에 정렬)
 }

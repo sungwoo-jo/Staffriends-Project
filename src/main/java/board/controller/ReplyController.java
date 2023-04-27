@@ -27,12 +27,12 @@ public class ReplyController {
 //        replyService.insertReply(replyVo); // original insertReply method
         if(replyVo.getReplyIdx() == null || "".equals(replyVo.getReplyIdx())) {
             if (replyVo.getReplyParent() != null) {
-                ReplyVo replyInfo = replyService.getReplyParent(replyVo.getReplyParent().toString());
+                ReplyVo replyInfo = replyService.getReplyParent(replyVo.getReplyParent());
                 replyVo.setReplyDepth(replyInfo.getReplyDepth());
                 replyVo.setReplyOrder(replyInfo.getReplyOrder() + 1);
                 replyService.updateReplyOrder(replyInfo);
             } else {
-                Integer maxReplyOrder = replyService.getMaxOrder(replyVo.getBoardIdx());
+                String maxReplyOrder = replyService.getMaxOrder(replyVo.getBoardIdx());
                 replyVo.setReplyOrder(maxReplyOrder);
             }
             replyService.insertReply(replyVo);

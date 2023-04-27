@@ -41,13 +41,19 @@
 <!--    </insert>-->
 
     <insert id="insertReply" parameterType="board.vo.ReplyVo">
-        <![CDATA[
+        <selectKey resultType="Integer" keyProperty="replyIdx" order="BEFORE">
+            SELECT
+                IFNULL(MAX(reply_idx),0)+1
+            FROM
+                reply
+        </selectKey>
             INSERT INTO
                 reply
                 (
                   board_idx,
                   reply_idx,
                   username,
+                  user_id,
                   deleted_yn,
                   reply_contents,
                   created_datetime,
@@ -60,18 +66,21 @@
                   #{boardIdx},
                   #{replyIdx},
                   #{username},
-                  'N'
+                  #{userId},
+                  'N',
                   #{replyContents},
                   now(),
                   #{replyOrder},
-                  #{replyParent},
-                  #{replyDepth},
                  <choose>
-                   <when test="replyParent == null">#{replyIdx},0</when>
-                   <otherwise>#{replyParent}, #{replyDepth}</otherwise>
+                   <when test="replyParent == null">
+                       <![CDATA[#{replyIdx},0]]>
+                   </when>
+                   <otherwise>
+                       <![CDATA[#{replyParent},#{replyDepth}]]>
+                   </otherwise>
                  </choose>
                 )
-        ]]>
+
     </insert>
 
     <update id="deleteReply" parameterType="int">
@@ -118,7 +127,7 @@
         ]]>
     </update>
 
-    <select id="getMaxOrder" parameterType="int" resultType="Integer">
+    <select id="getMaxOrder" parameterType="int" resultType="String">
         <![CDATA[
             SELECT
                 IFNULL(MAX(reply_order),0)+1

@@ -56,7 +56,7 @@
                 if (resp.status === 500) {
                     alert('에러가 발생했습니다.');
                 } else {
-                    if (resp == "insertSuccess") {
+                    if (resp === "insertSuccess") {
                         alert('댓글 작성이 완료되었습니다.');
                         getAllReply();
                         document.getElementById("replyContent").value = "";

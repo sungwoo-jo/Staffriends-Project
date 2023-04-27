@@ -46,7 +46,7 @@ public class ReplyServiceImpl implements ReplyService {
     }
 
     @Override
-    public Integer getMaxOrder(int boardIdx) {
+    public String getMaxOrder(int boardIdx) {
         return replyMapper.getMaxOrder(boardIdx);
     }
 }
