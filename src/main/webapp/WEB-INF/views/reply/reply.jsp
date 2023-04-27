@@ -59,7 +59,7 @@
                     if (resp === "insertSuccess") {
                         alert('댓글 작성이 완료되었습니다.');
                         getAllReply();
-                        document.getElementById("replyContent").value = "";
+                        document.getElementById("replyContents").value = "";
                     } else {
                         alert('댓글 작성에 실패하였습니다.');
                     }
@@ -96,18 +96,20 @@
                         reply += '<div class="card" style="margin: 0 auto; width: 80%; height: auto; margin-bottom:10px; left: ' + parseData[i].replyDepth * 10 + 'px;" id="card">';
                         reply += '<div class="card-header">';
                         reply += '->'+'<h7>'+'작성자: '+parseData[i].username+'</h7>';
-                        if (username === parseData[i].username) { // 댓글 작성자인 경우 삭제하기 버튼 생성
-                            reply += '<span style="float: right"><a href="javascript:deleteReply('+parseData[i].replyIdx+');">삭제하기</a></span>';
-                        }
+                        reply += '<td><span class="card-text text-right" style="font-size: small; float: right">'+parseData[i].createdDatetime+'</span></td>';
                         reply += '</div>';
                         reply += '<div class="border-bottom">';
                         reply += '<div class="card-body">';
                         reply += '<tr><td><h6 class="card-title">'+ parseData[i].replyContents +'</h6></td>';
                         reply += '</div>';
                         reply += '<div style="text-align: right">';
-                        reply += '<td><span class="card-text text-right" style="text-align: right">'+parseData[i].createdDatetime+'</span></td></tr>';
+                        if (username === parseData[i].username) { // 댓글 작성자인 경우 삭제하기 버튼 생성
+                            reply += '<span style="float: right"><a style="color: #007bff; margin-right: 10px;" href="javascript:deleteReply('+parseData[i].replyIdx+');">삭제하기</a></span>';
+                        }
+                        reply += '<span style="float: right;"><a href="javascript:showReplyForm();" style="color: #007bff; margin-right: 10px;">댓글달기</a></span>';
                         reply += '</div>';
                         reply += '</div>';
+                        reply += '<replyAdd></replyAdd>';
                         reply += '</div>';
                     }
                     document.querySelector("reply").innerHTML = reply;
@@ -150,5 +152,30 @@
             alert('에러가 발생했습니다. \n에러 코드: ' + xhr.status);
         };
         xhr.send(data);
+    }
+
+    function showReplyForm() { // 댓글 작성 폼 보여주기
+        let replyAddForm = ""; // 댓글 작성 폼
+        replyAddForm += '<div class="card-header" style="border: none; padding-bottom: 0"> <!-- 대댓글 헤더 -->';
+        replyAddForm += '<strong style="padding-right: 5px; margin-bottom: 0">└</strong>&nbsp;';
+        replyAddForm += '</div>';
+        replyAddForm += '<div class="border-bottom" style="background: rgba(0, 0, 0, .03); border-style: hidden; padding-right: 10px">';
+        replyAddForm += '  <div class="card-body" style="padding-left: 40px;">';
+        replyAddForm += '    <td><textarea style="width: 80%; resize: none" placeholder="댓글 내용을 입력해주세요."></textarea></td>';
+        replyAddForm += '  </div>';
+        replyAddForm += '  <div style="text-align: right; padding-left: 40px;">';
+        replyAddForm += '    <span style="float: right; margin-right: 10px;"><a href="#" style="color: #007bff">작성완료</a></span>';
+        replyAddForm += '  </div>';
+        replyAddForm += '</div>';
+        document.querySelector('replyAdd').innerHTML = replyAddForm;
+        document.getElementById('addReply').innerText = "취소하기";
+        document.getElementById('addReply').href = "javascript:deleteReplyForm()";
+    }
+
+    function deleteReplyForm() { // 댓글 작성 폼 삭제하기
+        let replyAddForm = ""; // 댓글 작성 폼
+        document.querySelector('replyAdd').innerHTML = replyAddForm;
+        document.getElementById('addReply').innerText = "댓글달기";
+        document.getElementById('addReply').href = "javascript:showReplyForm()";
     }
 </script>

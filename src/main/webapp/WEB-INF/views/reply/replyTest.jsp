@@ -54,11 +54,11 @@
   </div>
   <replyAdd></replyAdd>
   <div class="card-header" style="border: none;"> <!-- 대댓글 작성 시 추가되는 부분 시작 -->
-    <strong style="padding-right: 5px;">└</strong>&nbsp;<h7 class="text-left">작성자: sungwoo1122</h7>
+    <h7 class="text-left" style="padding-left: 20px;"> -> 작성자: sungwoo1122</h7>
     <td><span class="card-text text-right" style="font-size: small; float: right">2023-04-23 21:50:53</span></td></tr>
   </div>
   <div class="border-bottom"  style="background: rgba(0, 0, 0, .03); border-style: hidden">
-    <div class="card-body" style="padding-left: 40px;">
+    <div class="card-body" style="padding-left: 60px;">
       <tr>
         <b style="padding-right: 5px;">sungwoo11</b><span>두 번째 답글입니다.</span>
     </div>
@@ -66,7 +66,7 @@
       <span style="float: right"><a href="#" style="color: #007bff">삭제하기</a></span>
       <span style="float: right; margin-right: 10px;"><a href="#" style="color: #007bff">댓글달기</a></span>
     </div>
-  </div> <!-- 대댓글 작성 시 추가되는 부분 시작 -->
+  </div> <!-- 대댓글 작성 시 추가되는 부분 끝 -->
 
 </div>
   </div>
