@@ -25,14 +25,14 @@ public class ReplyController {
     @PostMapping("/insertReply")
     public String insertReply(@RequestBody ReplyVo replyVo) {
 //        replyService.insertReply(replyVo); // original insertReply method
-        if(replyVo.getReplyIdx() == null || "".equals(replyVo.getReplyIdx())) {
+        if(replyVo.getReplyIdx() == null || "".equals(replyVo.getReplyIdx())) { // 새로운 댓글 등록하는 경우
             if (replyVo.getReplyParent() != null) {
-                ReplyVo replyInfo = replyService.getReplyParent(replyVo.getReplyParent());
-                replyVo.setReplyDepth(replyInfo.getReplyDepth());
-                replyVo.setReplyOrder(replyInfo.getReplyOrder() + 1);
+                ReplyVo replyInfo = replyService.getReplyParent(replyVo.getReplyParent()); // 부모 댓글 정보 얻기
+                replyVo.setReplyDepth(replyInfo.getReplyDepth()); // replyDepth setting
+                replyVo.setReplyOrder(replyInfo.getReplyOrder() + 1); // replyOrder setting
                 replyService.updateReplyOrder(replyInfo);
             } else {
-                String maxReplyOrder = replyService.getMaxOrder(replyVo.getBoardIdx());
+                Integer maxReplyOrder = Integer.valueOf(replyService.getMaxOrder(replyVo.getBoardIdx()));
                 replyVo.setReplyOrder(maxReplyOrder);
             }
             replyService.insertReply(replyVo);

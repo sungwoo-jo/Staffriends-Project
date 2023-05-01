@@ -115,10 +115,10 @@
                         reply +=    '</div>';
                         reply += '<div class="border-bottom" style="background: rgba(0, 0, 0, .03); border-style: hidden; padding-right: 10px">';
                         reply += '  <div class="card-body" style="padding-left: 40px;">';
-                        reply += '    <td><textarea style="width: 80%; resize: none" id="replyTextArea'+ parseData[i].replyIdx +' placeholder="댓글 내용을 입력해주세요."></textarea></td>';
+                        reply += '    <td><textarea style="width: 80%; resize: none" id="reReply'+ parseData[i].replyIdx +'" placeholder="댓글 내용을 입력해주세요."></textarea></td>';
                         reply += '  </div>';
                         reply += '  <div style="text-align: right; padding-left: 40px;">';
-                        reply += '    <span style="float: right; margin-right: 10px;"><a href="#" style="color: #007bff">작성완료</a></span>';
+                        reply += '    <span style="float: right; margin-right: 10px;"><a href="javascript:insertReReply('+ parseData[i].replyIdx +')" style="color: #007bff">작성완료</a></span>';
                         reply += '  </div>';
                         reply += '</div>';
                         reply += '</replyAdd>';
@@ -180,7 +180,6 @@
         // replyAddForm += '  </div>';
         // replyAddForm += '</div>';
         // document.querySelector('replyAdd').innerHTML = replyAddForm;
-        document.getElementById('')
         document.querySelector('replyAdd'+replyIdx).style.display = 'block'; // replyAdd 태그의 style을 block으로 지정
         document.getElementById('addReply'+replyIdx).innerText = "취소하기";
         document.getElementById('addReply'+replyIdx).href = "javascript:deleteReplyForm("+ replyIdx +")";
@@ -192,5 +191,53 @@
         document.querySelector('replyAdd'+replyIdx).style.display = 'none'; // replyAdd 태그의 style을 none으로 지정
         document.getElementById('addReply'+replyIdx).innerText = "댓글달기";
         document.getElementById('addReply'+replyIdx).href = "javascript:showReplyForm("+ replyIdx +")";
+    }
+
+    function insertReReply(replyIdx) { // 대댓글 등록
+        const userId = document.getElementById('userId').value;
+        const username = document.getElementById('username').value;
+        const replyContents = document.getElementById('reReply'+replyIdx).value; // 대댓글 textarea 번호
+        const boardIdx = document.getElementById('boardIdx').value;
+        const replyParent = replyIdx;
+
+        // alert("parent:"+replyIdx);
+
+        if (replyContents.trim() === '' || replyContents.length === 0) {
+            alert('댓글 내용을 입력해주세요.');
+            return;
+        }
+        let data = {
+            userId: userId,
+            username: username,
+            boardIdx: boardIdx,
+            replyContents: replyContents,
+            replyParent: replyParent
+        };
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "/reply/insertReply");
+        xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+        xhr.onload = function () {
+            if (xhr.status === 200 || xhr.status === 201) {
+                let resp = xhr.responseText;
+                if (resp.status === 500) {
+                    alert('에러가 발생했습니다.');
+                } else {
+                    if (resp === "insertSuccess") {
+                        alert('댓글 작성이 완료되었습니다.');
+                        getAllReply();
+                        // document.getElementById("replyContents").value = "";
+                    } else {
+                        alert('댓글 작성에 실패하였습니다.');
+                    }
+                }
+            } else {
+                console.log(xhr.responseText);
+                alert('에러가 발생했습니다. \n에러 코드: ' + xhr.status);
+            }
+        };
+        xhr.onerror = function () {
+            alert('에러가 발생했습니다. \n에러 코드: ' + xhr.status);
+        };
+        xhr.send(JSON.stringify(data));
     }
 </script>

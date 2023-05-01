@@ -11,6 +11,8 @@
                 reply
             WHERE
                 board_idx = #{boardIdx} AND deleted_yn = 'N'
+            ORDER BY
+                reply_order;
         ]]>
     </select>
 
@@ -108,7 +110,7 @@
     <select id="getReplyParent" parameterType="String" resultType="board.vo.ReplyVo">
         <![CDATA[
             SELECT
-                board_idx, reply_depth+1 reply_depth, reply_order
+                board_idx, reply_depth+1 reply_depth, IFNULL((SELECT MAX(reply_order) FROM reply WHERE reply_parent = #{reply}), reply_order) reply_order
             FROM
                 reply
             WHERE
