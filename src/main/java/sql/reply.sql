@@ -5,7 +5,7 @@ create table reply (
                        reply_contents varchar(1000) not null,
                        board_idx int(10) not null,
                        deleted_yn char(1) not null default 'N',
-                       created_datetime default current_timestamp not null,
+                       created_datetime timestamp not null default current_timestamp,
                        reply_parent int,
                        reply_depth int not null,
                        reply_order int not null,
