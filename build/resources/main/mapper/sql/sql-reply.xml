@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board.mapper.ReplyMapper">
+    <select id="getAllReply" parameterType="Integer" resultType="board.vo.ReplyVo">
+        <![CDATA[
+            SELECT
+                *
+            FROM
+                reply
+            WHERE
+                board_idx = #{boardIdx} AND deleted_yn = 'N'
+            ORDER BY
+                reply_order;
+        ]]>
+    </select>
+
+<!--    <insert id="insertReply" parameterType="board.vo.ReplyVo"> &#45;&#45; original insert method-->
+<!--        <![CDATA[-->
+<!--            INSERT INTO-->
+<!--                reply-->
+<!--                    (-->
+<!--                        user_id,-->
+<!--                        username,-->
+<!--                        reply_contents,-->
+<!--                        board_idx,-->
+<!--                        reply_parent,-->
+<!--                        reply_order,-->
+<!--                        created_datetime-->
+<!--                    )-->
+<!--            VALUES-->
+<!--                    (-->
+<!--                        #{userId},-->
+<!--                        #{username},-->
+<!--                        #{replyContents},-->
+<!--                        #{boardIdx},-->
+<!--                        #{replyIdx},-->
+<!--                        #{replyIdx},-->
+<!--                        now()-->
+<!--                    )-->
+<!--        ]]>-->
+<!--    </insert>-->
+
+    <insert id="insertReply" parameterType="board.vo.ReplyVo">
+        <selectKey resultType="Integer" keyProperty="replyIdx" order="BEFORE">
+            SELECT
+                IFNULL(MAX(reply_idx),0)+1
+            FROM
+                reply
+        </selectKey>
+            INSERT INTO
+                reply
+                (
+                  board_idx,
+                  reply_idx,
+                  username,
+                  user_id,
+                  deleted_yn,
+                  reply_contents,
+                  created_datetime,
+                  reply_order,
+                  reply_parent,
+                  reply_depth
+                )
+            VALUES
+                (
+                  #{boardIdx},
+                  #{replyIdx},
+                  #{username},
+                  #{userId},
+                  'N',
+                  #{replyContents},
+                  now(),
+                  #{replyOrder},
+                 <choose>
+                   <when test="replyParent == null">
+                       <![CDATA[#{replyIdx},0]]>
+                   </when>
+                   <otherwise>
+                       <![CDATA[#{replyParent},#{replyDepth}]]>
+                   </otherwise>
+                 </choose>
+                )
+
+    </insert>
+
+    <update id="deleteReply" parameterType="int">
+        <![CDATA[
+            UPDATE
+                reply
+            SET
+                deleted_yn = 'Y'
+            WHERE
+                reply_idx = #{replyIdx}
+        ]]>
+    </update>
+
+    <select id="countReply" parameterType="int" resultType="Integer">
+        <![CDATA[
+            SELECT
+                count(*)
+            FROM
+                reply
+            WHERE
+                board_idx = #{boardIdx}
+        ]]>
+    </select>
+
+    <select id="getReplyParent" parameterType="String" resultType="board.vo.ReplyVo">
+        <![CDATA[
+            SELECT
+                board_idx, reply_depth+1 reply_depth, IFNULL((SELECT MAX(reply_order) FROM reply WHERE reply_parent = #{reply}), reply_order) reply_order
+            FROM
+                reply
+            WHERE
+                reply_idx = #{replyParent}
+        ]]>
+    </select>
+
+    <update id="updateReplyOrder" parameterType="board.vo.ReplyVo">
+        <![CDATA[
+            UPDATE
+                reply
+            SET
+                reply_order = reply_order + 1
+            WHERE
+                board_idx = #{boardIdx} AND reply_order > #{replyOrder}
+        ]]>
+    </update>
+
+    <select id="getMaxOrder" parameterType="int" resultType="String">
+        <![CDATA[
+            SELECT
+                IFNULL(MAX(reply_order),0)+1
+            FROM
+                reply
+            WHERE
+                board_idx = #{boardIdx}
+        ]]>
+    </select>
+</mapper>

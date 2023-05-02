@@ -131,9 +131,4 @@ public class BoardController {
         return "redirect:/board";
     }
 
-    @GetMapping("/reply") // 댓글 확인
-    public String reply() {
-        return "/reply/replyTest";
-    }
-
 }
