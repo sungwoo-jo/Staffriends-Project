@@ -15,5 +15,5 @@ public interface UserService {
 
     void updateUser(UserVo userVo) throws Exception;
 
-
+    String getAccessToken(String authorize_code);
 }
