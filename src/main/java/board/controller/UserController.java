@@ -88,12 +88,23 @@ public class UserController {
     }
 
     @GetMapping("/kakao")
-    public ModelAndView kakaoLogin(@RequestParam String code) { // 카카오 로그인
+    public String kakaoLogin(@RequestParam String code, HttpSession session) throws Exception { // 카카오 로그인
         System.out.println("code:"+code);
         String accessToken = userService.getAccessToken(code);
 
-        userService.getUserInfoFromKakao(accessToken);
-
-        return null;
+        UserVo userInfo = userService.getUserInfoFromKakao(accessToken);
+        Integer result = userService.checkUser(userInfo); // 회원 조회. 반환 타입: 회원의 id
+        System.out.println("userInfo: " + userInfo);
+        System.out.println(result);
+        if (result == null) { // 존재하지 않으면 회원가입 진행 후 index 페이지로 이동
+            System.out.println("존재하지않는회원->회원가입 진행");
+            userService.insertUser(userInfo);
+            session.setAttribute("signIn", userInfo);
+        } else { // 존재하면 로그인 후 index 페이지로 이동
+            System.out.println("존재하는회원->로그인 진행");
+            UserVo userVo = userService.getUserInfo(result); // 회원의 id로 회원 정보를 조회하여 담아줌
+            session.setAttribute("signIn", userVo);
+        }
+        return "/index";
     }
 }

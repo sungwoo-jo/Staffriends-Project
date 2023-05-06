@@ -19,5 +19,5 @@ public interface UserService {
 
     String getAccessToken(String authorize_code);
 
-    HashMap<String, Object> getUserInfoFromKakao(String accessToken);
+    UserVo getUserInfoFromKakao(String accessToken);
 }

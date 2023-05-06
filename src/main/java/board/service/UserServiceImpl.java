@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import org.apache.catalina.User;
 import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -49,6 +50,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public Integer checkUser(UserVo userVo) throws Exception {
         messageDigest(userVo, userVo.getPassword());
+        System.out.println("UserServiceImpl - userVo.password : " + userVo.getPassword());
+        System.out.println(userMapper.checkUser(userVo));
         return userMapper.checkUser(userVo);
     }
 
@@ -122,8 +125,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public HashMap<String, Object> getUserInfoFromKakao(String accessToken) {
-        HashMap<String, Object> userInfo = new HashMap<String, Object>();
+    public UserVo getUserInfoFromKakao(String accessToken) {
+        UserVo userInfo = new UserVo();
         String reqURL = "https://kapi.kakao.com/v2/user/me";
 
         try {
@@ -155,11 +158,25 @@ public class UserServiceImpl implements UserService {
                 Map<String, Object> jsonMap = objectMapper.readValue(result, new TypeReference<Map<String, Object>>() {
                 });
 
-                System.out.println(jsonMap.get("properties"));
+                System.out.println("properties: "+jsonMap.get("properties"));
                 Map<String, Object> properties = (Map<String, Object>) jsonMap.get("kakao_account");
 //                System.out.println(properties.get("nickname"));
 //                System.out.println(properties.get("email"));
-                userInfo.put("ni")
+                long id = (long) jsonMap.get("id");
+                String password = "1234";
+                String originalEmail = (String) properties.get("email");
+                String[] email = originalEmail.split("@");
+                String nickname = email[0];
+                String username = "k_" + id;
+
+
+                userInfo.setUsername(username);
+                userInfo.setPassword(password);
+                userInfo.setNickname(nickname);
+                userInfo.setEmail(originalEmail);
+
+                System.out.println(userInfo);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -167,7 +184,7 @@ public class UserServiceImpl implements UserService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return userInfo;
     }
 
     public void messageDigest(UserVo userVo, String oldPassword) throws Exception { // SHA-512 해시함수
