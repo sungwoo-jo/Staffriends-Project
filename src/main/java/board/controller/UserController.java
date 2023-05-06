@@ -2,10 +2,17 @@ package board.controller;
 
 import board.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import board.vo.UserVo;
+import org.springframework.web.client.HttpStatusCodeException;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -84,6 +91,9 @@ public class UserController {
     public ModelAndView kakaoLogin(@RequestParam String code) { // 카카오 로그인
         System.out.println("code:"+code);
         String accessToken = userService.getAccessToken(code);
+
+        userService.getUserInfoFromKakao(accessToken);
+
         return null;
     }
 }

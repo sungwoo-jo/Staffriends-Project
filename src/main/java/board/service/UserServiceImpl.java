@@ -1,19 +1,31 @@
 package board.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import board.vo.UserVo;
 import board.mapper.UserMapper;
+import org.springframework.web.client.HttpStatusCodeException;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.*;
 import java.math.BigInteger;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.Buffer;
 import java.security.MessageDigest;
+import java.util.HashMap;
+import java.util.Map;
 
 @Repository
 @Service
@@ -70,7 +82,7 @@ public class UserServiceImpl implements UserService {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=69eddbebb2b07d6a316fc057c32fdbdf"); // REST API KEY
-            sb.append("&redirect_url=http://localhost/user/kakao"); // redirect uri
+            sb.append("&redirect_uri=http://localhost/user/kakao"); // redirect uri
             sb.append("&code=" + code);
             bw.write(sb.toString());
             bw.flush();
@@ -107,6 +119,55 @@ public class UserServiceImpl implements UserService {
         }
 
         return accessToken;
+    }
+
+    @Override
+    public HashMap<String, Object> getUserInfoFromKakao(String accessToken) {
+        HashMap<String, Object> userInfo = new HashMap<String, Object>();
+        String reqURL = "https://kapi.kakao.com/v2/user/me";
+
+        try {
+            URL url = new URL(reqURL);
+            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+            conn.setRequestMethod("GET");
+
+            // 요청에 필요한 Header에 포함될 내용
+            conn.setRequestProperty("Authorization", "Bearer " + accessToken);
+
+            int responseCode = conn.getResponseCode();
+            System.out.println(responseCode);
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+            String line = "";
+            String result = "";
+
+            while ((line = br.readLine()) != null) {
+                result += line;
+            }
+            System.out.println("response body : " + result);
+            System.out.println("result type : " + result.getClass().getName()); // java.lang.String
+
+            try {
+                // jackson objectmapper 객체 생성
+                ObjectMapper objectMapper = new ObjectMapper();
+                // JSON String -> Map
+                Map<String, Object> jsonMap = objectMapper.readValue(result, new TypeReference<Map<String, Object>>() {
+                });
+
+                System.out.println(jsonMap.get("properties"));
+                Map<String, Object> properties = (Map<String, Object>) jsonMap.get("kakao_account");
+//                System.out.println(properties.get("nickname"));
+//                System.out.println(properties.get("email"));
+                userInfo.put("ni")
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void messageDigest(UserVo userVo, String oldPassword) throws Exception { // SHA-512 해시함수
