@@ -37,7 +37,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void insertUser(UserVo userVo) throws Exception {
+        System.out.println("Before messageDigest insert User password : " + userVo.getPassword());
         messageDigest(userVo, userVo.getPassword());
+        System.out.println("After messageDigest insert User password : " + userVo.getPassword());
+
         int result = userMapper.insertUser(userVo);
     }
 
@@ -169,11 +172,11 @@ public class UserServiceImpl implements UserService {
                 String nickname = email[0];
                 String username = "k_" + id;
 
-
                 userInfo.setUsername(username);
                 userInfo.setPassword(password);
                 userInfo.setNickname(nickname);
                 userInfo.setEmail(originalEmail);
+                userInfo.setOauth("kakao");
 
                 System.out.println(userInfo);
 

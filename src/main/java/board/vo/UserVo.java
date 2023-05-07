@@ -11,4 +11,5 @@ public class UserVo {
     private String email;
     private String joinDate;
     private String serialNum;
+    private String oauth;
 }

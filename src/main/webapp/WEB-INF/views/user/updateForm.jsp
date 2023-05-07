@@ -21,6 +21,7 @@
     <div class="form-group">
         <h5>아이디</h5><input type="text" name="username" class="form-control" disabled style="text-align: center" value="${signIn.username}"><p/>
     </div>
+    <c:if test="${empty signIn.oauth}"> <%-- 일반 유저는 비밀번호 수정이 가능 --%>
     <div class="form-group">
         <h5>비밀번호</h5><input type="password" class="form-control" placeholder="문자/숫자 포함 8자리 이상" name="password" id="password" style="text-align: center" oninput="pwCheck()">
         <span style="display: none; text-align: center; color: red; " id="notInputPw">비밀번호를 입력해주세요.</span>
@@ -33,6 +34,7 @@
         <span style="display: none; text-align: center; color: red;" id="notSamePw">비밀번호가 일치하지 않습니다.</span>
         <span style="display: none; text-align: center; color: green;" id="validSamePw">비밀번호가 일치합니다.</span>
     </div>
+    </c:if>
     <div class="form-group">
         <h5>닉네임</h5><input type="text" class="form-control" placeholder="한글, 영문 대/소문자, 숫자 포함 2~15자" name="nickName" id="nickname" style="text-align: center" value="${signIn.nickname}" oninput="nicknameCheck()">
         <span style="display: none; text-align: center; color: red;" id="notInputNickname">닉네임을 입력해주세요.</span>

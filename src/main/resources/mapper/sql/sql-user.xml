@@ -11,7 +11,8 @@
                      password,
                      email,
                      nickname,
-                     join_date
+                     join_date,
+                     oauth
                  )
             VALUES
                 (
@@ -19,7 +20,8 @@
                      #{password},
                      #{email},
                      #{nickname},
-                     now()
+                     now(),
+                     #{oauth}
                  )
         ]]>
     </insert>

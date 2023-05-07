@@ -4,5 +4,6 @@ create table t_user (
                         password varchar(130) not null,
                         email varchar(50) not null,
                         nickname varchar(20) not null,
-                        join_date datetime not null
+                        join_date datetime not null,
+                        oauth varchar(10)
 );
