@@ -108,6 +108,6 @@ public class UserController {
             UserVo userVo = userService.getUserInfo(result); // 회원의 id로 회원 정보를 조회하여 담아줌
             session.setAttribute("signIn", userVo);
         }
-        return "/index";
+        return "redirect:/";
     }
 }

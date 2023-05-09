@@ -38,6 +38,12 @@
         <span style="display: none; text-align: center; color: green;" id="validEmail">사용 가능한 이메일입니다.</span>
     </div>
     <div class="form-group">
+        <h5>이름</h5><input type="text" class="form-control" placeholder="이름을 입력하세요" name="name" id="name" style="text-align: center" oninput="nameCheck(), activateSignupBtn()">
+        <span style="display: none; text-align: center; color: red;" id="notInputName">이름을 입력해주세요.</span>
+        <span style="display: none; text-align: center; color: red;" id="invalidName">이름을 올바르게 입력해주세요.</span>
+        <span style="display: none; text-align: center; color: green;" id="validName">사용 가능한 이름입니다.</span>
+    </div>
+    <div class="form-group">
         <h5>시리얼번호</h5><input type="text" class="form-control" placeholder="시리얼번호를 입력하세요(선택)" name="serialNum" id="serialNum" style="text-align: center">
     </div>
     <div class="form-group text-center">
@@ -54,13 +60,14 @@
     let validSamePassword = false;
     let validNickname = false;
     let validEmail = false;
-
+    let validName = false;
 
     function join() {
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
         const nickname = document.getElementById('nickname').value;
         const email = document.getElementById('email').value;
+        const name = document.getElementById('name').value;
         const serialNum = document.getElementById('serialNum').value;
 
         // 유효성 검사 완료 후 실행할 로직
@@ -70,6 +77,7 @@
             password:password,
             nickname:nickname,
             email:email,
+            name:name,
             serialNum:serialNum
         };
 
@@ -253,8 +261,29 @@
         }
     }
 
+    function nameCheck() { // 이름 체크
+        let name = document.getElementById('name').value; // name 값을 담아줌
+        let nameCheck =  /^[가-힣]{2,10}$/; // 이름의 정규표현식
+        if (name.trim() === '') { // 입력값이 없는 경우
+            document.getElementById("notInputName").style.display = "block"; // 이름을 입력하라는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+            document.getElementById("invalidName").style.display = "none";
+            document.getElementById("name").style.backgroundColor="#FFCECE";
+            validName = false;
+        } else if (nameCheck.test(name) === false) { // 양식에 맞지 않을 시
+            document.getElementById("notInputName").style.display = "none";
+            document.getElementById("invalidName").style.display = "block"; // 양식에 맞지 않는다는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+            document.getElementById("name").style.backgroundColor="#FFCECE";
+            validName = false;
+        } else { // 사용 가능한 이름
+            document.getElementById("notInputName").style.display = "none";
+            document.getElementById("invalidName").style.display = "none";
+            document.getElementById("name").style.backgroundColor="#B0F6AC";
+            validName = true;
+        }
+    }
+
     function activateSignupBtn() { // 전체 폼 요소들 정규화 후 회원가입 버튼 활성화
-        if (validUsername === true && validPassword === true && validSamePassword === true && validNickname === true && validEmail === true) {
+        if (validUsername === true && validPassword === true && validSamePassword === true && validNickname === true && validEmail === true && validName === true) {
             document.getElementById("joinBtn").disabled = false;
             document.getElementById("joinBtn").backgroundColor = "#70ad47";
         } else {

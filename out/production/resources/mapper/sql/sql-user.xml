@@ -7,6 +7,7 @@
         <![CDATA[
             INSERT INTO t_user
                 (
+                     name,
                      username,
                      password,
                      email,
@@ -16,6 +17,7 @@
                  )
             VALUES
                 (
+                     #{name},
                      #{username},
                      #{password},
                      #{email},

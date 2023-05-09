@@ -14,6 +14,7 @@
     <div class="form-group">
         <h5 style="text-align: left">비밀번호</h5><input type="password" class="form-control" placeholder="비밀번호를 입력하세요." name="password" id="password">
     </div>
+    <div style="text-align: center; padding-bottom: 20px;"><a href="#">아이디 찾기</a> | <a href="#">비밀번호 찾기</a></div>
     <input class="btn btn-staffriends btn-lg center-div" type="button" value="로그인" onclick="loginCheck()">
     <a href="https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code"><img src="/img/kakao_login_medium_wide.png" class="btn-block" style="margin-top: 5px;height: 50px"></a>
 </form>
@@ -26,12 +27,12 @@
         let username = document.getElementById('username').value.trim();
         let password = document.getElementById('password').value.trim();
 
-        if (username == "") {
+        if (username === "") {
             alert("아이디를 입력해주세요.");
             document.getElementById('username').focus();
             return false;
         }
-        if (password == "") {
+        if (password === "") {
             alert("비밀번호를 입력해주세요.");
             document.getElementById('password').focus();
             return false;

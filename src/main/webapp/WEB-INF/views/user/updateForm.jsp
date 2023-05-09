@@ -48,6 +48,9 @@
         <span style="display: none; text-align: center; color: green;" id="validEmail">사용 가능한 이메일입니다.</span>
     </div>
     <div class="form-group">
+        <h5>이름</h5><input type="text" name="name" class="form-control" disabled style="text-align: center" value="${signIn.name}"><p/>
+    </div>
+    <div class="form-group">
         <h5>시리얼번호</h5><input type="text" class="form-control" placeholder="시리얼번호를 입력하세요." name="serialNum" id="serialNum" value="${signIn.serialNum}" style="text-align: center">
     </div>
     <div class="form-group text-center">
