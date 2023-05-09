@@ -24,7 +24,7 @@ public class BoardController {
         return "/index";
     }
 
-    @RequestMapping("/board") // 커뮤니티
+    @RequestMapping("/board") // 게시글 리스트 출력
     public String boardList(Model model, HttpServletRequest request) throws Exception {
         String tempPage = request.getParameter("page");
         Map<String, Integer> map = new HashMap<String, Integer>();

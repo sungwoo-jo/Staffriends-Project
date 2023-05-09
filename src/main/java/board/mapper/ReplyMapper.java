@@ -7,19 +7,17 @@ import java.util.List;
 
 @Mapper
 public interface ReplyMapper {
-    List<ReplyVo> getAllReply(Integer boardIdx); // 댓글 목록
+    List<ReplyVo> getAllReply(Integer boardIdx);
 
-    void insertReply(ReplyVo replyVo); // 댓글 작성
+    void insertReply(ReplyVo replyVo);
 
-    void deleteReply(int replyIdx); // 댓글 삭제
+    void deleteReply(int replyIdx);
 
-    int countReply(int boardIdx); // 댓글 갯수
+    ReplyVo getReplyParent(String replyParent);
 
-    ReplyVo getReplyParent(String replyParent); // 모댓글 정보 조회
+    void updateReplyOrder(ReplyVo replyInfo);
 
-    void updateReplyOrder(ReplyVo replyInfo); // 나머지 댓글들 순서 증가
-
-    String getMaxOrder(int boardIdx); // 최근 댓글의 숫자를 최대값으로
+    String getMaxOrder(int boardIdx);
 
     void updateReplyCount(int boardIdx);
 }

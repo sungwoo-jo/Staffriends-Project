@@ -31,11 +31,6 @@ public class ReplyServiceImpl implements ReplyService {
     }
 
     @Override
-    public int countReply(int boardIdx) {
-        return replyMapper.countReply(boardIdx);
-    }
-
-    @Override
     public ReplyVo getReplyParent(String replyParent) {
         return replyMapper.getReplyParent(replyParent);
     }

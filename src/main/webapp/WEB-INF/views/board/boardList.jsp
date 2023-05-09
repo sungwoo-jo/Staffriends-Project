@@ -40,7 +40,7 @@
                         <td style="text-align: center"><c:out value="${li.boardIdx}"/></td>
                         <td style="text-align: center"><a href="/board/boardDetail?boardIdx=${li.boardIdx}">
                             <c:out value="${li.title}"></c:out></a>
-                            <c:if test="${li.replyCount ne 0}">&nbsp;(<c:out value="${li.replyCount}"/>)</c:if>
+                            <c:if test="${li.replyCount ne 0}">&nbsp;<small>(<c:out value="${li.replyCount}"/>)</small></c:if>
                         </td>
                         <td style="text-align: center"><c:out value="${li.hitCnt}"/></td>
                         <td style="text-align: center"><c:out value="${li.createdDateTime}"/></td>
