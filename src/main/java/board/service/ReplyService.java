@@ -21,4 +21,6 @@ public interface ReplyService {
     void updateReplyOrder(ReplyVo replyInfo); // replyInfo의 replyOrder보다 큰 나머지 댓글들의 순서 증가
 
     String getMaxOrder(int boardIdx); // 최근 댓글의 숫자를 최대값으로
+
+    void updateReplyCount(int boardIdx);
 }

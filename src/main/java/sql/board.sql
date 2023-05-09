@@ -7,5 +7,6 @@ create table t_board(
                         creator_id varchar(50) not null,
                         updated_datetime datetime,
                         updater_id varchar(50),
-                        deleted_yn char(1) not null default 'N'
+                        deleted_yn char(1) not null default 'N',
+                        reply_count int default 0
 );

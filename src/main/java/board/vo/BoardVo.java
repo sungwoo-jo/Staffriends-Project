@@ -12,4 +12,5 @@ public class BoardVo {
     private String createdDateTime;
     private String updaterId;
     private String updatedDateTime;
+    private int replyCount;
 }

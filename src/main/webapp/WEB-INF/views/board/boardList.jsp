@@ -38,7 +38,10 @@
                     <c:forEach var="li" items="${list}">
                     <tr>
                         <td style="text-align: center"><c:out value="${li.boardIdx}"/></td>
-                        <td style="text-align: center"><a href="/board/boardDetail?boardIdx=${li.boardIdx}"><c:out value="${li.title}"></c:out></a></td>
+                        <td style="text-align: center"><a href="/board/boardDetail?boardIdx=${li.boardIdx}">
+                            <c:out value="${li.title}"></c:out></a>
+                            <c:if test="${li.replyCount ne 0}">&nbsp;(<c:out value="${li.replyCount}"/>)</c:if>
+                        </td>
                         <td style="text-align: center"><c:out value="${li.hitCnt}"/></td>
                         <td style="text-align: center"><c:out value="${li.createdDateTime}"/></td>
                     </tr>

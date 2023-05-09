@@ -139,4 +139,19 @@
                 board_idx = #{boardIdx}
         ]]>
     </select>
+
+    <update id="updateReplyCount" parameterType="int"> -- 댓글 갯수 업데이트
+        <![CDATA[
+            UPDATE t_board b
+            SET b.reply_count = (
+                                    SELECT
+                                        COUNT(reply_idx)
+                                    FROM
+                                        reply
+                                    WHERE
+                                        board_idx = #{boardIdx}
+                                )
+            WHERE b.board_idx = #{boardIdx}
+        ]]>
+    </update>
 </mapper>

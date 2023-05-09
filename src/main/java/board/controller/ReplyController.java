@@ -36,6 +36,7 @@ public class ReplyController {
                 replyVo.setReplyOrder(maxReplyOrder); // replyOrder를 가장 큰 값으로 세팅하여 가장 마지막 댓글로 출력
             }
             replyService.insertReply(replyVo); // 댓글 정보를 DB에 insert
+            replyService.updateReplyCount(replyVo.getBoardIdx());
         } else { // replyIdx의 값이 존재한다면 댓글의 출력 순서를 update
             replyService.updateReplyOrder(replyVo); // 댓글 또는 대댓글 작성 시 updateReplyOrder 메서드를 호출
         }

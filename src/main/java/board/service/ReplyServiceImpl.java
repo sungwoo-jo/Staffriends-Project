@@ -49,4 +49,9 @@ public class ReplyServiceImpl implements ReplyService {
     public String getMaxOrder(int boardIdx) {
         return replyMapper.getMaxOrder(boardIdx);
     }
+
+    @Override
+    public void updateReplyCount(int boardIdx) {
+        replyMapper.updateReplyCount(boardIdx);
+    }
 }
