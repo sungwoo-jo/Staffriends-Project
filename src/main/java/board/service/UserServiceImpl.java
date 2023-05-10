@@ -190,6 +190,11 @@ public class UserServiceImpl implements UserService {
         return userInfo;
     }
 
+    @Override
+    public String findMyId(UserVo userVo) {
+        return userMapper.findMyId(userVo);
+    }
+
     public void messageDigest(UserVo userVo, String oldPassword) throws Exception { // SHA-512 해시함수
         MessageDigest md = MessageDigest.getInstance("SHA-512");
         md.reset();

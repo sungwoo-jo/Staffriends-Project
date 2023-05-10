@@ -87,7 +87,7 @@ public class BoardController {
     }
 
     @RequestMapping("/board/boardWrite") // 글 작성 페이지
-    public String boardWrite() throws Exception {
+    public String boardWrite() {
         return "/board/boardWrite";
     }
 
@@ -117,7 +117,7 @@ public class BoardController {
     }
 
     @RequestMapping("/board/modifyBoard") // 글 수정 요청
-    public String modifyBoard(@RequestParam int boardIdx, Model model, BoardVo boardVo) throws Exception {
+    public String modifyBoard(Model model, BoardVo boardVo) throws Exception {
         boardService.updateBoard(boardVo);
         model.addAttribute("boardVo", boardVo);
         return "redirect:/board";

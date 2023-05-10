@@ -16,4 +16,6 @@ public interface UserMapper {
     UserVo getUserInfo(int count);
 
     void updateUser(UserVo userVo);
+
+    String findMyId(UserVo userVo);
 }

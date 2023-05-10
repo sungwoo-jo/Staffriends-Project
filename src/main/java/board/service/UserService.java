@@ -20,4 +20,6 @@ public interface UserService {
     String getAccessToken(String authorize_code);
 
     UserVo getUserInfoFromKakao(String accessToken);
+
+    String findMyId(UserVo userVo);
 }

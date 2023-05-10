@@ -87,7 +87,7 @@ public class UserController {
         return "/user/needLogin";
     }
 
-    @GetMapping("/kakao")
+    @GetMapping("/kakao") // 카카오 로그인 요청
     public String kakaoLogin(@RequestParam String code, HttpSession session) throws Exception { // 카카오 로그인
         System.out.println("code:"+code);
         String accessToken = userService.getAccessToken(code);
@@ -109,5 +109,18 @@ public class UserController {
             session.setAttribute("signIn", userVo);
         }
         return "redirect:/";
+    }
+
+    @GetMapping("/findMyId") // 아이디 찾기 페이지
+    public String findMyId() {
+        return "/user/findMyId";
+    }
+
+    @PostMapping("/findMyIdProc") // 찾을 아이디의 정보 입력 및 결과 출력 페이지
+    @ResponseBody
+    public Map<String, Object> findMyIdProc(@RequestBody UserVo userVo) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("username", userService.findMyId(userVo));
+        return map;
     }
 }

@@ -74,4 +74,11 @@
                 id = #{id}
         ]]>
     </update>
+
+    <select id="findMyId" parameterType="board.vo.UserVo" resultType="String">
+        <![CDATA[
+            SELECT
+                IFNULL((SELECT username FROM t_user WHERE name = #{name} AND email = #{email}), 0)
+        ]]>
+    </select>
 </mapper>
