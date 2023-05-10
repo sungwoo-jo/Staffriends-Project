@@ -21,7 +21,7 @@
     </div>
 </div>
 <br/>
-<reply></reply> <!--  -->
+<reply></reply> <!-- 댓글 출력부분을 나타내는 reply 태그 -->
 
 <script>
     window.onload = function() {
