@@ -16,32 +16,6 @@
         ]]>
     </select>
 
-<!--    <insert id="insertReply" parameterType="board.vo.ReplyVo"> &#45;&#45; original insert method-->
-<!--        <![CDATA[-->
-<!--            INSERT INTO-->
-<!--                reply-->
-<!--                    (-->
-<!--                        user_id,-->
-<!--                        username,-->
-<!--                        reply_contents,-->
-<!--                        board_idx,-->
-<!--                        reply_parent,-->
-<!--                        reply_order,-->
-<!--                        created_datetime-->
-<!--                    )-->
-<!--            VALUES-->
-<!--                    (-->
-<!--                        #{userId},-->
-<!--                        #{username},-->
-<!--                        #{replyContents},-->
-<!--                        #{boardIdx},-->
-<!--                        #{replyIdx},-->
-<!--                        #{replyIdx},-->
-<!--                        now()-->
-<!--                    )-->
-<!--        ]]>-->
-<!--    </insert>-->
-
     <insert id="insertReply" parameterType="board.vo.ReplyVo">
         <selectKey resultType="Integer" keyProperty="replyIdx" order="BEFORE">
             SELECT
@@ -140,7 +114,7 @@
         ]]>
     </select>
 
-    <update id="updateReplyCount" parameterType="int"> -- 댓글 갯수 업데이트
+    <update id="updateReplyCount" parameterType="int">
         <![CDATA[
             UPDATE t_board b
             SET b.reply_count = (
