@@ -6,5 +6,6 @@ create table t_user (
                         email varchar(50) not null,
                         nickname varchar(20) not null,
                         join_date datetime not null,
+                        serial_num varchar(100),
                         oauth varchar(10)
 );

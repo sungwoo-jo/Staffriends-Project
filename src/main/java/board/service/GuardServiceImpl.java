@@ -20,7 +20,7 @@ public class GuardServiceImpl implements GuardService{
     private GuardMapper guardMapper;
 
     @Override
-    public List<HistoryVo> getHistory(String serialNum) {
+    public List<HistoryVo> getHistory(String serialNum) { // 사용자의 경로 정보 조회 메서드(정렬 순서는 내림차순 - 가장 나중에 들어온 데이터를 먼저 조회)
         return guardMapper.getHistory(serialNum);
     }
 }
