@@ -4,28 +4,18 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import org.apache.catalina.User;
-import org.apache.tomcat.util.json.JSONParser;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import board.vo.UserVo;
 import board.mapper.UserMapper;
-import org.springframework.web.client.HttpStatusCodeException;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.*;
 import java.math.BigInteger;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.Buffer;
 import java.security.MessageDigest;
-import java.util.HashMap;
 import java.util.Map;
 
 @Repository
@@ -193,6 +183,28 @@ public class UserServiceImpl implements UserService {
     @Override
     public String findMyId(UserVo userVo) {
         return userMapper.findMyId(userVo);
+    }
+
+    @Override
+    public Integer findMyPassword(UserVo userVo) {
+        return userMapper.findMyPassword(userVo);
+    }
+
+    @Override
+    public String findMyPasswordProc(UserVo userVo) throws Exception {
+        String newPwd = RandomStringUtils.randomAlphanumeric(15);
+        Integer id = findMyPassword(userVo);
+        userVo = getUserInfo(id);
+        messageDigest(userVo, newPwd);
+        updatePassword(userVo);
+        System.out.println("userVo:" + userVo);
+
+        return newPwd;
+    }
+
+    @Override
+    public void updatePassword(UserVo userVo) {
+        userMapper.updatePassword(userVo);
     }
 
     public void messageDigest(UserVo userVo, String oldPassword) throws Exception { // SHA-512 해시함수

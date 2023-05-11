@@ -3,8 +3,6 @@ package board.service;
 import board.vo.UserVo;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-
 @Service
 public interface UserService {
     void insertUser(UserVo userVo) throws Exception;
@@ -22,4 +20,10 @@ public interface UserService {
     UserVo getUserInfoFromKakao(String accessToken);
 
     String findMyId(UserVo userVo);
+
+    Integer findMyPassword(UserVo userVo);
+
+    String findMyPasswordProc(UserVo userVo) throws Exception;
+
+    void updatePassword(UserVo userVo);
 }

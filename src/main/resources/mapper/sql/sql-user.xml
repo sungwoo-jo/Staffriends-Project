@@ -81,4 +81,22 @@
                 IFNULL((SELECT username FROM t_user WHERE name = #{name} AND email = #{email}), 0)
         ]]>
     </select>
+
+    <select id="findMyPassword" parameterType="board.vo.UserVo" resultType="Integer">
+        <![CDATA[
+            SELECT
+                IFNULL((SELECT id FROM t_user WHERE username = #{username} AND name = #{name} AND email = #{email}), 0)
+        ]]>
+    </select>
+
+    <update id="updatePassword" parameterType="board.vo.UserVo">
+        <![CDATA[
+            UPDATE
+                t_user
+            SET
+                password = #{password}
+            WHERE
+                id = #{id}
+        ]]>
+    </update>
 </mapper>

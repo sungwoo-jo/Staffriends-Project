@@ -1,6 +1,7 @@
 package board.controller;
 
 import board.service.UserService;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -121,6 +122,26 @@ public class UserController {
     public Map<String, Object> findMyIdProc(@RequestBody UserVo userVo) {
         Map<String, Object> map = new HashMap<>();
         map.put("username", userService.findMyId(userVo));
+        return map;
+    }
+
+    @GetMapping("/findMyPassword") // 비밀번호 찾기 페이지
+    public String findMyPassword() {
+        return "/user/findMyPassword";
+    }
+
+    @PostMapping("/findMyPasswordProc") // 찾을 비밀번호의 정보 입력 및 결과 출력 페이지
+    @ResponseBody
+    public Map<String, Object> findMyPasswordProc(@RequestBody UserVo userVo) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        System.out.println("findMyPassword:"+userService.findMyPassword(userVo));
+        if (userService.findMyPassword(userVo) != 0) {
+            map.put("password", userService.findMyPasswordProc(userVo));
+        } else {
+            map.put("password", "0");
+        }
+
+
         return map;
     }
 }

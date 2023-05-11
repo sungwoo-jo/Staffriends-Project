@@ -18,4 +18,10 @@ public interface UserMapper {
     void updateUser(UserVo userVo);
 
     String findMyId(UserVo userVo);
+
+    Integer findMyPassword(UserVo userVo);
+
+    String findMyPasswordProc(UserVo userVo);
+
+    void updatePassword(UserVo userVo);
 }

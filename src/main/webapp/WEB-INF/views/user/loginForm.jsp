@@ -14,7 +14,7 @@
     <div class="form-group">
         <h5 style="text-align: left">비밀번호</h5><input type="password" class="form-control" placeholder="비밀번호를 입력하세요." name="password" id="password">
     </div>
-    <div style="text-align: center; padding-bottom: 20px;"><a href="javascript:findMyIdPopUp()">아이디 찾기</a> | <a href="#">비밀번호 찾기</a></div>
+    <div style="text-align: center; padding-bottom: 20px;"><a href="javascript:findMyIdPopUp()">아이디 찾기</a> | <a href="javascript:findMyPasswordPopUp()">비밀번호 찾기</a></div>
     <input class="btn btn-staffriends btn-lg center-div" type="button" value="로그인" onclick="loginCheck()">
     <a href="https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code"><img src="/img/kakao_login_medium_wide.png" class="btn-block" style="margin-top: 5px;height: 50px"></a>
 </form>
@@ -90,6 +90,25 @@
 
         //등록된 url 및 window 속성 기준으로 팝업창 열기
         window.open(url, "findMyIdPopUp", windowStatus);
+    }
+
+    function findMyPasswordPopUp() { // 비밀번호 찾기 팝업창 열기
+        // 창 크기 지정(700 x 500)
+        let width = 700;
+        let height = 500;
+
+        // pc 화면 기준 가운데 정렬
+        let left = (window.screen.width / 2) - (width/2);
+        let top = (window.screen.height / 4);
+
+        // 팝업창 속성 지정
+        let windowStatus = 'width='+width+', height='+height+', left='+left+', top='+top+'';
+
+        // /user/findMyId로 연결
+        const url = "/user/findMyPassword";
+
+        //등록된 url 및 window 속성 기준으로 팝업창 열기
+        window.open(url, "findMyPasswordPopUp", windowStatus);
     }
 </script>
 <%@ include file="../layout/footer.jsp"%>
