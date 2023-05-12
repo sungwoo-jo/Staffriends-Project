@@ -7,19 +7,23 @@
         <![CDATA[
             INSERT INTO t_user
                 (
+                     name,
                      username,
                      password,
                      email,
                      nickname,
-                     join_date
+                     join_date,
+                     oauth
                  )
             VALUES
                 (
+                     #{name},
                      #{username},
                      #{password},
                      #{email},
                      #{nickname},
-                     now()
+                     now(),
+                     #{oauth}
                  )
         ]]>
     </insert>
@@ -35,7 +39,7 @@
         ]]>
     </select>
 
-    <select id="checkUser" parameterType="board.vo.UserVo" resultType="Integer">
+    <select id="loginProc" parameterType="board.vo.UserVo" resultType="Integer">
         <![CDATA[
             SELECT
                 id
@@ -46,7 +50,7 @@
         ]]>
     </select>
 
-    <select id="getUserInfo" parameterType="int" resultType="board.vo.UserVo">
+    <select id="getUserInfo" parameterType="Integer" resultType="board.vo.UserVo">
         <![CDATA[
             SELECT
                 *
@@ -66,6 +70,31 @@
                 nickname = #{nickname},
                 email = #{email},
                 serial_num = #{serialNum}
+            WHERE
+                id = #{id}
+        ]]>
+    </update>
+
+    <select id="findMyId" parameterType="board.vo.UserVo" resultType="String">
+        <![CDATA[
+            SELECT
+                IFNULL((SELECT username FROM t_user WHERE name = #{name} AND email = #{email}), 0)
+        ]]>
+    </select>
+
+    <select id="findMyPassword" parameterType="board.vo.UserVo" resultType="Integer">
+        <![CDATA[
+            SELECT
+                IFNULL((SELECT id FROM t_user WHERE username = #{username} AND name = #{name} AND email = #{email}), 0)
+        ]]>
+    </select>
+
+    <update id="updatePassword" parameterType="board.vo.UserVo">
+        <![CDATA[
+            UPDATE
+                t_user
+            SET
+                password = #{password}
             WHERE
                 id = #{id}
         ]]>

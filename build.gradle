@@ -8,7 +8,6 @@ plugins {
 bootJar {
 	mainClass = 'board.BoardApplication'
 	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-
 }
 
 group = 'com.insight'

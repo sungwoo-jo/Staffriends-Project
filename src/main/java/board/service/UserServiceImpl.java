@@ -26,36 +26,35 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public void insertUser(UserVo userVo) throws Exception {
+    public void insertUser(UserVo userVo) throws Exception { // 비밀번호 암호화 후 회원가입 진행
         messageDigest(userVo, userVo.getPassword());
         userMapper.insertUser(userVo);
     }
 
     @Override
-    public int idCheck(String username) throws Exception {
+    public int idCheck(String username) throws Exception { // 중복 아이디 확인
         return userMapper.idCheck(username);
     }
 
     @Override
-    public Integer loginProc(UserVo userVo) throws Exception {
+    public Integer loginProc(UserVo userVo) throws Exception { // 비밀번호 암호화 후 로그인 진행
         messageDigest(userVo, userVo.getPassword());
-        System.out.println("userMapper.loginProc(userVo)"+userMapper.loginProc(userVo));
         return userMapper.loginProc(userVo);
     }
 
     @Override
-    public UserVo getUserInfo(Integer count) {
+    public UserVo getUserInfo(Integer count) { // 회원 정보 조회
         return userMapper.getUserInfo(count);
     }
 
     @Override
-    public void updateUser(UserVo userVo) throws Exception {
+    public void updateUser(UserVo userVo) throws Exception { // 비밀번호 암호화 후 회원 정보 수정
         messageDigest(userVo, userVo.getPassword());
         userMapper.updateUser(userVo);
     }
 
     @Override
-    public String getAccessToken(String code) {
+    public String getAccessToken(String code) { //
         String accessToken = "";
         String refreshToken = "";
         String reqURL = "https://kauth.kakao.com/oauth/token";

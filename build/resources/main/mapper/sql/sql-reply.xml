@@ -16,32 +16,6 @@
         ]]>
     </select>
 
-<!--    <insert id="insertReply" parameterType="board.vo.ReplyVo"> &#45;&#45; original insert method-->
-<!--        <![CDATA[-->
-<!--            INSERT INTO-->
-<!--                reply-->
-<!--                    (-->
-<!--                        user_id,-->
-<!--                        username,-->
-<!--                        reply_contents,-->
-<!--                        board_idx,-->
-<!--                        reply_parent,-->
-<!--                        reply_order,-->
-<!--                        created_datetime-->
-<!--                    )-->
-<!--            VALUES-->
-<!--                    (-->
-<!--                        #{userId},-->
-<!--                        #{username},-->
-<!--                        #{replyContents},-->
-<!--                        #{boardIdx},-->
-<!--                        #{replyIdx},-->
-<!--                        #{replyIdx},-->
-<!--                        now()-->
-<!--                    )-->
-<!--        ]]>-->
-<!--    </insert>-->
-
     <insert id="insertReply" parameterType="board.vo.ReplyVo">
         <selectKey resultType="Integer" keyProperty="replyIdx" order="BEFORE">
             SELECT
@@ -139,4 +113,19 @@
                 board_idx = #{boardIdx}
         ]]>
     </select>
+
+    <update id="updateReplyCount" parameterType="int">
+        <![CDATA[
+            UPDATE t_board b
+            SET b.reply_count = (
+                                    SELECT
+                                        COUNT(reply_idx)
+                                    FROM
+                                        reply
+                                    WHERE
+                                        board_idx = #{boardIdx}
+                                )
+            WHERE b.board_idx = #{boardIdx}
+        ]]>
+    </update>
 </mapper>
