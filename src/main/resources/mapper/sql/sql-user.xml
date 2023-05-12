@@ -39,7 +39,7 @@
         ]]>
     </select>
 
-    <select id="checkUser" parameterType="board.vo.UserVo" resultType="Integer">
+    <select id="loginProc" parameterType="board.vo.UserVo" resultType="Integer">
         <![CDATA[
             SELECT
                 id

@@ -30,22 +30,18 @@ public class UserServiceImpl implements UserService {
         System.out.println("Before messageDigest insert User password : " + userVo.getPassword());
         messageDigest(userVo, userVo.getPassword());
         System.out.println("After messageDigest insert User password : " + userVo.getPassword());
-
-        int result = userMapper.insertUser(userVo);
     }
 
     @Override
     public int idCheck(String username) throws Exception {
-        int result = userMapper.idCheck(username);
-        return result;
+        return userMapper.idCheck(username);
     }
 
     @Override
-    public Integer checkUser(UserVo userVo) throws Exception {
+    public Integer loginProc(UserVo userVo) throws Exception {
         messageDigest(userVo, userVo.getPassword());
-        System.out.println("UserServiceImpl - userVo.password : " + userVo.getPassword());
-        System.out.println(userMapper.checkUser(userVo));
-        return userMapper.checkUser(userVo);
+        System.out.println(userMapper.loginProc(userVo));
+        return userMapper.loginProc(userVo);
     }
 
     @Override

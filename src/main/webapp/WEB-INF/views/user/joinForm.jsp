@@ -122,9 +122,6 @@
             document.getElementById("username").style.backgroundColor="#FFCECE";
             validUsername = false;
         } else { // 중복값 검사
-            // json 데이터로 변환
-            let data = {username:username};
-
             let xhr = new XMLHttpRequest();
             xhr.open("POST", "/user/join/idCheck");
             xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
@@ -159,7 +156,7 @@
             xhr.onerror = function() {
                 alert("에러가 발생했습니다. \n에러 코드: " + xhr.status);
             };
-            xhr.send(JSON.stringify(data.username));
+            xhr.send(username);
         }
     }
 

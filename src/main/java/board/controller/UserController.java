@@ -1,20 +1,10 @@
 package board.controller;
 
 import board.service.UserService;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import board.vo.UserVo;
-import org.springframework.web.client.HttpStatusCodeException;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.util.UriComponentsBuilder;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -35,11 +25,9 @@ public class UserController {
     @PostMapping("/join/idCheck") // 중복 아이디 확인
     @ResponseBody
     public Map<String, Integer> idCheck(@RequestBody String username) throws Exception {
-        username = username.replace("\"", ""); // json 포맷의 쌍따옴표 치환
-        int count = userService.idCheck(username);
-        Map<String, Integer> map = new HashMap<>();
-        map.put("count", count);
-        return map;
+        Map<String, Integer> map = new HashMap<>(); // 중복 아이디 결과를 담아줄 map 선언
+        map.put("count", userService.idCheck(username)); // 중복된 아이디의 갯수를 map에 put
+        return map; // 갯수 반환
     }
 
     @PostMapping("/join/insert") // 회원 가입
@@ -53,22 +41,21 @@ public class UserController {
         return "/user/loginForm";
     }
 
-    @PostMapping("/checkUser") // 존재하는 회원인지 확인
+    @PostMapping("/loginProc") // ID와 PW 일치 여부 확인
     @ResponseBody
-    public boolean checkUser(@RequestBody UserVo userVo, HttpSession session) throws Exception {
-        Integer result = userService.checkUser(userVo); // 회원 조회. 반환 타입: 회원의 id
-        if (result == null) { // 일치하는 회원의 id 정보가 조회되지 않으면 result의 값을 설정하지 않고 리턴
+    public boolean loginProc(@RequestBody UserVo userVo, HttpSession session) throws Exception {
+        if (userService.loginProc(userVo) == null) { // 일치하는 회원의 id 정보가 조회되지 않으면 세션 값을 설정하지 않고 리턴
             return false;
         }
-        userVo = userService.getUserInfo(result); // 회원의 id로 회원 정보를 조회하여 담아줌
-        session.setAttribute("signIn", userVo);
+        userVo = userService.getUserInfo(userService.loginProc(userVo)); // 회원의 id로 회원 정보를 조회하여 담아줌
+        session.setAttribute("signIn", userVo); // 회원의 세션 정보 생성 후 리턴
         return true;
     }
 
     @GetMapping("/logout") // 로그아웃
     public String logOut(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        session.invalidate();
+        HttpSession session = request.getSession(); // 전달받은 세션의 정보를 저장
+        session.invalidate(); // 세션 무효화
         return "redirect:/";
     }
 
@@ -96,7 +83,7 @@ public class UserController {
         UserVo userInfo = userService.getUserInfoFromKakao(accessToken);
         String originalPassword = userInfo.getPassword();
         System.out.println("Before join userInfo: " + userInfo);
-        Integer result = userService.checkUser(userInfo); // 회원 조회. 반환 타입: 회원의 id
+        Integer result = userService.loginProc(userInfo); // 회원 조회. 반환 타입: 회원의 id
         System.out.println("After checkUser userInfo: " + userInfo);
         System.out.println(result);
         if (result == null) { // 존재하지 않으면 회원가입 진행 후 index 페이지로 이동

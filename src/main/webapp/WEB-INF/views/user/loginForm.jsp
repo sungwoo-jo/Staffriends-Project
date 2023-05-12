@@ -44,7 +44,7 @@
         };
 
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", "/user/checkUser");
+        xhr.open("POST", "/user/loginProc");
         xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
         xhr.onload = function() {
             if (xhr.status === 200 || xhr.status === 201) {
