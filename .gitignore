@@ -1,3 +1,5 @@
+!build/libs/*.jar
+
 # Compiled class file
 *.class
 
