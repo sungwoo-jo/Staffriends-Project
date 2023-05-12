@@ -11,7 +11,7 @@ public interface UserService {
 
     int idCheck(String username) throws Exception;
 
-    UserVo getUserInfo(int count);
+    UserVo getUserInfo(Integer count);
 
     void updateUser(UserVo userVo) throws Exception;
 

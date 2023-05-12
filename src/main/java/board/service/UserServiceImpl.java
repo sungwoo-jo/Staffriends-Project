@@ -27,9 +27,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void insertUser(UserVo userVo) throws Exception {
-        System.out.println("Before messageDigest insert User password : " + userVo.getPassword());
         messageDigest(userVo, userVo.getPassword());
-        System.out.println("After messageDigest insert User password : " + userVo.getPassword());
+        userMapper.insertUser(userVo);
     }
 
     @Override
@@ -40,12 +39,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public Integer loginProc(UserVo userVo) throws Exception {
         messageDigest(userVo, userVo.getPassword());
-        System.out.println(userMapper.loginProc(userVo));
+        System.out.println("userMapper.loginProc(userVo)"+userMapper.loginProc(userVo));
         return userMapper.loginProc(userVo);
     }
 
     @Override
-    public UserVo getUserInfo(int count) {
+    public UserVo getUserInfo(Integer count) {
         return userMapper.getUserInfo(count);
     }
 
@@ -203,10 +202,9 @@ public class UserServiceImpl implements UserService {
         userMapper.updatePassword(userVo);
     }
 
-    public void messageDigest(UserVo userVo, String oldPassword) throws Exception { // SHA-512 해시함수
-        MessageDigest md = MessageDigest.getInstance("SHA-512");
-        md.reset();
-        md.update(oldPassword.getBytes("UTF8"));
-        userVo.setPassword(String.format("%0128x", new BigInteger(1, md.digest())));
+    public void messageDigest(UserVo userVo, String originalPassword) throws Exception { // SHA-512 해시함수
+        MessageDigest md = MessageDigest.getInstance("SHA-512"); // 암호화 기법 지정
+        md.update(originalPassword.getBytes()); // originalPassword를 byte 배열로 변환
+        userVo.setPassword(String.format("%0128x", new BigInteger(1, md.digest()))); // 해싱된 비밀번호 문자열을 10진법으로 받아 16진법으로 변환하여  set
     }
 }
