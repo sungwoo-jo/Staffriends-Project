@@ -3,8 +3,6 @@
 <title>Staffriends</title>
 <section class="py-5 container">
     <div class="container px-4 px-lg-5 my-5">
-<%--        <div class="row gx-4 gx-lg-5 align-items-center">--%>
-<%--            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="/image/testmap.png" alt="..." /></div>--%>
             <div class="col" style="text-align: center">
                 <h1>이젠 모두가 똑똑해져야 하는 시대입니다. </h1>
                 <div class="fs-5 mb-5">
@@ -12,7 +10,6 @@
                 </div>
                 <p class="lead"><b>시각 장애인을 위해 똑똑해져서 돌아온 새로운 지팡이를 소개합니다.</b></p>
             </div>
-<%--        </div>--%>
     </div>
 </section>
 <section class="py-5 bg-light">
