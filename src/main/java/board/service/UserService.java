@@ -23,7 +23,7 @@ public interface UserService {
 
     Integer findMyPassword(UserVo userVo);
 
-    String findMyPasswordProc(UserVo userVo) throws Exception;
+    String resetPassword(UserVo userVo) throws Exception;
 
     void updatePassword(UserVo userVo);
 }

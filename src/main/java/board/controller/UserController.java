@@ -112,12 +112,12 @@ public class UserController {
         return "/user/findMyPassword";
     }
 
-    @PostMapping("/findMyPasswordProc") // 찾을 비밀번호의 정보 입력 및 결과 출력 페이지
+    @PostMapping("/resetPassword") // 찾을 비밀번호의 정보 입력 및 결과 출력 페이지
     @ResponseBody
-    public Map<String, Object> findMyPasswordProc(@RequestBody UserVo userVo) throws Exception {
+    public Map<String, Object> resetPassword(@RequestBody UserVo userVo) throws Exception {
         Map<String, Object> map = new HashMap<>();
         if (userService.findMyPassword(userVo) != 0) { // 회원 정보가 일치하는 경우
-            map.put("password", userService.findMyPasswordProc(userVo)); // 비밀번호 재설정
+            map.put("password", userService.resetPassword(userVo)); // 비밀번호 재설정
         } else { // 회원 정보가 일치하지 않는 경우
             map.put("password", "0"); // "0"을 설정
         }

@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="../layout/header.jsp"%>
 <html>
 <body>
@@ -62,7 +62,7 @@
     let validEmail = false;
     let validName = false;
 
-    function join() {
+    function join() { // 회원가입
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
         const nickname = document.getElementById('nickname').value;
@@ -71,7 +71,6 @@
         const serialNum = document.getElementById('serialNum').value;
 
         // 유효성 검사 완료 후 실행할 로직
-        // json 데이터로 변환
         let data = {
             username:username,
             password:password,
@@ -105,10 +104,10 @@
     }
 
     function idCheck() { // 아이디 체크
-        let username = document.getElementById('username').value; // username 값을 담아줌
+        let username = document.getElementById('username').value;
         let usernameCheck = /^[a-zA-Z0-9_-]{7,20}$/; // 아이디의 정규표현식
         if (username.trim() === '') { // 입력값이 없는 경우
-            document.getElementById("notInputId").style.display = "block"; // 아이디를 입력하라는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+            document.getElementById("notInputId").style.display = "block"; // 아이디를 입력하라는 메시지를 block으로 표시해 화면에 띄워지게 함
             document.getElementById("invalidId").style.display = "none";
             document.getElementById("duplicateId").style.display = "none";
             document.getElementById("validId").style.display = "none";
@@ -116,7 +115,7 @@
             validUsername = false;
         } else if (usernameCheck.test(username) === false || username.length > 20) { // 양식에 맞지 않고 길이 초과 시
             document.getElementById("notInputId").style.display = "none";
-            document.getElementById("invalidId").style.display = "block"; // 양식에 맞지 않는다는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+            document.getElementById("invalidId").style.display = "block"; // 양식에 맞지 않는다는 메시지를 block으로 표시해 화면에 띄워지게 함
             document.getElementById("duplicateId").style.display = "none";
             document.getElementById("validId").style.display = "none";
             document.getElementById("username").style.backgroundColor="#FFCECE";
@@ -135,7 +134,7 @@
                         if(result.count > 0) {
                             document.getElementById("notInputId").style.display = "none";
                             document.getElementById("invalidId").style.display = "none";
-                            document.getElementById("duplicateId").style.display = "block"; // 중복된 아이디라는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+                            document.getElementById("duplicateId").style.display = "block"; // 중복된 아이디라는 메시지를 block으로 표시해 화면에 띄워지게 함
                             document.getElementById("validId").style.display = "none";
                             document.getElementById("username").style.backgroundColor="#FFCECE";
                             validUsername = false;
@@ -143,7 +142,7 @@
                             document.getElementById("notInputId").style.display = "none";
                             document.getElementById("invalidId").style.display = "none";
                             document.getElementById("duplicateId").style.display = "none";
-                            document.getElementById("validId").style.display = "block"; // 사용 가능하다는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+                            document.getElementById("validId").style.display = "block"; // 사용 가능하다는 메시지를 block으로 표시해 화면에 띄워지게 함
                             document.getElementById("username").style.backgroundColor="#B0F6AC";
                             validUsername = true;
                         }
@@ -161,16 +160,16 @@
     }
 
     function pwCheck() { // 비밀번호 체크
-        let password = document.getElementById('password').value; // password 값을 담아줌
+        let password = document.getElementById('password').value;
         let passwordCheck = /(?=.*\d)(?=.*[a-zA-ZS]).{8,}/; // 비밀번호의 정규표현식
         if (password.trim() === '') { // 입력값이 없는 경우
-            document.getElementById("notInputPw").style.display = "block"; // 비밀번호를 입력하라는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+            document.getElementById("notInputPw").style.display = "block"; // 비밀번호를 입력하라는 메시지를 block으로 표시해 화면에 띄워지게 함
             document.getElementById("invalidPw").style.display = "none";
             document.getElementById("password").style.backgroundColor="#FFCECE";
             validPassword = false;
         } else if (passwordCheck.test(password) === false || password.length > 128) { // 양식에 맞지 않고 길이 초과 시
             document.getElementById("notInputPw").style.display = "none";
-            document.getElementById("invalidPw").style.display = "block"; // 양식에 맞지 않는다는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+            document.getElementById("invalidPw").style.display = "block"; // 양식에 맞지 않는다는 메시지를 block으로 표시해 화면에 띄워지게 함
             document.getElementById("password").style.backgroundColor="#FFCECE";
             validPassword = false;
         } else { // 사용 가능한 비밀번호
@@ -182,11 +181,11 @@
     }
 
     function samePwCheck() { // 비밀번호 확인 체크
-        let password = document.getElementById('password').value; // 원래 비밀번호 값을 담아줌
+        let password = document.getElementById('password').value;
         let passwordCheck = /(?=.*\d)(?=.*[a-zA-ZS]).{8,}/; // 비밀번호의 정규표현식
-        let samePassword = document.getElementById('samePassword').value; // 비밀번호 확인 값을 담아줌
+        let samePassword = document.getElementById('samePassword').value;
         if (samePassword.trim() === '') { // 입력값이 없는 경우
-            document.getElementById("notInputSamePw").style.display = "block"; // 비밀번호를 한번 더 입력하라는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+            document.getElementById("notInputSamePw").style.display = "block"; // 비밀번호를 한번 더 입력하라는 메시지를 block으로 표시해 화면에 띄워지게 함
             document.getElementById("invalidSamePw").style.display = "none";
             document.getElementById("notSamePw").style.display = "none";
             document.getElementById("validSamePw").style.display = "none";
@@ -194,7 +193,7 @@
             validSamePassword = false;
         } else if (passwordCheck.test(samePassword) === false || password.length > 128) { // 양식에 맞지 않고 길이 초과 시
             document.getElementById("notInputSamePw").style.display = "none";
-            document.getElementById("invalidSamePw").style.display = "block"; // 양식에 맞지 않는다는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+            document.getElementById("invalidSamePw").style.display = "block"; // 양식에 맞지 않는다는 메시지를 block으로 표시해 화면에 띄워지게 함
             document.getElementById("notSamePw").style.display = "none";
             document.getElementById("validSamePw").style.display = "none";
             document.getElementById("samePassword").style.backgroundColor="#FFCECE";
@@ -202,7 +201,7 @@
         } else if (password !== samePassword) { // 일치하지 않는 경우
             document.getElementById("notInputSamePw").style.display = "none";
             document.getElementById("invalidSamePw").style.display = "none";
-            document.getElementById("notSamePw").style.display = "block"; // 비밀번호가 같지 않다는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+            document.getElementById("notSamePw").style.display = "block"; // 비밀번호가 같지 않다는 메시지를 block으로 표시해 화면에 띄워지게 함
             document.getElementById("validSamePw").style.display = "none";
             document.getElementById("samePassword").style.backgroundColor="#FFCECE";
             validSamePassword = false;
@@ -210,23 +209,23 @@
             document.getElementById("notInputSamePw").style.display = "none";
             document.getElementById("invalidSamePw").style.display = "none";
             document.getElementById("notSamePw").style.display = "none";
-            document.getElementById("validSamePw").style.display = "block"; // 비밀번호가 일치한다는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+            document.getElementById("validSamePw").style.display = "block"; // 비밀번호가 일치한다는 메시지를 block으로 표시해 화면에 띄워지게 함
             document.getElementById("samePassword").style.backgroundColor="#B0F6AC";
             validSamePassword = true;
         }
     }
 
     function nicknameCheck() { // 닉네임 체크
-        let nickname = document.getElementById('nickname').value; // nickname 값을 담아줌
+        let nickname = document.getElementById('nickname').value;
         let nicknameCheck = /^[가-힇a-zA-Z0-9]{2,15}$/; // 닉네임의 정규표현식
         if (nickname.trim() === '') { // 입력값이 없는 경우
-            document.getElementById("notInputNickname").style.display = "block"; // 비밀번호를 입력하라는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+            document.getElementById("notInputNickname").style.display = "block"; // 비밀번호를 입력하라는 메시지를 block으로 표시해 화면에 띄워지게 함
             document.getElementById("invalidNickname").style.display = "none";
             document.getElementById("nickname").style.backgroundColor="#FFCECE";
             validNickname = false;
         } else if (nicknameCheck.test(nickname) === false || nickname.length > 15) { // 양식에 맞지 않고 길이 초과 시
             document.getElementById("notInputNickname").style.display = "none";
-            document.getElementById("invalidNickname").style.display = "block"; // 양식에 맞지 않는다는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+            document.getElementById("invalidNickname").style.display = "block"; // 양식에 맞지 않는다는 메시지를 block으로 표시해 화면에 띄워지게 함
             document.getElementById("nickname").style.backgroundColor="#FFCECE";
             validNickname = false;
         } else { // 사용 가능한 닉네임
@@ -241,13 +240,13 @@
         let email = document.getElementById('email').value; // email 값을 담아줌
         let emailCheck = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/; // 이메일의 정규표현식
         if (email.trim() === '') { // 입력값이 없는 경우
-            document.getElementById("notInputEmail").style.display = "block"; // 이메일을 입력하라는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+            document.getElementById("notInputEmail").style.display = "block"; // 이메일을 입력하라는 메시지를 block으로 표시해 화면에 띄워지게 함
             document.getElementById("invalidEmail").style.display = "none";
             document.getElementById("email").style.backgroundColor="#FFCECE";
             validEmail = false;
         } else if (emailCheck.test(email) === false) { // 양식에 맞지 않을 시
             document.getElementById("notInputEmail").style.display = "none";
-            document.getElementById("invalidEmail").style.display = "block"; // 양식에 맞지 않는다는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+            document.getElementById("invalidEmail").style.display = "block"; // 양식에 맞지 않는다는 메시지를 block으로 표시해 화면에 띄워지게 함
             document.getElementById("email").style.backgroundColor="#FFCECE";
             validEmail = false;
         } else { // 사용 가능한 이메일
@@ -262,13 +261,13 @@
         let name = document.getElementById('name').value; // name 값을 담아줌
         let nameCheck =  /^[가-힣]{2,10}$/; // 이름의 정규표현식
         if (name.trim() === '') { // 입력값이 없는 경우
-            document.getElementById("notInputName").style.display = "block"; // 이름을 입력하라는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+            document.getElementById("notInputName").style.display = "block"; // 이름을 입력하라는 메시지를 block으로 표시해 화면에 띄워지게 함
             document.getElementById("invalidName").style.display = "none";
             document.getElementById("name").style.backgroundColor="#FFCECE";
             validName = false;
         } else if (nameCheck.test(name) === false) { // 양식에 맞지 않을 시
             document.getElementById("notInputName").style.display = "none";
-            document.getElementById("invalidName").style.display = "block"; // 양식에 맞지 않는다는 메시지를 block으로 표시해 화면에 띄워지게 한다.
+            document.getElementById("invalidName").style.display = "block"; // 양식에 맞지 않는다는 메시지를 block으로 표시해 화면에 띄워지게 함
             document.getElementById("name").style.backgroundColor="#FFCECE";
             validName = false;
         } else { // 사용 가능한 이름

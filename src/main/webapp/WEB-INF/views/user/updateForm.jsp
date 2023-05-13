@@ -7,13 +7,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../layout/header.jsp"%>
-<c:if test="${signIn == null}"><c:redirect url="http://localhost:8080/user/needLogin"/></c:if>
+<c:if test="${signIn == null}"><c:redirect url="http://localhost/user/needLogin"/></c:if>
+<%--<c:if test="${signIn == null}"><c:redirect url="http://staffriends.duckdns.org/user/needLogin"/></c:if>--%>
 <html>
 <head>
-    <title>정보수정</title>
+    <title>회원정보수정</title>
 </head>
 <body>
-<h2 style="text-align: center; margin-top: 30px; margin-bottom: 70px; font-family: KakaoBold;">정보수정</h2>
+<h2 style="text-align: center; margin-top: 30px; margin-bottom: 70px; font-family: KakaoBold;">회원정보수정</h2>
 <section style="padding-bottom: 50px;">
     <div class="container center-div">
 <form method="post" class="container center-div container-size">
@@ -61,6 +62,13 @@
 </section>
 
 <script>
+    window.onload = function () { // 페이지 진입 시 모든 정보들을 체크
+        pwCheck();
+        samePwCheck();
+        nicknameCheck();
+        emailCheck();
+    }
+
     let validPassword = false;
     let validSamePassword = false;
     let validNickname = false;
@@ -163,7 +171,7 @@
         }
     }
 
-    function updateInfo() {
+    function updateInfo() { // 회원 정보 수정
         if(validPassword === true && validSamePassword === true && validNickname === true && validEmail === true) {
             const password = document.getElementById('password').value;
             const nickname = document.getElementById('nickname').value;
@@ -172,7 +180,6 @@
             const id = document.getElementById('id').value;
 
             // 유효성 검사 완료 후 실행할 로직
-            // json 데이터로 변환
             let data = {
                 password:password,
                 nickname:nickname,

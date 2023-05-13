@@ -9,7 +9,7 @@
 <%@ include file="../layout/header.jsp"%>
 <html>
 <head>
-    <title>Title</title>
+    <title>로그인 필요</title>
 </head>
 <body>
 <h1 style="text-align: center">로그인 후 이용가능합니다.</h1>

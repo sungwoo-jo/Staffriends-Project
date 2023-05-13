@@ -19,7 +19,7 @@ public interface UserMapper {
 
     Integer findMyPassword(UserVo userVo);
 
-    String findMyPasswordProc(UserVo userVo);
+    String resetPassword(UserVo userVo);
 
     void updatePassword(UserVo userVo);
 }
