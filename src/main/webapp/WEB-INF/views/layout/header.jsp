@@ -7,6 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +19,9 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
   <script type="text/javascript" src="/js/ckeditor/ckeditor.js"></script>
+  <script src="/js/user.js"></script>
+  <script src="/js/reply.js"></script>
+  <script src="/js/guard.js"></script>
 
 </head>
 <body class="center-div">
@@ -64,20 +69,3 @@
 </nav>
 </section>
 <br>
-<script>
-  function transUserInfo(serialNum) {
-    let f = document.createElement('form'); // form element 생성
-
-    let obj;
-    obj = document.createElement('input'); // input element 생성
-    obj.setAttribute('type', 'hidden'); // type을 hidden으로,
-    obj.setAttribute('name', 'serialNum'); // name을 serialNum으로,
-    obj.setAttribute('value', serialNum); // value를 serialNum으로 설정
-
-    f.appendChild(obj); // form element의 자식 요소로 obj(input element)를 추가
-    f.setAttribute('method', 'post'); // method를 post 방식으로,
-    f.setAttribute('action', '/guard/guardIndex'); // action은 /guardIndex로 전송되도록
-    document.body.appendChild(f); // body의 자식 요소로 form을 추가
-    f.submit(); // form 전송
-  }
-</script>

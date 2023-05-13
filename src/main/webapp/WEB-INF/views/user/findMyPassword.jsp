@@ -11,6 +11,7 @@
 <head>
     <title>비밀번호 찾기</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/user.js"></script>
 </head>
 <body class="center-div">
 <section class="bg-white">
@@ -37,62 +38,4 @@
     </section>
 </section>
 </body>
-
-<script>
-    function findMyPasswordProc() { // 비밀번호 찾기
-        let username = document.getElementById('username').value.trim();
-        let name = document.getElementById('name').value.trim();
-        let email = document.getElementById('email').value.trim();
-
-        // 빈 값일 시 해당 칸을 focus
-        if (username === "") {
-            alert("아이디를 입력해주세요.");
-            document.getElementById('username').focus();
-            return false;
-        }
-        if (name === "") {
-            alert("이름을 입력해주세요.");
-            document.getElementById('name').focus();
-            return false;
-        }
-        if (email === "") {
-            alert("이메일을 입력해주세요.");
-            document.getElementById('email').focus();
-            return false;
-        }
-
-        let data = {
-            username:username,
-            name:name,
-            email:email
-        };
-
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", "/user/resetPassword");
-        xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-        xhr.onload = function() {
-            if (xhr.status === 200 || xhr.status === 201) {
-                let resp = xhr.responseText;
-                let result = JSON.parse(resp);
-                if (resp.status === 500) {
-                    alert("에러가 발생했습니다.");
-                } else {
-                    if(result.password === '0') { // 존재하는 회원이 없을 때
-                        alert('올바른 정보를 입력했는지 다시 확인해주세요.');
-                    } else { // 재설정된 비밀번호를 반환
-                        alert('회원님의 비밀번호는 ' + result.password + ' 입니다.');
-                    }
-                }
-            } else {
-                console.log(xhr.responseText);
-                alert("에러가 발생했습니다. \n에러 코드: " + xhr.status);
-            }
-        };
-        xhr.onerror = function() {
-            console.log(xhr.responseText);
-            alert("에러가 발생했습니다. \n에러 코드: " + xhr.status);
-        };
-        xhr.send(JSON.stringify(data));
-    }
-</script>
 </html>

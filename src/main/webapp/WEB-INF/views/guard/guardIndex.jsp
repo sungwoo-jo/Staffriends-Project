@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ include file="../layout/header.jsp"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <c:if test="${signIn == null}"><c:redirect url="http://localhost/user/needLogin"/></c:if>
 <head>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bcc049c8490042d9545bd799ec87eff7&libraries=services"></script>
@@ -15,46 +15,49 @@
     </div>
 
 <script>
-    var container = document.getElementById('map'); // 지도 정보를 가져오기
+    printGuardMap();
 
-    var options = {
-        center: new kakao.maps.LatLng(${history[0].h_lat}, ${history[0].h_long}), // 가장 최신 데이터의 마커를 지도의 중앙에 표시
-        level: 7
-    };
-    var map = new kakao.maps.Map(container, options);
+    function printGuardMap() { // 보호자 페이지 카카오맵 출력
+        let container = document.getElementById('map'); // 지도 정보를 가져오기
 
-    // 마커 이미지 지정
-    var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
-        imageSize = new kakao.maps.Size(24,35),
-        imageOption = {offset: new kakao.maps.Point(14,69)};
-    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+        let options = {
+            center: new kakao.maps.LatLng(${history[0].h_lat}, ${history[0].h_long}), // 가장 최신 데이터의 마커를 지도의 중앙에 표시
+            level: 7
+        };
+        let map = new kakao.maps.Map(container, options);
 
-    // 마커 정보 배열 선언 & 초기화
-    let markerPosition = new Array();
-    let marker = new Array();
-    let iwContent = new Array();
-    let iwPosition = new Array();
-    let infoWindow = new Array();
+        // 마커 이미지 지정
+        let imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
+            imageSize = new kakao.maps.Size(24,35),
+            imageOption = {offset: new kakao.maps.Point(14,69)};
+        let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 
-    let history = [];
+        // 마커 정보 배열 선언 & 초기화
+        let markerPosition = new Array();
+        let marker = new Array();
+        let iwContent = new Array();
+        let iwPosition = new Array();
+        let infoWindow = new Array();
 
-    <c:forEach var="history" items="${history}" varStatus="status"> <%-- 가져온 경로 정보를 카카오맵에 표시 --%>
-        history.push("${history}");
+        let history = [];
 
-        markerPosition = new kakao.maps.LatLng(${history.h_lat}, ${history.h_long}); // 마커가 표시될 위치 지정
+        <c:forEach var="history" items="${history}" varStatus="status"> <%-- 가져온 경로 정보를 카카오맵에 표시 --%>
+            history.push("${history}");
 
-        marker = new kakao.maps.Marker({ position: markerPosition, image : markerImage }); // 마커를 생성
+            markerPosition = new kakao.maps.LatLng(${history.h_lat}, ${history.h_long}); // 마커가 표시될 위치 지정
 
-        marker.setMap(map); // 마커가 지도 위에 표시되도록 설정
+            marker = new kakao.maps.Marker({ position: markerPosition, image : markerImage }); // 마커를 생성
 
-        // JSTL 태그로 tx_time을 원하는 포맷대로 출력(yyyy-MM-dd HH:mm:ss)
-        iwContent ='<div style="padding: 4px; font-size:0.6rem;">'+'<b style="color: blue">'+'${history.serial_num}'+'</b>'+':&nbsp' +'<fmt:formatDate value="${history.tx_time}" pattern="yyyy-MM-dd HH:mm:ss"/>'+'</div>';
-        iwPosition = new kakao.maps.LatLng(${history.h_lat}, ${history.h_long});
-        infoWindow = new kakao.maps.InfoWindow({ position : iwPosition, content : iwContent });
+            marker.setMap(map); // 마커가 지도 위에 표시되도록 설정
 
-        infoWindow.open(map, marker); // 인포 윈도우 오픈
-    </c:forEach>
+            // JSTL 태그로 tx_time을 원하는 포맷대로 출력(yyyy-MM-dd HH:mm:ss)
+            iwContent ='<div style="padding: 4px; font-size:0.6rem;">'+'<b style="color: blue">'+'${history.serial_num}'+'</b>'+':&nbsp' +'<fmt:formatDate value="${history.tx_time}" pattern="yyyy-MM-dd HH:mm:ss"/>'+'</div>';
+            iwPosition = new kakao.maps.LatLng(${history.h_lat}, ${history.h_long});
+            infoWindow = new kakao.maps.InfoWindow({ position : iwPosition, content : iwContent });
 
+            infoWindow.open(map, marker); // 인포 윈도우 오픈
+        </c:forEach>
+    }
 </script>
 <div class="screen_bottom">
     <div class="screen_bottom_1"> <!-- 좌하단 이동 로그 표시 -->
@@ -63,19 +66,13 @@
     </div>
     <div class="screen_bottom_2"> <!-- 우하단 실시간 이미지 표시(랜덤 이미지로 대체) -->
         <img id="random-image" alt="Random Image" style="cursor:pointer; width: 100%; height: 100%;" onclick="window.open('image/road_image/image1.jpg');" onerror="this.src='/image/default.jpg'">
-        <script>const imgElement = document.querySelector('#random-image');
+        <script>
+            const imgElement = document.querySelector('#random-image');
 
-        async function getRandomImage() {
-            const response = await fetch('https://source.unsplash.com/random');
-            const blob = await response.blob();
-            const imgUrl = URL.createObjectURL(blob);
-            imgElement.src = imgUrl;
-        }
-
-        setInterval(() => {
+            setInterval(() => {
+                getRandomImage();
+            }, 1000);
             getRandomImage();
-        }, 1000);
-        getRandomImage();
         </script>
     </div>
 </div>
