@@ -67,7 +67,7 @@ select * from test;]]></console>
           <database value="mysql" />
           <type value="USER_PASSWORD" />
           <user value="sungwoo" />
-          <deprecated-pwd value="anN3NDg2MjU=" />
+          <deprecated-pwd value="QWJjZDEyMzQhQA==" />
         </database>
         <properties>
           <auto-commit value="false" />
