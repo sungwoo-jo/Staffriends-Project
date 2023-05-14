@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="../layout/header.jsp"%>
-<c:if test="${signIn == null}"><c:redirect url="http://localhost:80/user/needLogin"/></c:if>
+<c:if test="${signIn == null}"><c:redirect url="http://http://staffriends.duckdns.org/user/needLogin"/></c:if>
 <head>
     <title>board</title>
 </head>

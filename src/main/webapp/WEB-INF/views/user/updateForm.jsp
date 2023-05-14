@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../layout/header.jsp"%>
-<c:if test="${signIn == null}"><c:redirect url="http://localhost/user/needLogin"/></c:if>
+<c:if test="${signIn == null}"><c:redirect url="http://http://staffriends.duckdns.org/user/needLogin"/></c:if>
 <%--<c:if test="${signIn == null}"><c:redirect url="http://staffriends.duckdns.org/user/needLogin"/></c:if>--%>
 <html>
 <head>
@@ -63,8 +63,6 @@
 
 <script>
     window.onload = function () { // 페이지 진입 시 모든 정보들을 체크
-        pwCheck();
-        samePwCheck();
         nicknameCheck();
         emailCheck();
     }

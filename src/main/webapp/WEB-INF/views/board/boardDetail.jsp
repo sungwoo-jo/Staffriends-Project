@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../layout/header.jsp"%>
-<%--<c:if test="${signIn == null}"><c:redirect url="http://localhost:80/user/needLogin"/></c:if>--%>
+<c:if test="${signIn == null}"><c:redirect url="http://http://staffriends.duckdns.org/user/needLogin"/></c:if>
 <!DOCTYPE html>
 <html lang="en">
 <head>
