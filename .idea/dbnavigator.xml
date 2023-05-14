@@ -25,9 +25,40 @@
                         oauth varchar(10)
 );
 
-use staffriends;
+create table t_board(
+                        board_idx int(10) not null primary key auto_increment,
+                        title varchar(300) not null,
+                        contents text not null,
+                        hit_cnt smallint(10) not null default 0,
+                        created_datetime datetime not null,
+                        creator_id varchar(50) not null,
+                        updated_datetime datetime,
+                        updater_id varchar(50),
+                        deleted_yn char(1) not null default 'N',
+                        reply_count int default 0
+);
 
-show databases;
+create table history (
+                         id int not null auto_increment primary key,
+                         serial_num varchar(100) not null,
+                         h_lat decimal(9,6) not null,
+                         h_long decimal(10,6) not null,
+                         tx_time timestamp not null
+);
+
+create table reply (
+                       reply_idx int not null auto_increment primary key,
+                       user_id int not null,
+                       username varchar(100) not null,
+                       reply_contents varchar(1000) not null,
+                       board_idx int(10) not null,
+                       deleted_yn char(1) not null default 'N',
+                       created_datetime timestamp not null default current_timestamp,
+                       reply_parent int,
+                       reply_depth int not null,
+                       reply_order int not null,
+                       constraint board_reply_fk foreign key(board_idx) references t_board(board_idx)
+);
 
 show tables;
 

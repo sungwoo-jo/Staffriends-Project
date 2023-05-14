@@ -1,3 +1,9 @@
+let validUsername;
+let validPassword;
+let validSamePassword;
+let validEmail;
+let validNickname;
+
 function findMyIdProc() { // 아이디 찾기
     let name = document.getElementById('name').value.trim();
     let email = document.getElementById('email').value.trim();
