@@ -22,7 +22,8 @@
   <script src="/js/user.js"></script>
   <script src="/js/reply.js"></script>
   <script src="/js/guard.js"></script>
-<%--  <link rel="favicon" href="/resources/static/img/favicon.ico">--%>
+  <script src="/js/board.js"></script>
+  <script src="/js/ckeditor.js"></script>
   <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" />
 
 </head>

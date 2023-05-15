@@ -28,11 +28,8 @@
         <tr>
           <td colspan="2">
             <textarea class="form-control" id="contents" name="contents"></textarea>
-            <script type="text/javascript">
-              CKEDITOR.replace('contents', {
-                        filebrowserUploadUrl: '/fileUpload',
-                        height: '500px'
-                      });
+            <script>
+                writeEditor();
             </script>
           </td>
         </tr>
@@ -40,13 +37,8 @@
       </table>
     </form>
     <h5 style="text-align: center"><button class="btn btn-success" id="save" style="margin-top: 20px; margin-bottom: 20px;">글 작성 완료</button></h5>
-    <script src="/js/ckeditor.js"></script>
       <script>
-        document.getElementById("save").onclick = function(event) {
-          frm.action = "/board/insertBoard";
-          frm.submit();
-          alert('글 작성이 완료되었습니다.');
-        }
+          insertBoard();
       </script>
     </div>
 

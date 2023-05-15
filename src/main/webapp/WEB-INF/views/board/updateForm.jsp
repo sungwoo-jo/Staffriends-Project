@@ -28,11 +28,8 @@
       <tr>
           <td colspan="4" class="view_text" style="max-width: 30%; height: auto">
             <textarea title="내용" id="contents" name="contents" style="text-align: center; ">${boardVo.contents}</textarea>
-            <script type="text/javascript">
-              CKEDITOR.replace('contents', {
-                filebrowserUploadUrl: '/fileUpload',
-                height: '500px'
-              });
+            <script>
+                writeEditor();
             </script>
           </td>
       </tr>
@@ -40,25 +37,15 @@
   </table>
   <input type="hidden" id="boardIdx" name="boardIdx" value="${boardVo.boardIdx}">
   </form>
-    <input type="button" id="list" value="되돌아가기" style="margin-top: 20px; margin-bottom: 20px;">
-    <input type="button" id="successEdit" value="수정완료" style="margin-top: 20px; margin-bottom: 20px;">
+    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+        <button type="button" class="btn btn-warning" id="list" style="margin-top: 20px; margin-bottom: 20px;">되돌아가기</button>
+        <button type="button" class="btn btn-success" id="successEdit" style="margin-top: 20px; margin-bottom: 20px;">수정완료</button>
+    </div>
     <script>
-      document.getElementById("successEdit").onclick = function(event) {
-        let boardIdx = document.getElementById('boardIdx');
-        frm.action = "/board/modifyBoard";
-        frm.submit();
-        alert('수정이 완료되었습니다.');
-      }
-
-      document.getElementById("list").onclick = function(event) {
-        history.back();
-        // event.preventDefault(); // 클릭 시 결과 실행 후 대기
-      }
+        modifyBoard();
     </script>
   </div>
 </div>
-  <script src="/js/ckeditor.js"></script>
 </div>
 </body>
 <%@ include file="../layout/footer.jsp"%>
-</html>

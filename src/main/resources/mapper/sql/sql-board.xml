@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="board.mapper.BoardMapper">
-    <select id="selectBoardList" resultType="board.vo.BoardVo" parameterType="Map"> -- 게시판 목록
+    <select id="selectBoardList" resultType="board.vo.BoardVo" parameterType="Map">
         <![CDATA[
             SELECT
                 board_idx,
@@ -20,7 +20,7 @@
         ]]>
     </select>
 
-    <select id="getTotalRows" resultType="int"> -- 총 데이터 개수 구하기
+    <select id="getTotalRows" resultType="int">
         <![CDATA[
             SELECT
                 count(*)
@@ -29,7 +29,7 @@
         ]]>
     </select>
     
-    <insert id="insertBoard" parameterType="board.vo.BoardVo"> -- 글쓰기
+    <insert id="insertBoard" parameterType="board.vo.BoardVo">
         <![CDATA[
             INSERT INTO t_board
                 (
@@ -48,18 +48,18 @@
             ]]>
     </insert>
 
-    <update id="updateHitCount" parameterType="int"> -- 조회수 증가
+    <update id="updateHitCount" parameterType="int">
         <![CDATA[
             UPDATE
                 t_board
             SET
                 hit_cnt = hit_cnt + 1
             WHERE
-                board_idx = #{boardIdx} -- 게시판 목록 중 게시판 번호가 DB의 게시판 번호와 같은 글
+                board_idx = #{boardIdx}
         ]]>
     </update>
 
-    <select id="selectBoardDetail" parameterType="int" resultType="board.vo.BoardVo"> -- 글 상세보기
+    <select id="selectBoardDetail" parameterType="int" resultType="board.vo.BoardVo">
         <![CDATA[
             SELECT
                 board_idx, title, contents, hit_cnt,
@@ -72,7 +72,7 @@
         ]]>
     </select>
 
-    <update id="updateBoard" parameterType="board.vo.BoardVo"> -- 글 수정
+    <update id="updateBoard" parameterType="board.vo.BoardVo">
         <![CDATA[
             UPDATE
                 t_board
@@ -93,7 +93,7 @@
             SET
                 deleted_yn = 'Y',
                 updated_datetime = now(),
-                updater_id = 'admin'
+                updater_id = #{creatorId}
             WHERE
                 board_idx = #{boardIdx}
         ]]>

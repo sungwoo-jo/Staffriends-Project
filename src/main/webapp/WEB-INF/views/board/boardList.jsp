@@ -33,30 +33,25 @@
                 </tr>
             </thead>
             <tbody>
-<%--            <c:choose>--%>
                 <c:if test="${fn:length(list) > 0}">
                     <c:forEach var="li" items="${list}">
                     <tr>
                         <td style="text-align: center"><c:out value="${li.boardIdx}"/></td>
-                        <td style="text-align: center"><a href="/board/boardDetail?boardIdx=${li.boardIdx}">
+                        <td style="text-align: center"><a href="/board/boardDetail?boardIdx=${li.boardIdx}"> <%-- 제목을 클릭하면 해당 게시글로 이동 --%>
                             <c:out value="${li.title}"></c:out></a>
-                            <c:if test="${li.replyCount ne 0}">&nbsp;<small>(<c:out value="${li.replyCount}"/>)</small></c:if>
+                            <c:if test="${li.replyCount ne 0}">&nbsp;<small>(<c:out value="${li.replyCount}"/>)</small></c:if> <%-- 게시글에 달린 댓글의 갯수를 표시 --%>
                         </td>
                         <td style="text-align: center"><c:out value="${li.hitCnt}"/></td>
                         <td style="text-align: center"><c:out value="${li.createdDateTime}"/></td>
                     </tr>
                     </c:forEach>
                 </c:if>
-<%--                <c:otherwise> &lt;%&ndash; 게시글 정보가 없으면 조회 결과 없음 출력 &ndash;%&gt;--%>
-<%--                    <h1>조회결과없음</h1>--%>
-<%--                </c:otherwise>--%>
-<%--            </c:choose>--%>
             </tbody>
         </table>
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
                 <c:choose>
-                    <c:when test="${startPage == 1}">
+                    <c:when test="${startPage == 1}"> <%-- 첫 페이지일 때 Previous 버튼 비활성화 --%>
                         <li class="page-item disabled"><a class="page-link" href="#" aria-disabled="true">Previous</a></li>
                     </c:when>
                     <c:otherwise>
@@ -64,32 +59,31 @@
                     </c:otherwise>
                 </c:choose>
                 <c:choose>
-                    <c:when test="${startPage <= endPage}">
+                    <c:when test="${startPage <= endPage}"> <%-- 끝 페이지 이하일 경우 --%>
                         <c:forEach var="start" begin="${startPage}" end="${endPage}" step="1"> <%-- 페이지 번호 출력 --%>
                             <c:choose>
-                                <c:when test="${start != cPage}"> <%-- 클릭한 페이지 번호 비활성화 하기 --%>
+                                <c:when test="${start != cPage}"> <%-- 버튼 별 이동할 페이지 링크 설정 --%>
                                     <li class="page-item">
                                         <a class="page-link" href="board?page=${start}">${start}</a></li>
                                 </c:when>
-                                <c:otherwise>
+                                <c:otherwise> <%-- 클릭한 페이지 번호 비활성화 --%>
                                     <li class="page-item">
                                     <li class="page-item disabled"><a class="page-link" href="#" aria-disabled="true" style="background: #e9ecef; color: #8B4513">${start}</a></li>
                                 </c:otherwise>
                             </c:choose>
-
                         </c:forEach>
                     </c:when>
                 </c:choose>
                 <c:choose>
                     <%-- 마지막 페이지 숫자와 startPage에서 pageLength 더해준 값이 일치할 때 --%>
-                    <%-- (즉 마지막 페이지 블럭일 때) --%>
+                    <%-- 즉 마지막 페이지 블럭일 때 Next 버튼 비활성화 --%>
                     <c:when test="${totalPages == endPage}">
                         <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
                     </c:when>
                     <c:otherwise>
-                <li class="page-item">
-                    <a class="page-link" href="board?page=${endPage+1}">Next</a>
-                </li>
+                        <li class="page-item">
+                            <a class="page-link" href="board?page=${endPage+1}">Next</a>
+                        </li>
                     </c:otherwise>
                 </c:choose>
             </ul>
@@ -97,4 +91,3 @@
     </div>
 </body>
 <%@ include file="../layout/footer.jsp"%>
-</html>

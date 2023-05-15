@@ -62,7 +62,41 @@ create table reply (
 
 show tables;
 
-select * from t_user;]]></console>
+select * from t_user;
+
+
+
+CREATE PROCEDURE testDataInsert()
+BEGIN
+    DECLARE i INT DEFAULT 1;
+
+    WHILE i <= 120 DO
+        INSERT INTO t_board(title, contents, hit_cnt, created_datetime, creator_id, deleted_yn)
+          VALUES(concat('제목',i), concat('내용',i), concat(0), concat(now()), concat('admin'), concat('N'));
+        SET i = i + 1;
+    END WHILE;
+END $$
+commit;
+select * from t_board;
+
+SELECT
+    board_idx,
+    title,
+    hit_cnt,
+    DATE_FORMAT(created_datetime, '%Y.%m.%d %H:%i:%s') AS created_datetime,
+    reply_count
+FROM
+    t_board
+WHERE
+    deleted_yn = 'N'
+ORDER BY board_idx DESC
+LIMIT 0, 10;
+
+call testDataInsert();
+
+delete from reply;
+delete from t_board;
+commit;]]></console>
       <console name="staffriends 1" type="STANDARD" schema="staffriends" session="Main"><![CDATA[use staffriends;
 
 
@@ -97,6 +131,9 @@ select * from test;]]></console>
   <component name="DBNavigator.Project.ObjectQuickFilterManager">
     <last-used-operator value="EQUAL" />
     <filters />
+  </component>
+  <component name="DBNavigator.Project.ScriptExecutionManager" clear-outputs="true">
+    <recently-used-interfaces />
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>

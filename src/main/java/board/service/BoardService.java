@@ -19,4 +19,6 @@ public interface BoardService {
     void deleteBoard(BoardVo boardVo) throws Exception;
 
     int getTotalRows();
+
+    Map<String, Integer> paging(String tempPage) throws Exception;
 }
