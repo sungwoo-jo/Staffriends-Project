@@ -49,8 +49,9 @@ public class ReplyController {
     }
 
     @PostMapping("/deleteReply")
-    public String deleteReply(@RequestBody String replyIdx) { // 댓글 삭제 메서드
-        replyService.deleteReply(Integer.parseInt(replyIdx)); // 전달받은 replyIdx와 일치하는 컬럼의 deleted_yn 필드를 y로 update
+    public String deleteReply(@RequestBody ReplyVo replyVo) { // 댓글 삭제 메서드
+        replyService.deleteReply(replyVo); // 전달받은 replyIdx와 일치하는 컬럼의 deleted_yn 필드를 y로 update
+        replyService.updateReplyCount(replyVo.getBoardIdx());
 
         return "deleteSuccess"; // 성공적으로 댓글 삭제 후 deleteSuccess 문자열 반환
     }

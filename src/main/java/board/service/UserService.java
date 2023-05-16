@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 public interface UserService {
     void insertUser(UserVo userVo) throws Exception;
 
-    Integer loginProc(UserVo userVo) throws Exception;
+    String loginProc(UserVo userVo) throws Exception;
 
     int idCheck(String username) throws Exception;
 
-    UserVo getUserInfo(Integer count);
+    UserVo getUserInfo(String username);
 
     void updateUser(UserVo userVo) throws Exception;
 
@@ -21,7 +21,7 @@ public interface UserService {
 
     String findMyId(UserVo userVo);
 
-    Integer findMyPassword(UserVo userVo);
+    String findMyPassword(UserVo userVo);
 
     String resetPassword(UserVo userVo) throws Exception;
 

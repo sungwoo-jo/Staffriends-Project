@@ -26,8 +26,8 @@ public class ReplyServiceImpl implements ReplyService {
     }
 
     @Override
-    public void deleteReply(int replyIdx) { // 댓글 삭제 메서드
-        replyMapper.deleteReply(replyIdx);
+    public void deleteReply(ReplyVo replyVo) { // 댓글 삭제 메서드
+        replyMapper.deleteReply(replyVo);
     }
 
     @Override

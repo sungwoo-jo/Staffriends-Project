@@ -11,7 +11,6 @@
     <div class="card-body">
         <form id="replyForm">
             <textarea id="replyContents" style="width: 100%; resize: none" placeholder="내용을 입력해주세요."></textarea>
-            <input type="hidden" id="userId" value="${signIn.id}">
             <input type="hidden" id="boardIdx" value="${board.boardIdx}">
             <input type="hidden" id="username" value="${signIn.username}">
         </form>

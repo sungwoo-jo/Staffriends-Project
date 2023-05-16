@@ -44,11 +44,11 @@ public class UserController {
     @PostMapping("/loginProc") // ID와 PW 일치 여부 확인
     @ResponseBody
     public boolean loginProc(@RequestBody UserVo userVo, HttpSession session) throws Exception {
-        Integer result = userService.loginProc(userVo); // 일치하는 회원 번호
-        if (result == null) { // 일치하는 회원의 아이디가 조회되지 않으면 세션 값을 설정하지 않고 리턴
+        String username = userService.loginProc(userVo); // 일치하는 회원의 id
+        if (username == null) { // 일치하는 회원의 아이디가 조회되지 않으면 세션 값을 설정하지 않고 리턴
             return false;
         }
-        userVo = userService.getUserInfo(result); // 회원의 id로 회원 정보를 조회하여 담아줌
+        userVo = userService.getUserInfo(username); // 회원의 id로 회원 정보를 조회하여 담아줌
         session.setAttribute("signIn", userVo); // 회원의 세션 정보 생성 후 리턴
         return true;
     }
@@ -82,13 +82,13 @@ public class UserController {
         String accessToken = userService.getAccessToken(code); // accessToken 요청
         UserVo userInfo = userService.getUserInfoFromKakao(accessToken); // accessToken으로 사용자 정보 요청
         String originalPassword = userInfo.getPassword(); // 카카오 계정에 설정하는 디폴트 패스워드 값(originalPassword)
-        Integer result = userService.loginProc(userInfo); // 기존 가입자 여부 확인
-        if (result == null) { // 가입 정보가 존재하지 않으면 회원가입 진행
+        String username = userService.loginProc(userInfo); // 기존 가입자 여부 확인
+        if (username == null) { // 가입 정보가 존재하지 않으면 회원가입 진행
             userInfo.setPassword(originalPassword); // 패스워드 설정
             userService.insertUser(userInfo); // 회원 정보 insert
             session.setAttribute("signIn", userInfo); // 회원 세션 생성
         } else { // 가입 정보가 존재하면 로그인
-            UserVo userVo = userService.getUserInfo(result); // 회원 번호로 회원 정보를 조회
+            UserVo userVo = userService.getUserInfo(username); // 회원 id로 회원 정보를 조회
             session.setAttribute("signIn", userVo); // 회원 세션 생성
         }
         return "redirect:/";
@@ -116,7 +116,7 @@ public class UserController {
     @ResponseBody
     public Map<String, Object> resetPassword(@RequestBody UserVo userVo) throws Exception {
         Map<String, Object> map = new HashMap<>();
-        if (userService.findMyPassword(userVo) != 0) { // 회원 정보가 일치하는 경우
+        if (userService.findMyPassword(userVo) != null) { // 회원 정보가 일치하는 경우
             map.put("password", userService.resetPassword(userVo)); // 비밀번호 재설정
         } else { // 회원 정보가 일치하지 않는 경우
             map.put("password", "0"); // "0"을 설정

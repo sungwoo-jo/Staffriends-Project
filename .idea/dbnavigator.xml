@@ -80,7 +80,6 @@ CREATE TABLE history
 CREATE TABLE reply
 (
     `reply_idx`         int              NOT NULL    AUTO_INCREMENT COMMENT '댓글 번호',
-    `user_id`           int              NOT NULL    COMMENT '댓글 작성자 idx',
     `username`          varchar(100)     NOT NULL    COMMENT '댓글 작성자 id',
     `reply_contents`    varchar(1000)    NOT NULL    COMMENT '댓글 내용',
     `board_idx`         int(10)          NOT NULL    COMMENT '게시글 번호',
@@ -99,7 +98,18 @@ ALTER TABLE reply
 
 -- Foreign Key 삭제 SQL - reply(board_idx)
 -- ALTER TABLE reply
--- DROP FOREIGN KEY board_reply_fk;]]></console>
+-- DROP FOREIGN KEY board_reply_fk;
+
+commit;
+
+select * from reply;
+
+SELECT
+    COUNT(reply_idx)
+FROM
+    reply
+WHERE
+    board_idx = 2 AND deleted_yn = 'N';]]></console>
       <console name="staffriends 1" type="STANDARD" schema="staffriends" session="Main"><![CDATA[use staffriends;
 
 

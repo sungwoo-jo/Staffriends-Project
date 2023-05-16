@@ -12,7 +12,7 @@ public interface ReplyService {
     
     void insertReply(ReplyVo replyVo);
     
-    void deleteReply(int replyIdx);
+    void deleteReply(ReplyVo replyVo);
 
     ReplyVo getReplyParent(String replyParent);
 

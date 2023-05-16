@@ -3,7 +3,6 @@
 CREATE TABLE reply
 (
     `reply_idx`         int              NOT NULL    AUTO_INCREMENT COMMENT '댓글 번호',
-    `user_id`           int              NOT NULL    COMMENT '댓글 작성자 idx',
     `username`          varchar(100)     NOT NULL    COMMENT '댓글 작성자 id',
     `reply_contents`    varchar(1000)    NOT NULL    COMMENT '댓글 내용',
     `board_idx`         int(10)          NOT NULL    COMMENT '게시글 번호',

@@ -366,7 +366,7 @@ function loginProc() { // 로그인 실행 로직
             if (resp.status === 500) {
                 alert("에러가 발생했습니다.");
             } else {
-                if (result) { // 회원 정보를 반환받은 경우
+                if (username) { // 회원 정보를 반환받은 경우
                     alert("로그인이 완료되었습니다.");
                     location.href = "/";
                 } else { // 반환받은 회원 정보가 없는 경우

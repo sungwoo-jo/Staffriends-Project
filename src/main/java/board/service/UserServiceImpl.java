@@ -37,14 +37,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Integer loginProc(UserVo userVo) throws Exception { // 비밀번호 암호화 후 로그인 진행
+    public String loginProc(UserVo userVo) throws Exception { // 비밀번호 암호화 후 로그인 진행
         messageDigest(userVo, userVo.getPassword());
         return userMapper.loginProc(userVo);
     }
 
     @Override
-    public UserVo getUserInfo(Integer count) { // 회원 정보 조회
-        return userMapper.getUserInfo(count);
+    public UserVo getUserInfo(String username) { // 회원 정보 조회
+        return userMapper.getUserInfo(username);
     }
 
     @Override
@@ -178,15 +178,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Integer findMyPassword(UserVo userVo) { // 비밀번호 찾기(아이디, 이름, 이메일로 조회)
+    public String findMyPassword(UserVo userVo) { // 비밀번호 찾기(아이디, 이름, 이메일로 조회)
         return userMapper.findMyPassword(userVo);
     }
 
     @Override
     public String resetPassword(UserVo userVo) throws Exception { // 비밀번호 재설정 로직
         String newPassword = RandomStringUtils.randomAlphanumeric(15); // 15자리의 영소문자+숫자로 이루어진 랜덤한 비밀번호 생성
-        Integer id = findMyPassword(userVo); // 입력받은 회원정보로 존재하는 회원의 고유번호 조회
-        userVo = getUserInfo(id); // 고유번호에 해당하는 회원 정보 조회
+        String username = findMyPassword(userVo); // 입력받은 회원정보로 존재하는 회원의 고유번호 조회
+        userVo = getUserInfo(username); // 회원 id로 해당하는 회원 정보 조회
         messageDigest(userVo, newPassword); // 비밀번호 암호화
         updatePassword(userVo); // 회원 비밀번호 재설정
         System.out.println("userVo:" + userVo);
