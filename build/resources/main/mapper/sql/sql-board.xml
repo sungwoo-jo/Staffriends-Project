@@ -12,7 +12,7 @@
                 DATE_FORMAT(created_datetime, '%Y.%m.%d %H:%i:%s') AS created_datetime,
                 reply_count
             FROM
-                t_board
+                board
             WHERE
                 deleted_yn = 'N'
             ORDER BY board_idx DESC
@@ -25,25 +25,25 @@
             SELECT
                 count(*)
             FROM
-                t_board
+                board
         ]]>
     </select>
     
     <insert id="insertBoard" parameterType="board.vo.BoardVo">
         <![CDATA[
-            INSERT INTO t_board
+            INSERT INTO board
                 (
                     title,
                     contents,
                     created_datetime,
-                    creator_id
+                    username
                 )
             VALUES
                 (
                    #{title},
                    #{contents},
                    now(),
-                   #{creatorId}
+                   #{username}
                 )
             ]]>
     </insert>
@@ -51,7 +51,7 @@
     <update id="updateHitCount" parameterType="int">
         <![CDATA[
             UPDATE
-                t_board
+                board
             SET
                 hit_cnt = hit_cnt + 1
             WHERE
@@ -64,9 +64,9 @@
             SELECT
                 board_idx, title, contents, hit_cnt,
                 DATE_FORMAT(created_datetime, '%Y.%m.%d %H:%i:%s') AS created_datetime,
-                creator_id
+                username
             FROM
-                t_board
+                board
             WHERE
                 board_idx = #{boardIdx} AND deleted_yn = 'N'
         ]]>
@@ -75,12 +75,12 @@
     <update id="updateBoard" parameterType="board.vo.BoardVo">
         <![CDATA[
             UPDATE
-                t_board
+                board
             SET
                 title = #{title},
                 contents = #{contents},
                 updated_datetime = now(),
-                updater_id = #{creatorId}
+                updater_id = #{username}
             WHERE
                 board_idx = #{boardIdx}
         ]]>
@@ -89,11 +89,11 @@
     <update id="deleteBoard" parameterType="int"> -- 글 삭제
         <![CDATA[
             UPDATE
-                t_board
+                board
             SET
                 deleted_yn = 'Y',
                 updated_datetime = now(),
-                updater_id = #{creatorId}
+                updater_id = #{username}
             WHERE
                 board_idx = #{boardIdx}
         ]]>

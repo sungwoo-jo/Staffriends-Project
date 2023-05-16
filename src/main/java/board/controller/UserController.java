@@ -45,7 +45,7 @@ public class UserController {
     @ResponseBody
     public boolean loginProc(@RequestBody UserVo userVo, HttpSession session) throws Exception {
         Integer result = userService.loginProc(userVo); // 일치하는 회원 번호
-        if (result == null) { // 일치하는 회원의 id 정보가 조회되지 않으면 세션 값을 설정하지 않고 리턴
+        if (result == null) { // 일치하는 회원의 아이디가 조회되지 않으면 세션 값을 설정하지 않고 리턴
             return false;
         }
         userVo = userService.getUserInfo(result); // 회원의 id로 회원 정보를 조회하여 담아줌

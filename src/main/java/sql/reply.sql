@@ -1,13 +1,25 @@
-create table reply (
-                       reply_idx int not null auto_increment primary key,
-                       user_id int not null,
-                       username varchar(100) not null,
-                       reply_contents varchar(1000) not null,
-                       board_idx int(10) not null,
-                       deleted_yn char(1) not null default 'N',
-                       created_datetime timestamp not null default current_timestamp,
-                       reply_parent int,
-                       reply_depth int not null,
-                       reply_order int not null,
-                       constraint board_reply_fk foreign key(board_idx) references t_board(board_idx)
+-- reply Table Create SQL
+-- 테이블 생성 SQL - reply
+CREATE TABLE reply
+(
+    `reply_idx`         int              NOT NULL    AUTO_INCREMENT COMMENT '댓글 번호',
+    `user_id`           int              NOT NULL    COMMENT '댓글 작성자 idx',
+    `username`          varchar(100)     NOT NULL    COMMENT '댓글 작성자 id',
+    `reply_contents`    varchar(1000)    NOT NULL    COMMENT '댓글 내용',
+    `board_idx`         int(10)          NOT NULL    COMMENT '게시글 번호',
+    `deleted_yn`        char(1)          NOT NULL    DEFAULT 'N' COMMENT '삭제 여부',
+    `created_datetime`  timestamp        NOT NULL    DEFAULT current_timestamp COMMENT '작성 일자',
+    `reply_parent`      int              NULL        COMMENT '모 댓글 idx',
+    `reply_depth`       int              NOT NULL    COMMENT '댓글, 대댓글 여부',
+    `reply_order`       int              NOT NULL    COMMENT '댓글 출력 순서',
+     PRIMARY KEY (reply_idx)
 );
+
+-- Foreign Key 설정 SQL - reply(board_idx) -> board(board_idx)
+ALTER TABLE reply
+    ADD CONSTRAINT board_reply_fk FOREIGN KEY (board_idx)
+        REFERENCES board (board_idx) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+-- Foreign Key 삭제 SQL - reply(board_idx)
+-- ALTER TABLE reply
+-- DROP FOREIGN KEY board_reply_fk;

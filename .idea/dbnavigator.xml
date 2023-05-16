@@ -13,90 +13,93 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="96cd716b-f873-438d-96fd-16f37d6067aa">
-      <console name="staffriends" type="STANDARD" schema="staffriends" session="Main"><![CDATA[create table t_user (
-                        id int auto_increment primary key not null,
-                        name varchar(100) not null,
-                        username varchar(100) not null,
-                        password varchar(130) not null,
-                        email varchar(50) not null,
-                        nickname varchar(20) not null,
-                        join_date datetime not null,
-                        serial_num varchar(100),
-                        oauth varchar(10)
+      <console name="staffriends" type="STANDARD" schema="staffriends" session="Main"><![CDATA[drop table history;
+drop table reply;
+drop table board;
+drop table user;
+
+-- user Table Create SQL
+-- 테이블 생성 SQL - user
+CREATE TABLE user
+(
+    `username`    varchar(100)    NOT NULL    COMMENT '회원 id',
+    `name`        varchar(100)    NOT NULL    COMMENT '이름',
+    `password`    varchar(130)    NOT NULL    COMMENT '비밀번호',
+    `email`       varchar(50)     NOT NULL    COMMENT '이메일',
+    `nickname`    varchar(20)     NOT NULL    COMMENT '닉네임',
+    `join_date`   datetime        NOT NULL    COMMENT '가입 일자',
+    `serial_num`  varchar(100)    NULL        COMMENT '시리얼 번호',
+    `oauth`       varchar(10)     NULL        COMMENT 'oauth 여부',
+     PRIMARY KEY (username)
 );
 
-create table t_board(
-                        board_idx int(10) not null primary key auto_increment,
-                        title varchar(300) not null,
-                        contents text not null,
-                        hit_cnt smallint(10) not null default 0,
-                        created_datetime datetime not null,
-                        creator_id varchar(50) not null,
-                        updated_datetime datetime,
-                        updater_id varchar(50),
-                        deleted_yn char(1) not null default 'N',
-                        reply_count int default 0
+-- board Table Create SQL
+-- 테이블 생성 SQL - board
+CREATE TABLE board
+(
+    `board_idx`         int(10)         NOT NULL    AUTO_INCREMENT COMMENT '게시글 번호',
+    `title`             varchar(300)    NOT NULL    COMMENT '제목',
+    `contents`          text            NOT NULL    COMMENT '내용',
+    `hit_cnt`           smallint(10)    NOT NULL    DEFAULT 0 COMMENT '조회수',
+    `created_datetime`  datetime        NOT NULL    COMMENT '작성 일자',
+    `username`          varchar(100)    NOT NULL    COMMENT '작성 회원 id',
+    `updated_datetime`  datetime        NULL        COMMENT '수정 일자',
+    `updater_id`        varchar(50)     NULL        COMMENT '수정 회원 id',
+    `deleted_yn`        char(1)         NOT NULL    DEFAULT 'N' COMMENT '삭제 여부',
+    `reply_count`       int             NULL        DEFAULT 0 COMMENT '댓글 갯수',
+     PRIMARY KEY (board_idx)
 );
 
-create table history (
-                         id int not null auto_increment primary key,
-                         serial_num varchar(100) not null,
-                         h_lat decimal(9,6) not null,
-                         h_long decimal(10,6) not null,
-                         tx_time timestamp not null
+-- Foreign Key 설정 SQL - board(creator_id) -> user(username)
+ALTER TABLE board
+    ADD CONSTRAINT board_user_fk FOREIGN KEY (username)
+        REFERENCES user (username) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+-- Foreign Key 삭제 SQL - reply(board_idx)
+-- ALTER TABLE board
+-- DROP FOREIGN KEY user_board_fk;
+
+-- history Table Create SQL
+-- 테이블 생성 SQL - history
+CREATE TABLE history
+(
+    `id`          int              NOT NULL    AUTO_INCREMENT COMMENT '데이터 순번',
+    `serial_num`  varchar(100)     NOT NULL    COMMENT '시리얼 번호',
+    `latitude`       decimal(9,6)     NOT NULL    COMMENT '위도',
+    `longitude`      decimal(10,6)    NOT NULL    COMMENT '경도',
+    `tx_time`     timestamp        NOT NULL    COMMENT '수신시간',
+     PRIMARY KEY (id)
 );
 
-create table reply (
-                       reply_idx int not null auto_increment primary key,
-                       user_id int not null,
-                       username varchar(100) not null,
-                       reply_contents varchar(1000) not null,
-                       board_idx int(10) not null,
-                       deleted_yn char(1) not null default 'N',
-                       created_datetime timestamp not null default current_timestamp,
-                       reply_parent int,
-                       reply_depth int not null,
-                       reply_order int not null,
-                       constraint board_reply_fk foreign key(board_idx) references t_board(board_idx)
+-- Foreign Key 삭제 SQL - history(serial_num)
+-- ALTER TABLE history
+-- DROP FOREIGN KEY history_user_fk;
+
+-- reply Table Create SQL
+-- 테이블 생성 SQL - reply
+CREATE TABLE reply
+(
+    `reply_idx`         int              NOT NULL    AUTO_INCREMENT COMMENT '댓글 번호',
+    `user_id`           int              NOT NULL    COMMENT '댓글 작성자 idx',
+    `username`          varchar(100)     NOT NULL    COMMENT '댓글 작성자 id',
+    `reply_contents`    varchar(1000)    NOT NULL    COMMENT '댓글 내용',
+    `board_idx`         int(10)          NOT NULL    COMMENT '게시글 번호',
+    `deleted_yn`        char(1)          NOT NULL    DEFAULT 'N' COMMENT '삭제 여부',
+    `created_datetime`  timestamp        NOT NULL    DEFAULT current_timestamp COMMENT '작성 일자',
+    `reply_parent`      int              NULL        COMMENT '모 댓글 idx',
+    `reply_depth`       int              NOT NULL    COMMENT '댓글, 대댓글 여부',
+    `reply_order`       int              NOT NULL    COMMENT '댓글 출력 순서',
+     PRIMARY KEY (reply_idx)
 );
 
-show tables;
+-- Foreign Key 설정 SQL - reply(board_idx) -> board(board_idx)
+ALTER TABLE reply
+    ADD CONSTRAINT board_reply_fk FOREIGN KEY (board_idx)
+        REFERENCES board (board_idx) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
-select * from t_user;
-
-
-
-CREATE PROCEDURE testDataInsert()
-BEGIN
-    DECLARE i INT DEFAULT 1;
-
-    WHILE i <= 120 DO
-        INSERT INTO t_board(title, contents, hit_cnt, created_datetime, creator_id, deleted_yn)
-          VALUES(concat('제목',i), concat('내용',i), concat(0), concat(now()), concat('admin'), concat('N'));
-        SET i = i + 1;
-    END WHILE;
-END $$
-commit;
-select * from t_board;
-
-SELECT
-    board_idx,
-    title,
-    hit_cnt,
-    DATE_FORMAT(created_datetime, '%Y.%m.%d %H:%i:%s') AS created_datetime,
-    reply_count
-FROM
-    t_board
-WHERE
-    deleted_yn = 'N'
-ORDER BY board_idx DESC
-LIMIT 0, 10;
-
-call testDataInsert();
-
-delete from reply;
-delete from t_board;
-commit;]]></console>
+-- Foreign Key 삭제 SQL - reply(board_idx)
+-- ALTER TABLE reply
+-- DROP FOREIGN KEY board_reply_fk;]]></console>
       <console name="staffriends 1" type="STANDARD" schema="staffriends" session="Main"><![CDATA[use staffriends;
 
 

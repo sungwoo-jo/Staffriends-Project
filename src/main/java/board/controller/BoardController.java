@@ -26,7 +26,7 @@ public class BoardController {
     }
 
     @RequestMapping("/board") // 게시글 리스트 출력 및 페이징
-    public ModelAndView boardList(Model model, HttpServletRequest request) throws Exception {
+    public ModelAndView boardList() throws Exception {
         ModelAndView mv = new ModelAndView();
         Map<String, Integer> map = boardService.paging("page"); // 쿼리 스트링의 페이지 번호를 전달
 
@@ -52,7 +52,7 @@ public class BoardController {
 
     @RequestMapping("/board/insertBoard") // 글 작성 로직
     public String insertBoard(BoardVo boardVo, @RequestParam String username) throws Exception {
-        boardVo.setCreatorId(username);
+        boardVo.setUsername(username);
         boardService.insertBoard(boardVo);
         return "redirect:/board";
     }

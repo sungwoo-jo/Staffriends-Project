@@ -22,7 +22,7 @@
                         <th scope="row" style="min-width: 50px; max-width: 50px;text-align: center; ">글 번호</th>
                         <td>${board.boardIdx}</td>
                         <th scope="row" style="min-width: 50px; max-width: 50px;text-align: center; ">작성자</th>
-                        <td>${board.creatorId}</td>
+                        <td>${board.username}</td>
                     </tr>
                     <tr>
                         <th scope="row" style="min-width: 50px; max-width: 50px;text-align: center; ">조회수</th>
@@ -47,7 +47,7 @@
 
     <script>
         showBoardDetail();
-        <c:if test="${signIn.username == board.creatorId}"> <%-- 수정, 삭제 가능 --%>
+        <c:if test="${signIn.username == board.username}"> <%-- 수정, 삭제 가능 --%>
         editAndDelete();
         </c:if>
     </script>

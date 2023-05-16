@@ -18,7 +18,6 @@
 <section style="padding-bottom: 50px;">
     <div class="container center-div">
 <form method="post" class="container center-div container-size">
-    <input type="hidden" id="id" value="${signIn.id}">
     <div class="form-group">
         <h5>아이디</h5><input type="text" name="username" class="form-control" disabled style="text-align: center" value="${signIn.username}"><p/>
     </div>

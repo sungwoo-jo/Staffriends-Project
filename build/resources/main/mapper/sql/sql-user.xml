@@ -5,7 +5,7 @@
 <mapper namespace="board.mapper.UserMapper">
     <insert id="insertUser" parameterType="board.vo.UserVo">
         <![CDATA[
-            INSERT INTO t_user
+            INSERT INTO user
                 (
                      name,
                      username,
@@ -33,7 +33,7 @@
             SELECT
                 count(*) as username
             FROM
-                t_user
+                user
             WHERE
                 username = #{username}
         ]]>
@@ -42,9 +42,9 @@
     <select id="loginProc" parameterType="board.vo.UserVo" resultType="Integer">
         <![CDATA[
             SELECT
-                id
+                username
             FROM
-                t_user
+                user
             WHERE
                 username = #{username} AND password = #{password}
         ]]>
@@ -55,48 +55,48 @@
             SELECT
                 *
             FROM
-                t_user
+                user
             WHERE
-                id = #{id}
+                username = #{username}
         ]]>
     </select>
 
     <update id="updateUser" parameterType="board.vo.UserVo">
         <![CDATA[
             UPDATE
-                t_user
+                user
             SET
                 password = #{password},
                 nickname = #{nickname},
                 email = #{email},
                 serial_num = #{serialNum}
             WHERE
-                id = #{id}
+                username = #{username}
         ]]>
     </update>
 
     <select id="findMyId" parameterType="board.vo.UserVo" resultType="String">
         <![CDATA[
             SELECT
-                IFNULL((SELECT username FROM t_user WHERE name = #{name} AND email = #{email}), 0)
+                IFNULL((SELECT username FROM user WHERE name = #{name} AND email = #{email}), 0)
         ]]>
     </select>
 
     <select id="findMyPassword" parameterType="board.vo.UserVo" resultType="Integer">
         <![CDATA[
             SELECT
-                IFNULL((SELECT id FROM t_user WHERE username = #{username} AND name = #{name} AND email = #{email}), 0)
+                IFNULL((SELECT id FROM user WHERE username = #{username} AND name = #{name} AND email = #{email}), 0)
         ]]>
     </select>
 
     <update id="updatePassword" parameterType="board.vo.UserVo">
         <![CDATA[
             UPDATE
-                t_user
+                user
             SET
                 password = #{password}
             WHERE
-                id = #{id}
+                username = #{username}
         ]]>
     </update>
 </mapper>

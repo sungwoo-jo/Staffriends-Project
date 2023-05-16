@@ -116,7 +116,7 @@
 
     <update id="updateReplyCount" parameterType="int">
         <![CDATA[
-            UPDATE t_board b
+            UPDATE board b
             SET b.reply_count = (
                                     SELECT
                                         COUNT(reply_idx)

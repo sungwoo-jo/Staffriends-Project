@@ -3,6 +3,7 @@ let validPassword;
 let validSamePassword;
 let validEmail;
 let validNickname;
+let validName;
 
 function findMyIdProc() { // 아이디 찾기
     let name = document.getElementById('name').value.trim();
@@ -429,15 +430,13 @@ function updateInfo() { // 회원 정보 수정
         const nickname = document.getElementById('nickname').value;
         const email = document.getElementById('email').value;
         const serialNum = document.getElementById('serialNum').value;
-        const id = document.getElementById('id').value;
 
         // 유효성 검사 완료 후 실행할 로직
         let data = {
             password:password,
             nickname:nickname,
             email:email,
-            serialNum:serialNum,
-            id:id
+            serialNum:serialNum
         };
 
         let xhr = new XMLHttpRequest();
