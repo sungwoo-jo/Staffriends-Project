@@ -2,7 +2,7 @@
 시각장애인 및 시각장애인의 보호자를 위한 위치 정보 공유 서비스
 
 # index(메인 페이지)
-![image](https://user-images.githubusercontent.com/110444315/230159111-cf61a8dc-a83c-4338-ad9b-82425e94c017.png)
+![메인페이지](https://github.com/sungwoo-jo/Staffriends-Project/assets/110444315/a6330d8c-f041-43e1-bb83-597784f02834)
 
 # join(회원가입 페이지)
 ![회원가입](https://github.com/sungwoo-jo/Staffriends-Project/assets/110444315/eccf4aee-9090-4320-bac4-18e64b40fbef)
