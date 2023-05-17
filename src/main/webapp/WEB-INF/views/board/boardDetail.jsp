@@ -22,7 +22,7 @@
                         <th scope="row" style="min-width: 50px; max-width: 50px;text-align: center; ">글 번호</th>
                         <td>${board.boardIdx}</td>
                         <th scope="row" style="min-width: 50px; max-width: 50px;text-align: center; ">작성자</th>
-                        <td>${board.username}</td>
+                        <td>${board.nickname}</td>
                     </tr>
                     <tr>
                         <th scope="row" style="min-width: 50px; max-width: 50px;text-align: center; ">조회수</th>

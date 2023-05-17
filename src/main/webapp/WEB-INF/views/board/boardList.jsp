@@ -19,15 +19,17 @@
             <h5 style="text-align: right"><a href="/board/boardWrite" class="btn btn-success justify-content-end">글 쓰기</a></h5>
         <table class="table table-striped border-bottom" >
             <colgroup>
-                <col width="15%"/>
+                <col width="10%"/>
                 <col width="*"/>
-                <col width="15%"/>
+                <col width="10%"/>
+                <col width="10%"/>
                 <col width="20%"/>
             </colgroup>
             <thead>
                 <tr>
                     <th scope="col" style="text-align: center">글번호</th>
                     <th scope="col" style="text-align: center">제목</th>
+                    <th scope="col" style="text-align: center">글쓴이</th>
                     <th scope="col" style="text-align: center">조회수</th>
                     <th scope="col" style="text-align: center">작성일</th>
                 </tr>
@@ -41,6 +43,7 @@
                             <c:out value="${li.title}"></c:out></a>
                             <c:if test="${li.replyCount ne 0}">&nbsp;<small>(<c:out value="${li.replyCount}"/>)</small></c:if> <%-- 게시글에 달린 댓글의 갯수를 표시 --%>
                         </td>
+                        <td style="text-align: center"><c:out value="${li.nickname}"/></td>
                         <td style="text-align: center"><c:out value="${li.hitCnt}"/></td>
                         <td style="text-align: center"><c:out value="${li.createdDateTime}"/></td>
                     </tr>

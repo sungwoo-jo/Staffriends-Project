@@ -8,7 +8,8 @@ public class BoardVo {
     private String title; // 제목
     private String contents; // 내용
     private int hitCnt; // 조회수
-    private String username; // 작성자
+    private String username; // 작성자 id
+    private String nickname; // 작성자 닉네임
     private String createdDateTime; // 작성일
     private String updaterId; // 수정자
     private String updatedDateTime; // 수정일

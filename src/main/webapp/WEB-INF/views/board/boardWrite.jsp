@@ -34,6 +34,7 @@
           </td>
         </tr>
         <input type="hidden" value="${signIn.username}" name="username" id="username">
+        <input type="hidden" value="${signIn.nickname}" name="nickname" id="nickname">
       </table>
     </form>
     <h5 style="text-align: center"><button class="btn btn-success" id="save" style="margin-top: 20px; margin-bottom: 20px;">글 작성 완료</button></h5>

@@ -10,7 +10,9 @@
                 title,
                 hit_cnt,
                 DATE_FORMAT(created_datetime, '%Y.%m.%d %H:%i:%s') AS created_datetime,
-                reply_count
+                reply_count,
+                username,
+                nickname
             FROM
                 board
             WHERE
@@ -36,14 +38,16 @@
                     title,
                     contents,
                     created_datetime,
-                    username
+                    username,
+                    nickname
                 )
             VALUES
                 (
                    #{title},
                    #{contents},
                    now(),
-                   #{username}
+                   #{username},
+                   #{nickname}
                 )
             ]]>
     </insert>
@@ -64,7 +68,7 @@
             SELECT
                 board_idx, title, contents, hit_cnt,
                 DATE_FORMAT(created_datetime, '%Y.%m.%d %H:%i:%s') AS created_datetime,
-                username
+                nickname
             FROM
                 board
             WHERE

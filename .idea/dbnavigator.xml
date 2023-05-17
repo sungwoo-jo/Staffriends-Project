@@ -121,7 +121,30 @@ WHERE
     serial_num = 1234
 ORDER BY
     tx_time DESC
-LIMIT 50;]]></console>
+LIMIT 50;
+
+delete from board where board_idx < 5;
+
+select username 
+from user
+where (select u.nickname from user as u inner join board as b on u.username = b.username);
+
+select * from board;
+
+select * from user where user.username = board.username;
+
+'sungwoo11'; -> user의 username과 같은 걸 찾아야함
+
+
+select nickname from user where username = 'sungwoo11';
+
+select * from board where username = 'sungwoo11';
+
+ALTER TABLE board AUTO_INCREMENT=1;
+SET @COUNT = 0;
+UPDATE board SET board_idx = @COUNT:=@COUNT+1;
+
+alter table board add nickname varchar(100) not null;]]></console>
       <console name="staffriends 1" type="STANDARD" schema="staffriends" session="Main"><![CDATA[use staffriends;
 
 
