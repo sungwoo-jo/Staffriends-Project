@@ -1,7 +1,7 @@
-# board
-간단한 게시판 프로젝트
+# Overview
+시각장애인 및 시각장애인의 보호자를 위한 위치 정보 공유 서비스
 
-# 메인페이지
+# index(메인 페이지)
 ![image](https://user-images.githubusercontent.com/110444315/230159111-cf61a8dc-a83c-4338-ad9b-82425e94c017.png)
 
 # 회원가입 페이지, 유효성 검사
