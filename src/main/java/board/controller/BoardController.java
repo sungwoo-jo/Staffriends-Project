@@ -52,6 +52,8 @@ public class BoardController {
 
     @RequestMapping("/board/insertBoard") // 글 작성 로직
     public String insertBoard(BoardVo boardVo, @RequestParam String username, @RequestParam String nickname) throws Exception {
+        System.out.println("username:"+username);
+        System.out.println("nickname:"+nickname);
         boardVo.setUsername(username);
         boardVo.setNickname(nickname);
         boardService.insertBoard(boardVo);
