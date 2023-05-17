@@ -1,4 +1,5 @@
 function insertReply() { // 댓글 등록 메서드
+    const nickname = document.getElementById('nickname').value;
     const username = document.getElementById('username').value;
     const replyContents = document.getElementById('replyContents').value;
     const boardIdx = document.getElementById('boardIdx').value;
@@ -8,6 +9,7 @@ function insertReply() { // 댓글 등록 메서드
         return;
     }
     let data = {
+        nickname: nickname,
         username: username,
         boardIdx: boardIdx,
         replyContents: replyContents
@@ -58,7 +60,7 @@ function getAllReply() { // 댓글 목록 출력
                 for(let i=0; i<parseData.length; i++) {
                     replyForm += '<div class="card" style="margin: 0 auto; width: 80%; height: auto; margin-bottom:10px; left: ' + parseData[i].replyDepth * 10 + 'px;" id="card">';
                     replyForm +=    '<div class="card-header">';
-                    replyForm +=        '<h7>'+'작성자: '+parseData[i].username+'</h7>';
+                    replyForm +=        '<h7>'+'작성자: '+parseData[i].nickname+'</h7>';
                     replyForm +=        '<td><span class="card-text text-right" style="font-size: small; float: right">'+parseData[i].createdDatetime+'</span></td>';
                     replyForm +=    '</div>';
                     replyForm +=    '<div class="border-bottom">';
@@ -148,6 +150,7 @@ function hideReplyForm(replyIdx) { // 댓글 작성 폼 숨김 메서드
 }
 
 function insertReReply(replyIdx) { // 대댓글 등록 메서드
+    const nickname =document.getElementById('nickname').value;
     const username = document.getElementById('username').value;
     const replyContents = document.getElementById('reReply'+replyIdx).value; // 대댓글 textarea 번호
     const boardIdx = document.getElementById('boardIdx').value;
@@ -158,6 +161,7 @@ function insertReReply(replyIdx) { // 대댓글 등록 메서드
         return;
     }
     let data = {
+        nickname: nickname,
         username: username,
         boardIdx: boardIdx,
         replyContents: replyContents,

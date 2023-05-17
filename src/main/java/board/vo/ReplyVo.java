@@ -6,7 +6,8 @@ import lombok.Data;
 public class ReplyVo {
     private Integer replyIdx; // 댓글 번호
     private int userId; // 댓글 작성자 idx
-    private String username; // 댓글 작성자
+    private String username; // 댓글 작성자 id
+    private String nickname; // 댓글 작성자 닉네임
     private String replyContents; // 댓글 내용
     private int boardIdx; // 게시글 번호
     private String deletedYn; // 삭제 여부

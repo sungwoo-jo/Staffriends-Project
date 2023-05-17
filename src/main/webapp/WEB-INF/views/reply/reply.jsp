@@ -12,6 +12,7 @@
         <form id="replyForm">
             <textarea id="replyContents" style="width: 100%; resize: none" placeholder="내용을 입력해주세요."></textarea>
             <input type="hidden" id="boardIdx" value="${board.boardIdx}">
+            <input type="hidden" id="nickname" value="${signIn.nickname}">
             <input type="hidden" id="username" value="${signIn.username}">
         </form>
     </div>

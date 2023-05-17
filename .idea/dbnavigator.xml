@@ -43,6 +43,7 @@ CREATE TABLE board
     `hit_cnt`           smallint(10)    NOT NULL    DEFAULT 0 COMMENT '조회수',
     `created_datetime`  datetime        NOT NULL    COMMENT '작성 일자',
     `username`          varchar(100)    NOT NULL    COMMENT '작성 회원 id',
+    `nickname`          varchar(100)    NOT NULL    COMMENT '작성 회원 닉네임',
     `updated_datetime`  datetime        NULL        COMMENT '수정 일자',
     `updater_id`        varchar(50)     NULL        COMMENT '수정 회원 id',
     `deleted_yn`        char(1)         NOT NULL    DEFAULT 'N' COMMENT '삭제 여부',
@@ -81,6 +82,7 @@ CREATE TABLE reply
 (
     `reply_idx`         int              NOT NULL    AUTO_INCREMENT COMMENT '댓글 번호',
     `username`          varchar(100)     NOT NULL    COMMENT '댓글 작성자 id',
+    `nickname`          varchar(100)     NOT NULL    COMMENT '댓글 작성자 닉네임',
     `reply_contents`    varchar(1000)    NOT NULL    COMMENT '댓글 내용',
     `board_idx`         int(10)          NOT NULL    COMMENT '게시글 번호',
     `deleted_yn`        char(1)          NOT NULL    DEFAULT 'N' COMMENT '삭제 여부',
@@ -144,7 +146,8 @@ ALTER TABLE board AUTO_INCREMENT=1;
 SET @COUNT = 0;
 UPDATE board SET board_idx = @COUNT:=@COUNT+1;
 
-alter table board add nickname varchar(100) not null;]]></console>
+alter table board add nickname varchar(100) not null; 
+alter table reply add nickname varchar(100) not null;]]></console>
       <console name="staffriends 1" type="STANDARD" schema="staffriends" session="Main"><![CDATA[use staffriends;
 
 
