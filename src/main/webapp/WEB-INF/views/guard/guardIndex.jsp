@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ include file="../layout/header.jsp"%>
 
-<c:if test="${signIn == null}"><c:redirect url="http://http://staffriends.duckdns.org/user/needLogin"/></c:if>
+<c:if test="${signIn == null}"><c:redirect url="http://staffriends.duckdns.org/user/needLogin"/></c:if>
 <head>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bcc049c8490042d9545bd799ec87eff7&libraries=services"></script>
     <link rel="stylesheet" type="text/css" href="/css/guardlayout.css"/>

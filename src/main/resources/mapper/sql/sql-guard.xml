@@ -13,6 +13,7 @@
                 serial_num = #{serialNum}
             ORDER BY
                 tx_time DESC
+            LIMIT 50
         ]]>
     </select>
 </mapper>

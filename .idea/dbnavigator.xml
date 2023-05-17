@@ -111,7 +111,17 @@ FROM
 WHERE
     board_idx = 2 AND deleted_yn = 'N';
 
-select * from `user`;]]></console>
+select * from `user`;
+
+SELECT
+    *
+FROM
+    history
+WHERE
+    serial_num = 1234
+ORDER BY
+    tx_time DESC
+LIMIT 50;]]></console>
       <console name="staffriends 1" type="STANDARD" schema="staffriends" session="Main"><![CDATA[use staffriends;
 
 
