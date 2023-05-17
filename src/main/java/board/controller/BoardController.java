@@ -26,9 +26,9 @@ public class BoardController {
     }
 
     @RequestMapping("/board") // 게시글 리스트 출력 및 페이징
-    public ModelAndView boardList() throws Exception {
+    public ModelAndView boardList(HttpServletRequest request) throws Exception {
         ModelAndView mv = new ModelAndView();
-        Map<String, Integer> map = boardService.paging("page"); // 쿼리 스트링의 페이지 번호를 전달
+        Map<String, Integer> map = boardService.paging(request.getParameter("page")); // 쿼리 스트링의 페이지 번호를 전달
 
         List<BoardVo> list = boardService.selectBoardList(map); // 게시글 정보(BoardVo)
         int startPage = map.get("startPage"); // 시작 페이지 번호
