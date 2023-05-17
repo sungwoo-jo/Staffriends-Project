@@ -39,7 +39,7 @@
         ]]>
     </select>
 
-    <select id="loginProc" parameterType="board.vo.UserVo" resultType="Integer">
+    <select id="loginProc" parameterType="board.vo.UserVo" resultType="String">
         <![CDATA[
             SELECT
                 username
@@ -50,7 +50,7 @@
         ]]>
     </select>
 
-    <select id="getUserInfo" parameterType="Integer" resultType="board.vo.UserVo">
+    <select id="getUserInfo" parameterType="String" resultType="board.vo.UserVo">
         <![CDATA[
             SELECT
                 *
@@ -82,10 +82,10 @@
         ]]>
     </select>
 
-    <select id="findMyPassword" parameterType="board.vo.UserVo" resultType="Integer">
+    <select id="findMyPassword" parameterType="board.vo.UserVo" resultType="String">
         <![CDATA[
             SELECT
-                IFNULL((SELECT id FROM user WHERE username = #{username} AND name = #{name} AND email = #{email}), 0)
+                IFNULL((SELECT username FROM user WHERE username = #{username} AND name = #{name} AND email = #{email}), 0)
         ]]>
     </select>
 

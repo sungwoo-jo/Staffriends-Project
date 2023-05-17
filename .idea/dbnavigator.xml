@@ -109,7 +109,9 @@ SELECT
 FROM
     reply
 WHERE
-    board_idx = 2 AND deleted_yn = 'N';]]></console>
+    board_idx = 2 AND deleted_yn = 'N';
+
+select * from `user`;]]></console>
       <console name="staffriends 1" type="STANDARD" schema="staffriends" session="Main"><![CDATA[use staffriends;
 
 

@@ -1,5 +1,4 @@
 function insertReply() { // 댓글 등록 메서드
-    const userId = document.getElementById('userId').value;
     const username = document.getElementById('username').value;
     const replyContents = document.getElementById('replyContents').value;
     const boardIdx = document.getElementById('boardIdx').value;
@@ -9,7 +8,6 @@ function insertReply() { // 댓글 등록 메서드
         return;
     }
     let data = {
-        userId: userId,
         username: username,
         boardIdx: boardIdx,
         replyContents: replyContents
@@ -55,7 +53,6 @@ function getAllReply() { // 댓글 목록 출력
             if (resp.status === 500) {
                 alert('에러가 발생했습니다.');
             } else {
-                console.log(resp);
                 let replyForm = "";
                 let parseData = JSON.parse(resp);
                 for(let i=0; i<parseData.length; i++) {
@@ -106,9 +103,14 @@ function getAllReply() { // 댓글 목록 출력
 }
 
 function deleteReply(replyIdx) { // 댓글 삭제
-    let data = replyIdx;
+    let boardIdx = document.getElementById('boardIdx').value;
+    let data = {
+        replyIdx: replyIdx,
+        boardIdx: boardIdx
+    };
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "/reply/deleteReply");
+    xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     xhr.onload = function () {
         if (xhr.status === 200 || xhr.status === 201) {
             let resp = xhr.responseText;
@@ -130,7 +132,7 @@ function deleteReply(replyIdx) { // 댓글 삭제
     xhr.onerror = function () {
         alert('에러가 발생했습니다. \n에러 코드: ' + xhr.status);
     };
-    xhr.send(data);
+    xhr.send(JSON.stringify(data));
 }
 
 function showReplyForm(replyIdx) { // 댓글 작성 폼 표시 메서드
@@ -146,7 +148,6 @@ function hideReplyForm(replyIdx) { // 댓글 작성 폼 숨김 메서드
 }
 
 function insertReReply(replyIdx) { // 대댓글 등록 메서드
-    const userId = document.getElementById('userId').value;
     const username = document.getElementById('username').value;
     const replyContents = document.getElementById('reReply'+replyIdx).value; // 대댓글 textarea 번호
     const boardIdx = document.getElementById('boardIdx').value;
@@ -157,7 +158,6 @@ function insertReReply(replyIdx) { // 대댓글 등록 메서드
         return;
     }
     let data = {
-        userId: userId,
         username: username,
         boardIdx: boardIdx,
         replyContents: replyContents,
