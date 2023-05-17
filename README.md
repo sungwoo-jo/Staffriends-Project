@@ -4,21 +4,23 @@
 # index(메인 페이지)
 ![image](https://user-images.githubusercontent.com/110444315/230159111-cf61a8dc-a83c-4338-ad9b-82425e94c017.png)
 
-# 회원가입 페이지, 유효성 검사
-![image](https://user-images.githubusercontent.com/110444315/230159146-90f038e6-d290-46ad-84a4-6708c1ac3670.png)
-![image](https://user-images.githubusercontent.com/110444315/230159252-2facacf2-07f4-499e-a289-a557a30123c0.png)
+# join(회원가입 페이지)
+![회원가입](https://github.com/sungwoo-jo/Staffriends-Project/assets/110444315/eccf4aee-9090-4320-bac4-18e64b40fbef)
 
-# 로그인 페이지
-![image](https://user-images.githubusercontent.com/110444315/230159282-9b9afe12-0b11-43f3-8e83-481365ae84af.png)
+# login(로그인 페이지)
+![로그인](https://github.com/sungwoo-jo/Staffriends-Project/assets/110444315/3bceb31d-9d7a-425c-bdac-a293b266e01d)
 
-# 보호자 페이지(수정중)
-![image](https://user-images.githubusercontent.com/110444315/230159342-f3d87a81-55a9-417c-ac81-0e4d27f1e0e7.png)
+# guard(보호자 페이지)
+![보호자페이지](https://github.com/sungwoo-jo/Staffriends-Project/assets/110444315/cea88cb9-5d96-49f8-9b1d-90b2020a1428)
 
-# 커뮤니티 페이지(수정중)
-![image](https://user-images.githubusercontent.com/110444315/230159412-bd0483f1-cfb6-4fcb-a391-4d3e2e3e559d.png)
+# board(커뮤니티 페이지)
+![글목록페이지](https://github.com/sungwoo-jo/Staffriends-Project/assets/110444315/a82c8f95-8dac-4549-a7b2-39cded3f0834)
 
-# 글 작성 페이지(수정중)
-![image](https://user-images.githubusercontent.com/110444315/230159465-a6b913d3-7152-464c-aae8-0dfe37caebcc.png)
+# 글 상세보기 페이지
+![글상세보기페이지](https://github.com/sungwoo-jo/Staffriends-Project/assets/110444315/64e0fe5b-0851-4d13-a75d-4c0c7ef8aaab)
+
+# 글 작성 페이지
+![글작성페이지](https://github.com/sungwoo-jo/Staffriends-Project/assets/110444315/dfcf5e67-030a-42e9-aa5a-2da6c4052bbb)
 
 # 정보 수정 페이지
-![image](https://user-images.githubusercontent.com/110444315/230159511-45e7c4a9-bf75-4aad-8638-ff9508df8973.png)
+![회원정보수정](https://github.com/sungwoo-jo/Staffriends-Project/assets/110444315/407e063c-9dd0-4f9c-aaeb-1d3e5407ff87)
