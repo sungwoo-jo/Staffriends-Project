@@ -17,7 +17,7 @@ function getAddr(latitude, longitude, txTime, index) { // 주소 변환 메서�
 };
 
 async function getRandomImage() { // 랜덤 이미지 가져오기
-    const response = await fetch('https://source.unsplash.com/random');
+    const response = await fetch('https://picsum.photos/450/320');
     const blob = await response.blob();
     const imgUrl = URL.createObjectURL(blob);
     imgElement.src = imgUrl;
