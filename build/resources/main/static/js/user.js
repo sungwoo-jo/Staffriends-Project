@@ -426,6 +426,7 @@ function findMyPasswordPopUp() { // 비밀번호 찾기 팝업창 열기
 
 function updateInfo() { // 회원 정보 수정
     if(validPassword === true && validSamePassword === true && validNickname === true && validEmail === true) {
+        const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
         const nickname = document.getElementById('nickname').value;
         const email = document.getElementById('email').value;
@@ -433,6 +434,7 @@ function updateInfo() { // 회원 정보 수정
 
         // 유효성 검사 완료 후 실행할 로직
         let data = {
+            username:username,
             password:password,
             nickname:nickname,
             email:email,

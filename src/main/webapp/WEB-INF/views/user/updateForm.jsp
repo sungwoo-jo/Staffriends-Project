@@ -19,7 +19,7 @@
     <div class="container center-div">
 <form method="post" class="container center-div container-size">
     <div class="form-group">
-        <h5>아이디</h5><input type="text" name="username" class="form-control" disabled style="text-align: center" value="${signIn.username}"><p/>
+        <h5>아이디</h5><input type="text" name="username" id="username" class="form-control" disabled style="text-align: center" value="${signIn.username}"><p/>
     </div>
     <c:if test="${empty signIn.oauth}"> <%-- 일반 유저는 비밀번호 수정이 가능 --%>
     <div class="form-group">

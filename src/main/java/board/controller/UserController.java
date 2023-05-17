@@ -68,6 +68,7 @@ public class UserController {
     @PostMapping("/updateProc") // 정보 업데이트
     @ResponseBody
     public void updateUser(@RequestBody UserVo userVo) throws Exception {
+        System.out.println(userVo.getSerialNum());
         userService.updateUser(userVo);
     }
 

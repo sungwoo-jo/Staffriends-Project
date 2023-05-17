@@ -21,7 +21,7 @@
         let container = document.getElementById('map'); // 지도 정보를 가져오기
 
         let options = {
-            center: new kakao.maps.LatLng(${history[0].h_lat}, ${history[0].h_long}), // 가장 최신 데이터의 마커를 지도의 중앙에 표시
+            center: new kakao.maps.LatLng(${history[0].latitude}, ${history[0].longitude}), // 가장 최신 데이터의 마커를 지도의 중앙에 표시
             level: 7
         };
         let map = new kakao.maps.Map(container, options);
@@ -44,7 +44,7 @@
         <c:forEach var="history" items="${history}" varStatus="status"> <%-- 가져온 경로 정보를 카카오맵에 표시 --%>
             history.push("${history}");
 
-            markerPosition = new kakao.maps.LatLng(${history.h_lat}, ${history.h_long}); // 마커가 표시될 위치 지정
+            markerPosition = new kakao.maps.LatLng(${history.latitude}, ${history.longitude}); // 마커가 표시될 위치 지정
 
             marker = new kakao.maps.Marker({ position: markerPosition, image : markerImage }); // 마커를 생성
 
@@ -52,7 +52,7 @@
 
             // JSTL 태그로 tx_time을 원하는 포맷대로 출력(yyyy-MM-dd HH:mm:ss)
             iwContent ='<div style="padding: 4px; font-size:0.6rem;">'+'<b style="color: blue">'+'${history.serial_num}'+'</b>'+':&nbsp' +'<fmt:formatDate value="${history.tx_time}" pattern="yyyy-MM-dd HH:mm:ss"/>'+'</div>';
-            iwPosition = new kakao.maps.LatLng(${history.h_lat}, ${history.h_long});
+            iwPosition = new kakao.maps.LatLng(${history.latitude}, ${history.longitude});
             infoWindow = new kakao.maps.InfoWindow({ position : iwPosition, content : iwContent });
 
             infoWindow.open(map, marker); // 인포 윈도우 오픈
