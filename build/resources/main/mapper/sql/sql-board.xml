@@ -68,7 +68,7 @@
             SELECT
                 board_idx, title, contents, hit_cnt,
                 DATE_FORMAT(created_datetime, '%Y.%m.%d %H:%i:%s') AS created_datetime,
-                nickname
+                username, nickname
             FROM
                 board
             WHERE
