@@ -24,8 +24,8 @@
 |------|---|
 |Language|Java 17, HTML/CSS, Javascript|
 |Framework|Spring Boot 2.7, MyBatis 3.0, BootStrap4|
-|Server|Linux(Ubuntu)|
-|OS|테스트2|
+|Server|Apache Tomcat(IntelliJ Plugins), AWS EC2(Ubuntu 22.04), AWS RDS(MariaDB 10.6.10)|
+|OS|Linux(Ubuntu)|
 |Tools|IntelliJ, DBeaver, MySQL Workbench, XShell, Github, Postman|
 |API&Library|KakaoMapsAPI, KakaoLoginAPI, CKEditor4, JSTL|
 
