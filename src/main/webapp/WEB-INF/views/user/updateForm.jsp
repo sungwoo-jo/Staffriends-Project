@@ -1,13 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 2023-04-02
-  Time: 오전 2:18
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../layout/header.jsp"%>
-<c:if test="${signIn == null}"><c:redirect url="http://http://staffriends.duckdns.org/user/needLogin"/></c:if>
+<c:if test="${signIn == null}"><c:redirect url="http://staffriends.duckdns.org/user/needLogin"/></c:if>
 <%--<c:if test="${signIn == null}"><c:redirect url="http://staffriends.duckdns.org/user/needLogin"/></c:if>--%>
 <html>
 <head>

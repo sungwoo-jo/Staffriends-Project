@@ -32,8 +32,9 @@ public class UserController {
 
     @PostMapping("/join/insert") // 회원 가입
     @ResponseBody
-    public void joinUser(@RequestBody UserVo userVo) throws Exception{
+    public String joinUser(@RequestBody UserVo userVo) throws Exception{
         userService.insertUser(userVo);
+        return "success";
     }
 
     @GetMapping("/loginForm") // 로그인 페이지
@@ -67,9 +68,9 @@ public class UserController {
 
     @PostMapping("/updateProc") // 정보 업데이트
     @ResponseBody
-    public void updateUser(@RequestBody UserVo userVo) throws Exception {
-        System.out.println(userVo.getSerialNum());
+    public String updateUser(@RequestBody UserVo userVo) throws Exception {
         userService.updateUser(userVo);
+        return "success";
     }
 
     @GetMapping("/needLogin") // 로그인 안내 페이지

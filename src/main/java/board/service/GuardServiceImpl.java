@@ -12,7 +12,6 @@ import java.security.MessageDigest;
 import java.util.HashMap;
 import java.util.List;
 
-@Repository
 @Service
 public class GuardServiceImpl implements GuardService{
 

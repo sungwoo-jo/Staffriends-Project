@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../layout/header.jsp"%>
+<title>로그인</title>
 <html>
 <body>
 <c:set var="REST_API_KEY" value="69eddbebb2b07d6a316fc057c32fdbdf"/>

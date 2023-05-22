@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Repository
 @Service
 public class ReplyServiceImpl implements ReplyService {
 

@@ -1,17 +1,10 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 2023-03-28
-  Time: 오후 12:19
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="../layout/header.jsp"%>
-<c:if test="${signIn == null}"><c:redirect url="http://http://staffriends.duckdns.org/user/needLogin"/></c:if>
+<c:if test="${signIn == null}"><c:redirect url="http://staffriends.duckdns.org/user/needLogin"/></c:if>
 <head>
-    <title>board</title>
+    <title>커뮤니티</title>
 </head>
 <body>
     <div class="container">

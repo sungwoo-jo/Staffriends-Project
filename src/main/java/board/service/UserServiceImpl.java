@@ -18,7 +18,6 @@ import java.net.URL;
 import java.security.MessageDigest;
 import java.util.Map;
 
-@Repository
 @Service
 public class UserServiceImpl implements UserService {
 

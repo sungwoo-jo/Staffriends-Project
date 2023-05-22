@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Repository
 @Service
 public class BoardServiceImpl implements BoardService {
 

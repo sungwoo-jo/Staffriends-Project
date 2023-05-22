@@ -1,11 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../layout/header.jsp"%>
-<c:if test="${signIn == null}"><c:redirect url="http://http://staffriends.duckdns.org/user/needLogin"/></c:if>
+<c:if test="${signIn == null}"><c:redirect url="http://staffriends.duckdns.org/user/needLogin"/></c:if>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>게시글 등록</title>
+    <title>글쓰기</title>
     <style>
       .ck-editor__editable { height: 1000px; }
       .ck-content { font-size: 12px; }
@@ -16,7 +16,7 @@
 <body class="center-div">
 
     <div class="container justify-content-center">
-    <h2 style="text-align: center; margin-top: 30px; margin-bottom: 70px; font-family: KakaoBold;">게시글 등록</h2>
+    <h2 style="text-align: center; margin-top: 30px; margin-bottom: 70px; font-family: KakaoBold;">글쓰기</h2>
     <form id="frm" name="frm" method="post">
       <table style="margin-left:auto;margin-right:auto;">
         <tr>

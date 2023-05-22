@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="../layout/header.jsp"%>
+<title>회원가입</title>
 <html>
 <body>
 <h2 style="text-align: center; margin-top: 30px; margin-bottom: 70px; font-family: KakaoBold;">회원가입</h2>
