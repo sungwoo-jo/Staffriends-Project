@@ -51,7 +51,7 @@
                         <li class="page-item disabled"><a class="page-link" href="#" aria-disabled="true">Previous</a></li>
                     </c:when>
                     <c:otherwise>
-                        <li class="page-item"><a class="page-link" href="board?page=${startPage-1}" aria-disabled="true">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="boardList?page=${startPage-1}" aria-disabled="true">Previous</a></li>
                     </c:otherwise>
                 </c:choose>
                 <c:choose>
@@ -60,7 +60,7 @@
                             <c:choose>
                                 <c:when test="${start != cPage}"> <%-- 버튼 별 이동할 페이지 링크 설정 --%>
                                     <li class="page-item">
-                                        <a class="page-link" href="board?page=${start}">${start}</a></li>
+                                        <a class="page-link" href="boardList?page=${start}">${start}</a></li>
                                 </c:when>
                                 <c:otherwise> <%-- 클릭한 페이지 번호 비활성화 --%>
                                     <li class="page-item">
@@ -78,7 +78,7 @@
                     </c:when>
                     <c:otherwise>
                         <li class="page-item">
-                            <a class="page-link" href="board?page=${endPage+1}">Next</a>
+                            <a class="page-link" href="boardList?page=${endPage+1}">Next</a>
                         </li>
                     </c:otherwise>
                 </c:choose>
