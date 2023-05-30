@@ -24,6 +24,11 @@ public class BoardController {
         return "/index";
     }
 
+    @RequestMapping("/reply")
+    public String reply() {
+        return "/reply/replyTest";
+    }
+
     @RequestMapping("/boardList") // 게시글 리스트 출력 및 페이징
     public ModelAndView boardList(HttpServletRequest request) throws Exception {
         System.out.println("page:"+request.getParameter("page"));

@@ -1,3 +1,38 @@
+function modifyProc(replyIdx) {
+    let replyContents = document.getElementById("replyIdx"+replyIdx).value;
+
+    let data = {
+        replyIdx: replyIdx,
+        replyContents: replyContents
+    };
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("PUT", "/reply/modifyProc");
+    xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+    xhr.onload = function () {
+        if (xhr.status === 200 || xhr.status === 201) {
+            let resp = xhr.responseText;
+            if (resp.status === 500) {
+                alert('에러가 발생했습니다.');
+            } else {
+                if (resp === "modifySuccess") { // 결과로 받은 문자열이 Success면 댓글 수정 성공
+                    alert('댓글 수정이 완료되었습니다.'); // 작성 완료 알림창 띄우기
+                    getAllReply(); // 전체 댓글 재조회
+                } else {
+                    alert('댓글 수정에 실패하였습니다.');
+                }
+            }
+        } else {
+            console.log(xhr.responseText);
+            alert('에러가 발생했습니다. \n에러 코드: ' + xhr.status);
+        }
+    };
+    xhr.onerror = function () {
+        alert('에러가 발생했습니다. \n에러 코드: ' + xhr.status);
+    };
+    xhr.send(JSON.stringify(data));
+}
+
 function insertReply() { // 댓글 등록 메서드
     const nickname = document.getElementById('nickname').value;
     const username = document.getElementById('username').value;
@@ -58,24 +93,25 @@ function getAllReply() { // 댓글 목록 출력
                 let replyForm = "";
                 let parseData = JSON.parse(resp);
                 for(let i=0; i<parseData.length; i++) {
-                    replyForm += '<div class="card" style="margin: 0 auto; width: 80%; height: auto; margin-bottom:10px; left: ' + parseData[i].replyDepth * 10 + 'px;" id="card">';
+                    replyForm += '<div class="card" style="margin: 0 auto; width: 80%; height: auto; margin-bottom:10px; left: ' + parseData[i].replyDepth * 10 + 'px;">';
                     replyForm +=    '<div class="card-header">';
                     replyForm +=        '<h7>'+'작성자: '+parseData[i].nickname+'</h7>';
                     replyForm +=        '<td><span class="card-text text-right" style="font-size: small; float: right">'+parseData[i].createdDatetime+'</span></td>';
                     replyForm +=    '</div>';
                     replyForm +=    '<div class="border-bottom">';
                     replyForm +=        '<div class="card-body">';
-                    replyForm +=            '<tr><td><h6 class="card-title">'+ parseData[i].replyContents +'</h6></td>';
+                    replyForm +=            '<tr><td><h6 class="card-title" id="replyIdx' + parseData[i].replyIdx + '">'+ parseData[i].replyContents +'</h6></td>'; // 댓글 내용이 들어가는 부분
                     replyForm +=        '</div>';
                     replyForm +=    '<div style="text-align: right">';
-                    if (username === parseData[i].username) { // 댓글 작성자인 경우 삭제하기 버튼 생성
+                    if (username === parseData[i].username) { // 댓글 작성자인 경우 삭제하기 및 수정하기 버튼 생성
                         replyForm +=    '<span style="float: right"><a style="color: #007bff; margin-right: 10px;" href="javascript:deleteReply('+parseData[i].replyIdx+');">삭제하기</a></span>';
+                        replyForm +=    '<span style="float: right;"><a href="javascript:showModifyReplyForm('+ parseData[i].replyIdx +');" style="color: #007bff; margin-right: 10px;" id="modifyReply'+ parseData[i].replyIdx +'">수정하기</a></span>';
                     }
                     // 대댓글 작성 시 동적 태그 추가
                     replyForm +=        '<span style="float: right;"><a href="javascript:showReplyForm('+ parseData[i].replyIdx +');" style="color: #007bff; margin-right: 10px;" id="addReply'+ parseData[i].replyIdx +'">댓글달기</a></span>';
                     replyForm +=    '</div>';
                     replyForm += '</div>';
-                    replyForm += '<replyAdd'+ parseData[i].replyIdx +' style="display: none">'; <!-- 댓글작성 누르면 나타나는 부분 -->
+                    replyForm += '<replyAdd'+ parseData[i].replyIdx +' style="display: none">'; <!-- 댓글달기 누르면 나타나는 부분 -->
                     replyForm +=    '<div class="card-header" style="border: none; padding-bottom: 0; "> <!-- 대댓글 헤더 -->';
                     replyForm +=        '<strong style="padding-right: 5px; margin-bottom: 0">└</strong>&nbsp;';
                     replyForm +=    '</div>';
@@ -147,6 +183,21 @@ function hideReplyForm(replyIdx) { // 댓글 작성 폼 숨김 메서드
     document.querySelector('replyAdd'+replyIdx).style.display = 'none'; // replyAdd 태그의 style을 none으로 지정
     document.getElementById('addReply'+replyIdx).innerText = "댓글달기"; // 버튼의 글자를 '댓글달기'로 변경
     document.getElementById('addReply'+replyIdx).href = "javascript:showReplyForm("+ replyIdx +")"; // showReplyForm 메서드를 링크
+}
+
+function showModifyReplyForm(replyIdx) { // 댓글 수정 폼 표시 메서드
+    document.getElementById('addReply'+replyIdx).innerText = "취소하기"; // '댓글달기' 버튼의 글자를 '취소하기'로 변경
+    document.getElementById('addReply'+replyIdx).href = "javascript:getAllReply()"; // getAllReply 메서드를 링크
+    document.getElementById('modifyReply'+replyIdx).innerText = "수정완료"; // '수정하기' 버튼의 글자를 '수정완료'로 변경
+    document.getElementById('modifyReply'+replyIdx).href = "javascript:modifyProc(" + replyIdx + ")"; // modifyProc 메서드를 링크
+
+    let replyContents = document.getElementById('replyIdx' + replyIdx); // 댓글의 인덱스 얻기
+    let newTextArea = document.createElement('textarea'); // textarea 생성
+    newTextArea.setAttribute("id", "replyIdx" + replyIdx);
+    newTextArea.textContent = replyContents.innerText; // textarea에 현재 댓글의 내용을 넣기
+    replyContents.replaceWith(newTextArea); // 댓글의 내용만 추출
+
+    console.log(replyContents.innerText);
 }
 
 function insertReReply(replyIdx) { // 대댓글 등록 메서드

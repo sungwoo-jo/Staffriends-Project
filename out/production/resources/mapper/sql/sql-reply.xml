@@ -128,4 +128,15 @@
             WHERE b.board_idx = #{boardIdx}
         ]]>
     </update>
+
+    <update id="updateReplyContents" parameterType="board.vo.ReplyVo">
+        <![CDATA[
+            UPDATE
+                reply
+            SET
+                reply_contents = #{replyContents}
+            WHERE
+                reply_idx = #{replyIdx}
+        ]]>
+    </update>
 </mapper>

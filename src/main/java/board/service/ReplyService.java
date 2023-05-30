@@ -21,4 +21,6 @@ public interface ReplyService {
     String getMaxOrder(int boardIdx);
 
     void updateReplyCount(int boardIdx);
+
+    void updateReplyContents(ReplyVo replyVo);
 }
