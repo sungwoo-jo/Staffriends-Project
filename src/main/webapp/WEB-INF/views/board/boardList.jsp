@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <h2 style="text-align: center; margin-top: 30px; margin-bottom: 20px; font-family: KakaoBold;">게시글 목록</h2>
-            <h5 style="text-align: right"><a href="/board/boardWrite" class="btn btn-success justify-content-end">글 쓰기</a></h5>
+            <h5 style="text-align: right"><a href="/board/insertBoard" class="btn btn-success justify-content-end">글 쓰기</a></h5>
         <table class="table table-striped border-bottom" >
             <colgroup>
                 <col width="10%"/>
@@ -32,7 +32,7 @@
                     <c:forEach var="li" items="${list}">
                     <tr>
                         <td style="text-align: center"><c:out value="${li.boardIdx}"/></td>
-                        <td style="text-align: center"><a href="/board/boardDetail?boardIdx=${li.boardIdx}"> <%-- 제목을 클릭하면 해당 게시글로 이동 --%>
+                        <td style="text-align: center"><a href="/board/${li.boardIdx}"> <%-- 제목을 클릭하면 해당 게시글로 이동 --%>
                             <c:out value="${li.title}"></c:out></a>
                             <c:if test="${li.replyCount ne 0}">&nbsp;<small>(<c:out value="${li.replyCount}"/>)</small></c:if> <%-- 게시글에 달린 댓글의 갯수를 표시 --%>
                         </td>

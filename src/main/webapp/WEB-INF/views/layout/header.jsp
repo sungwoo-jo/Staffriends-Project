@@ -46,7 +46,7 @@
                   <a class="nav-link" href="/boardList"><h5>커뮤니티</h5></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/board/boardWrite"><h5>글쓰기</h5></a>
+                  <a class="nav-link" href="/board/insertBoard"><h5>글쓰기</h5></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/user/updateForm"><h5>${signIn.nickname}님</h5></a>

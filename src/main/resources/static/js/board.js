@@ -25,6 +25,7 @@ function editAndDelete() {
 
     document.getElementById("delete").onclick = function(event) {
         frm.action = "/board/deleteBoard";
+        frm.method = "DELETE";
         frm.submit();
         alert('게시글 삭제가 완료되었습니다.');
     }

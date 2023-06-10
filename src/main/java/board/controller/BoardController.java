@@ -5,8 +5,7 @@ import board.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,17 +18,12 @@ public class BoardController {
     @Autowired
     private BoardService boardService;
 
-    @RequestMapping({"/", ""})
+    @GetMapping({"/", ""})
     public String index() throws Exception {
         return "/index";
     }
 
-    @RequestMapping("/reply")
-    public String reply() {
-        return "/reply/replyTest";
-    }
-
-    @RequestMapping("/boardList") // 게시글 리스트 출력 및 페이징
+    @GetMapping("/boardList") // 게시글 리스트 출력 및 페이징
     public ModelAndView boardList(HttpServletRequest request) throws Exception {
         System.out.println("page:"+request.getParameter("page"));
         ModelAndView mv = new ModelAndView();
@@ -50,35 +44,38 @@ public class BoardController {
         return mv;
     }
 
-    @RequestMapping("/board/boardWrite") // 글 작성 페이지
+    @GetMapping("/board/insertBoard") // 글 작성 페이지
     public String boardWrite() {
         return "/board/boardWrite";
     }
 
-    @RequestMapping("/board/insertBoard") // 글 작성 로직
+    @PostMapping("/board/insertBoard") // 글 작성 로직
     public String insertBoard(BoardVo boardVo, @RequestParam String username, @RequestParam String nickname) throws Exception {
         boardVo.setUsername(username);
         boardVo.setNickname(nickname);
         boardService.insertBoard(boardVo);
-        return "redirect:/board";
+        return "redirect:/boardList";
     }
 
-    @RequestMapping("/board/boardDetail") // 글 상세 보기
-    public String boardDetail(@RequestParam int boardIdx, Model model) throws Exception {
+    @GetMapping("/board/{boardIdx}") // 글 상세 보기
+//    public String boardDetail(@RequestParam int boardIdx, Model model) throws Exception {
+    public String boardDetail(@PathVariable("boardIdx") int boardIdx, Model model) throws Exception {
+        System.out.println("@@@@ boardDetail 진입 @@@@");
         BoardVo boardVo = boardService.selectBoardDetail(boardIdx);
         model.addAttribute("board", boardVo);
 
         return "/board/boardDetail";
     }
 
-    @RequestMapping("/board/updateForm") // 글 수정 폼 요청
+    @PostMapping("/board/updateForm") // 글 수정 폼 요청
     public String updateForm(@RequestParam int boardIdx, Model model) throws Exception {
+        System.out.println("updateForm 진입");
         BoardVo boardVo = boardService.selectBoardDetail(boardIdx);
         model.addAttribute("boardVo", boardVo);
         return "/board/updateForm";
     }
 
-    @RequestMapping("/board/modifyBoard") // 글 수정 요청
+    @PostMapping("/board/modifyBoard") // 글 수정 요청
     public String modifyBoard(Model model, BoardVo boardVo) throws Exception {
         int boardIdx = boardVo.getBoardIdx();
         boardService.updateBoard(boardVo);
@@ -86,10 +83,10 @@ public class BoardController {
         return "redirect:/board/boardDetail?boardIdx="+boardIdx;
     }
 
-    @RequestMapping("/board/deleteBoard") // 글 삭제
+    @DeleteMapping("/board/deleteBoard") // 글 삭제
     public String deleteBoard(BoardVo boardVo) throws Exception {
         boardService.deleteBoard(boardVo);
-        return "redirect:/board";
+        return "redirect:/boardList";
     }
 
 }
