@@ -15,7 +15,7 @@ public interface UserService {
 
     void updateUser(UserVo userVo) throws Exception;
 
-    String getAccessToken(String authorize_code);
+    String getAccessTokenFromKakao(String authorize_code);
 
     UserVo getUserInfoFromKakao(String accessToken);
 

@@ -48,7 +48,7 @@
     <script>
         showBoardDetail();
         <c:if test="${signIn.username == board.username}"> <%-- 수정, 삭제 가능 --%>
-        editAndDelete();
+        editAndDelete(${boardIdx});
         </c:if>
     </script>
 

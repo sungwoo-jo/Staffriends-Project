@@ -37,7 +37,7 @@ public class ReplyServiceImpl implements ReplyService {
         } else { // replyIdx의 값이 존재한다면 댓글의 출력 순서를 update
             updateReplyOrder(replyVo); // 댓글 또는 대댓글 작성 시 updateReplyOrder 메서드를 호출
         }
-        replyMapper.insertReply(replyVo);
+//        replyMapper.insertReply(replyVo);
     }
 
     @Override

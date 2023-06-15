@@ -81,7 +81,7 @@ public class UserController {
     @GetMapping("/kakao") // 카카오 로그인 요청
     public String kakaoLogin(@RequestParam String code, HttpSession session) throws Exception { // 카카오 로그인
         System.out.println("code:"+code);
-        String accessToken = userService.getAccessToken(code); // accessToken 요청
+        String accessToken = userService.getAccessTokenFromKakao(code); // accessToken 요청
         UserVo userInfo = userService.getUserInfoFromKakao(accessToken); // accessToken으로 사용자 정보 요청
         String originalPassword = userInfo.getPassword(); // 카카오 계정에 설정하는 디폴트 패스워드 값(originalPassword)
         String username = userService.loginProc(userInfo); // 기존 가입자 여부 확인

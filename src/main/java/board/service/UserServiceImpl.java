@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String getAccessToken(String code) { // 액세스 토큰 발급 받기
+    public String getAccessTokenFromKakao(String code) { // 액세스 토큰 발급 받기
         String accessToken = "";
         String refreshToken = "";
         String reqURL = "https://kauth.kakao.com/oauth/token";
