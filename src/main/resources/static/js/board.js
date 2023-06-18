@@ -24,13 +24,31 @@ function editAndDelete(boardIdx) {
     }
 
     document.getElementById("delete").onclick = function (event) {
-        let form = document.createElement("form");
-        form.setAttribute("charset", "UTF-8");
-        form.setAttribute("method", "DELETE");
-        form.setAttribute("action", "/board/deleteBoard/" + boardIdx);
-
-        document.body.appendChild(form);
-        form.submit();
+        let xhr = new XMLHttpRequest();
+        xhr.open("DELETE", "/board/deleteBoard/" + boardIdx);
+        xhr.onload = function() {
+            if (xhr.status === 200 || xhr.status === 201) {
+                let resp = xhr.responseText;
+                if (resp.status === 500) {
+                    alert("에러가 발생했습니다.");
+                } else {
+                    if (resp === "deleteSuccess") { // 게시글 삭제에 성공한 경우
+                        alert("게시글이 삭제되었습니다.");
+                        location.href = "/boardList";
+                    } else { // 게시글 삭제에 실패한 경우
+                        alert("게시글 삭제에 실패했습니다.");
+                    }
+                }
+            } else {
+                console.log(xhr.responseText);
+                alert("에러가 발생했습니다. \n에러 코드: " + xhr.status);
+            }
+        };
+        xhr.onerror = function() {
+            console.log(xhr.responseText);
+            alert("에러가 발생했습니다. \n에러 코드: " + xhr.status);
+        };
+        xhr.send(boardIdx);
     }
 }
 

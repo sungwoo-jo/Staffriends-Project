@@ -81,11 +81,12 @@ public class BoardController {
         return "redirect:/board/" + boardVo.getBoardIdx();
     }
 
+    @ResponseBody
     @DeleteMapping("/board/deleteBoard/{boardIdx}") // 글 삭제
     public String deleteBoard(@PathVariable("boardIdx") int boardIdx) throws Exception {
         System.out.println("@@@ DELETE BOARD 진입 완료 @@@ ");
         boardService.deleteBoard(boardIdx);
-        return "/boardList";
+        return "deleteSuccess";
     }
 
 }
