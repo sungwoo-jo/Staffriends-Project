@@ -14,11 +14,11 @@
 </section>
 <section class="py-5 bg-light">
     <div class="container px-4 px-lg-5 mt-5">
-        <h2 class="fw-bolder mb-4"><center>AI 스마트 지팡이</center><font size ="4"><p><center> 이런 분들에게 필요해요</center></p></h2>
+        <h2 class="fw-bolder mb-4"><center>AI 스마트 지팡이</center><font size ="4"><p><center> 이런 기능을 가지고 있어요</center></p></h2>
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <div class="col mb-5">
                 <div class="card h-100">
-                    <img class ="card-img-top" src="/img/1.png">
+                    <img class ="card-img-top" src="/img/warning.png">
                     <div class="card-body p-4">
                         <div class="text-center">
                             <h5 class="fw-bolder">위험 상황 예방 </h5>
@@ -28,7 +28,7 @@
             </div>
             <div class="col mb-5">
                 <div class="card h-100">
-                    <img class ="card-img-top" src="/image/body_2.png">
+                    <img class ="card-img-top" src="/img/outing.png">
                     <div class="card-body p-4">
                         <div class="text-center">
                             <h5 class="fw-bolder">단독 외출 가능 </h5>
@@ -38,10 +38,10 @@
             </div>
             <div class="col mb-5">
                 <div class="card h-100">
-                    <img class ="card-img-top" src="/image/body_3.png">
+                    <img class ="card-img-top" src="/img/guidance.png">
                     <div class="card-body p-4">
                         <div class="text-center">
-                            <h5 class="fw-bolder">네비게이션 기능</h5>
+                            <h5 class="fw-bolder">음성 안내 기능</h5>
                         </div>
                     </div>
                 </div>

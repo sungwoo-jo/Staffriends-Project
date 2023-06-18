@@ -6848,7 +6848,7 @@ a.bg-danger:focus, a.bg-danger:hover, button.bg-danger:focus, button.bg-danger:h
 }
 
 .bg-light {
-    height: 900px;
+    height: 100%;
     padding-top:55px;
 
 }
@@ -8601,17 +8601,17 @@ a.bg-dark:focus, a.bg-dark:hover, button.bg-dark:focus, button.bg-dark:hover {
     padding: 3rem !important
 }
 
-.pt-5, .py-5 {
-    padding-top: 3rem !important
-}
+/*.pt-5, .py-5 {*/
+/*    padding-top: 3rem !important*/
+/*}*/
 
 .pr-5, .px-5 {
     padding-right: 3rem !important
 }
 
-.pb-5, .py-5 {
-    padding-bottom: 3rem !important
-}
+/*.pb-5, .py-5 {*/
+/*    padding-bottom: 3rem !important*/
+/*}*/
 
 .pl-5, .px-5 {
     padding-left: 3rem !important

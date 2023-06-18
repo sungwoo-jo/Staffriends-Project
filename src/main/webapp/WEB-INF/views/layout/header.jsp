@@ -40,8 +40,7 @@
         <%-- 로그인 시 --%>
               <ul class="navbar-nav">
                 <li class="nav-item">
-<%--                  <a class="nav-link" href="javascript:transUserInfo('${signIn.serialNum}')"><h5>보호자페이지</h5></a>--%>
-                  <a class="nav-link" href="/guard/guardIndex"><h5>보호자페이지</h5></a>
+                  <a class="nav-link" href="javascript:transUserInfo('${signIn.serialNum}')"><h5>보호자페이지</h5></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/boardList"><h5>커뮤니티</h5></a>
