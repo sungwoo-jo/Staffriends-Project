@@ -29,12 +29,12 @@ public class ReplyController {
         return "insertSuccess";
     }
 
-    @PostMapping("/getAllReply")
-    public List<ReplyVo> getAllReply(@RequestBody String boardIdx) { // 댓글 정보 출력 메서드
-        return replyService.getAllReply(Integer.parseInt(boardIdx)); // 전달받은 boardIdx와 일치하고, 삭제되지 않은 댓글의 정보를 replyOrder 순서대로 조회하여 결과를 반환
+    @GetMapping("/getAllReply/{boardIdx}")
+    public List<ReplyVo> getAllReply(@PathVariable("boardIdx") int boardIdx) { // 댓글 정보 출력 메서드
+        return replyService.getAllReply(boardIdx); // 전달받은 boardIdx와 일치하고, 삭제되지 않은 댓글의 정보를 replyOrder 순서대로 조회하여 결과를 반환
     }
 
-    @PostMapping("/deleteReply")
+    @DeleteMapping("/deleteReply/{replyIdx}")
     public String deleteReply(@RequestBody ReplyVo replyVo) { // 댓글 삭제 메서드
         replyService.deleteReply(replyVo); // 전달받은 replyIdx와 일치하는 컬럼의 deleted_yn 필드를 y로 update
         replyService.updateReplyCount(replyVo.getBoardIdx());
@@ -43,7 +43,7 @@ public class ReplyController {
     }
 
     @PutMapping("/modifyProc")
-    public String modifyProc(@RequestBody ReplyVo replyVo) {
+    public String modifyProc(@RequestBody ReplyVo replyVo) { // 댓글 수정 메서드
         System.out.println(replyVo);
         replyService.updateReplyContents(replyVo);
         return "modifySuccess";

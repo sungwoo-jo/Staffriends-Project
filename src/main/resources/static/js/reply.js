@@ -83,7 +83,7 @@ function getAllReply() { // 댓글 목록 출력
 
     let data = boardIdx;
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", "/reply/getAllReply");
+    xhr.open("GET", "/reply/getAllReply/" + boardIdx);
     xhr.onload = function () {
         if (xhr.status === 200 || xhr.status === 201) {
             let resp = xhr.responseText;
@@ -147,7 +147,7 @@ function deleteReply(replyIdx) { // 댓글 삭제
         boardIdx: boardIdx
     };
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", "/reply/deleteReply");
+    xhr.open("DELETE", "/reply/deleteReply/" + replyIdx);
     xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     xhr.onload = function () {
         if (xhr.status === 200 || xhr.status === 201) {
