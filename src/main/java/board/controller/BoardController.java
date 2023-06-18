@@ -58,7 +58,6 @@ public class BoardController {
     }
 
     @GetMapping("/board/{boardIdx}") // 글 상세 보기
-//    public String boardDetail(@RequestParam int boardIdx, Model model) throws Exception {
     public String boardDetail(@PathVariable("boardIdx") int boardIdx, Model model) throws Exception {
         System.out.println("@@@@ boardDetail 진입 @@@@");
         BoardVo boardVo = boardService.selectBoardDetail(boardIdx);
@@ -77,16 +76,16 @@ public class BoardController {
 
     @PostMapping("/board/modifyBoard") // 글 수정 요청
     public String modifyBoard(Model model, BoardVo boardVo) throws Exception {
-        int boardIdx = boardVo.getBoardIdx();
         boardService.updateBoard(boardVo);
         model.addAttribute("boardVo", boardVo);
         return "redirect:/board/" + boardVo.getBoardIdx();
     }
 
-    @DeleteMapping("/board/deleteBoard") // 글 삭제
+    @DeleteMapping("/board/deleteBoard/{boardIdx}") // 글 삭제
     public String deleteBoard(@PathVariable("boardIdx") int boardIdx) throws Exception {
+        System.out.println("@@@ DELETE BOARD 진입 완료 @@@ ");
         boardService.deleteBoard(boardIdx);
-        return "redirect:/boardList";
+        return "/boardList";
     }
 
 }

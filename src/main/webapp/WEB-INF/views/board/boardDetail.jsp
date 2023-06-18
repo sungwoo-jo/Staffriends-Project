@@ -15,7 +15,7 @@
     <div class="container">
         <div class="container justify-content-center" style="max-width: 80%; min-width: 370px; max-height: 80%">
             <h2 style="text-align: center; margin-top: 30px; margin-bottom: 20px; font-family: KakaoBold;">${board.title}</h2>
-            <form id="frm" method="post">
+            <form id="frm">
                 <table style="margin-left:auto;margin-right:auto; margin: 0 auto">
                     <tbody>
                     <tr>

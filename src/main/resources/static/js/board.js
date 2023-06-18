@@ -19,13 +19,18 @@ function editAndDelete(boardIdx) {
     deleteButton.style = 'margin-top: 20px; margin-bottom: 20px;';
     editButton.insertAdjacentElement("afterend", deleteButton);
 
-    document.getElementById("edit").onclick = function(event) {
-        location.href = "/board/updateForm/"+boardIdx;
+    document.getElementById("edit").onclick = function (event) {
+        location.href = "/board/updateForm/" + boardIdx;
     }
 
-    document.getElementById("delete").onclick = function(event) {
-        location.href = "/board/deleteBoard/"+boardIdx;
-        alert('게시글 삭제가 완료되었습니다.');
+    document.getElementById("delete").onclick = function (event) {
+        let form = document.createElement("form");
+        form.setAttribute("charset", "UTF-8");
+        form.setAttribute("method", "DELETE");
+        form.setAttribute("action", "/board/deleteBoard/" + boardIdx);
+
+        document.body.appendChild(form);
+        form.submit();
     }
 }
 
@@ -36,7 +41,7 @@ function showBoardDetail() {
         })
 
     document.getElementById("list").onclick = function(event) {
-        history.back();
+        location.href = "/boardList";
     }
 }
 

@@ -18,7 +18,7 @@ public interface BoardMapper {
 
     void updateBoard(BoardVo boardVo) throws Exception;
 
-    void deleteBoard(BoardVo boardVo) throws Exception;
+    void deleteBoard(int boardIdx) throws Exception;
 
     int getTotalRows();
 }

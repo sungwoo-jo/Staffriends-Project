@@ -38,8 +38,8 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public void deleteBoard(BoardVo boardVo) throws Exception{ // 글 삭제
-        boardMapper.deleteBoard(boardVo);
+    public void deleteBoard(int boardIdx) throws Exception{ // 글 삭제
+        boardMapper.deleteBoard(boardIdx);
     }
 
     @Override
