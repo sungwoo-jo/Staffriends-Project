@@ -7,7 +7,7 @@ function modifyProc(replyIdx) {
     };
 
     let xhr = new XMLHttpRequest();
-    xhr.open("PUT", "/reply/modifyProc");
+    xhr.open("PUT", "/reply/modifyProc/" + replyIdx);
     xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     xhr.onload = function () {
         if (xhr.status === 200 || xhr.status === 201) {
@@ -196,8 +196,6 @@ function showModifyReplyForm(replyIdx) { // 댓글 수정 폼 표시 메서드
     newTextArea.setAttribute("id", "replyIdx" + replyIdx);
     newTextArea.textContent = replyContents.innerText; // textarea에 현재 댓글의 내용을 넣기
     replyContents.replaceWith(newTextArea); // 댓글의 내용만 추출
-
-    console.log(replyContents.innerText);
 }
 
 function insertReReply(replyIdx) { // 대댓글 등록 메서드

@@ -33,7 +33,7 @@ public class GuardController {
         return "/guard/guardIndex"; // 정상적인 시리얼 번호를 입력한 경우 정상적으로 보호자 페이지에 결과를 출력
     }
 
-    @PostMapping("/notRegSerial") // 시리얼 번호 미등록 페이지
+    @GetMapping("/notRegSerial") // 시리얼 번호 미등록 페이지
     public String notRegSerial() {
         return "/guard/notRegSerial";
     }

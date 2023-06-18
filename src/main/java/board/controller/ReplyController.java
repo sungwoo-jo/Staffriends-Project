@@ -42,7 +42,7 @@ public class ReplyController {
         return "deleteSuccess"; // 성공적으로 댓글 삭제 후 deleteSuccess 문자열 반환
     }
 
-    @PutMapping("/modifyProc")
+    @PutMapping("/modifyProc/{replyIdx}")
     public String modifyProc(@RequestBody ReplyVo replyVo) { // 댓글 수정 메서드
         System.out.println(replyVo);
         replyService.updateReplyContents(replyVo);
