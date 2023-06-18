@@ -34,7 +34,7 @@ public class UserController {
     @ResponseBody
     public String joinUser(@RequestBody UserVo userVo) throws Exception{
         userService.insertUser(userVo);
-        return "success";
+        return "insertSuccess";
     }
 
     @GetMapping("/loginForm") // 로그인 페이지
@@ -66,7 +66,7 @@ public class UserController {
         return "/user/updateForm";
     }
 
-    @PostMapping("/updateProc") // 정보 업데이트
+    @PatchMapping("/updateProc") // 정보 업데이트
     @ResponseBody
     public String updateUser(@RequestBody UserVo userVo) throws Exception {
         userService.updateUser(userVo);
