@@ -167,7 +167,24 @@ CREATE TABLE test (
 
 insert into test(content) values('테스트');
 
-select * from test;]]></console>
+select * from test;
+
+drop PROCEDURE testDataInsert;
+
+CREATE PROCEDURE testDataInsert()
+BEGIN
+    DECLARE i INT DEFAULT 1;
+
+    WHILE i <= 120 DO
+        INSERT INTO board(title, contents, hit_cnt, created_datetime, username, deleted_yn, nickname)
+          VALUES(concat('제목',i), concat('내용',i), concat(0), concat(now()), concat('admin'), concat('N'), concat('어드민'));
+        SET i = i + 1;
+    END WHILE;
+END;;
+
+call testDataInsert;
+
+commit;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">

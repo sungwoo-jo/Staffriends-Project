@@ -57,7 +57,7 @@ public class BoardServiceImpl implements BoardService {
         int startPage; // 페이지 블록의 시작 번호
         int endPage; // 페이지 블록의 마지막 번호
         int totalPages; // 전체 페이지의 갯수
-        int start; // SQL 쿼리의 LIMIT에 들어갈 변수(~번 부터 pageLength개를 출력)
+        int offsetStartNumber; // SQL 쿼리의 LIMIT에 들어갈 변수(~번 부터 pageLength개를 출력)
         int totalRows = getTotalRows(); // 전체 게시글의 갯수
 
 //        // cPage(현재 위치한 페이지의 번호 정하기)
@@ -83,20 +83,20 @@ public class BoardServiceImpl implements BoardService {
         }
 
         // 페이지 처음과 끝을 지정하는 부분
-        currentBlock = cPage % pageLength == 0 ? cPage / pageLength : (cPage / pageLength) + 1; // 현재 위치한 페이지 블록 구하기(ex. cPage=1, pageLength=10 -> 1)
+        currentBlock = cPage % pageLength == 0 ? cPage / pageLength : (cPage / pageLength) + 1; // 현재 위치한 페이지 블록의 순번(1~10: 1번째, 11~20: 2번째, 21~30: 3번째)
         System.out.println("currentBlock: " + currentBlock);
-        startPage = (currentBlock - 1) * pageLength + 1; // 페이지 블럭의 시작 번호 구하기(ex. currentBlock=1, pageLength=10 -> 1)
-        endPage = startPage + pageLength - 1; // 페이지 블럭의 마지막 번호 구하기(ex. startPage=1, pageLength=10 -> 10)
+        startPage = (currentBlock - 1) * pageLength + 1; // 페이지 블럭의 시작 번호 구하기(1~10은 1로 시작, 11~20은 11로 시작, 21~30은 21로 시작)
+        endPage = currentBlock * pageLength; // 페이지 블럭의 마지막 번호 구하기(1~10의 끝 번호는 10, 11~20의 끝 번호는 20, 21~30의 끝 번호는 30)
 
-        // 총 페이지 갯수보다 endPage가 높으면 endPage를 총 페이지 갯수로 지정
+        // 총 페이지 갯수보다 endPage가 높으면 endPage를 총 페이지 갯수로 지정(불필요한 페이지 번호를 생성하지 않기 위함)
         if (endPage > totalPages) {
             endPage = totalPages;
         }
 
-        start = (cPage - 1) * pageLength; // 각 페이지의 첫 번째 게시글의 번호를 구하기 : (현재 페이지 - 1) * 보여줄 게시글의 갯수(ex. 1페이지=0~9, 2페이지=10~19, 3페이지=20~29)
+        offsetStartNumber = (cPage - 1) * pageLength; // 각 페이지의 첫 번째 게시글의 번호를 구하기 : (현재 페이지 - 1) * 보여줄 게시글의 갯수(ex. 1페이지=0~9, 2페이지=10~19, 3페이지=20~29)
 
         // 첫 번째 게시글의 번호와 보여줄 게시글의 갯수를 가지고 게시글 목록을 조회(총 pageLength개의 데이터를 가져오며, 현재 페이지 - 1 * pageLength에 해당하는 번호의 게시글들이 조회됨)
-        map.put("start", start);
+        map.put("start", offsetStartNumber);
         map.put("pageLength", pageLength);
         map.put("startPage", startPage);
         map.put("endPage", endPage);

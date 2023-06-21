@@ -56,15 +56,15 @@
                 </c:choose>
                 <c:choose>
                     <c:when test="${startPage <= endPage}"> <%-- 끝 페이지 이하일 경우 --%>
-                        <c:forEach var="start" begin="${startPage}" end="${endPage}" step="1"> <%-- 페이지 번호 출력 --%>
+                        <c:forEach var="pageNumber" begin="${startPage}" end="${endPage}" step="1"> <%-- 페이지 번호 출력 --%>
                             <c:choose>
-                                <c:when test="${start != cPage}"> <%-- 버튼 별 이동할 페이지 링크 설정 --%>
+                                <c:when test="${pageNumber != cPage}"> <%-- 버튼 별 이동할 페이지 링크 설정 --%>
                                     <li class="page-item">
-                                        <a class="page-link" href="boardList?page=${start}">${start}</a></li>
+                                        <a class="page-link" href="boardList?page=${pageNumber}">${pageNumber}</a></li>
                                 </c:when>
                                 <c:otherwise> <%-- 클릭한 페이지 번호 비활성화 --%>
                                     <li class="page-item">
-                                    <li class="page-item disabled"><a class="page-link" href="#" aria-disabled="true" style="background: #e9ecef; color: #8B4513">${start}</a></li>
+                                    <li class="page-item disabled"><a class="page-link" href="#" aria-disabled="true" style="background: #e9ecef; color: #8B4513">${pageNumber}</a></li>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
