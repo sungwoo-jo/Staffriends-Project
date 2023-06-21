@@ -3,9 +3,10 @@
 <title>로그인</title>
 <html>
 <body>
-<c:set var="REST_API_KEY" value="69eddbebb2b07d6a316fc057c32fdbdf"/>
-<%--<c:set var="REDIRECT_URI" value="http://localhost/user/kakao"/>--%>
-<c:set var="REDIRECT_URI" value="http://staffriends.duckdns.org/user/kakao"/>
+<c:set var="KAKAO_REST_API_KEY" value="69eddbebb2b07d6a316fc057c32fdbdf"/>
+<c:set var="KAKAO_REDIRECT_URI" value="http://staffriends.duckdns.org/user/kakao"/>
+<c:set var="NAVER_CLIEND_ID" value="7qqLASP70SF5B7AX2r7H"/>
+<c:set var="NAVER_REDIRECT_URI" value="http://localhost/user/naver"/>
 <h2 style="text-align: center; margin-top: 30px; margin-bottom: 70px; font-family: KakaoBold;">로그인</h2>
 <section style="padding-bottom: 50px;">
 <div class="container center-div">
@@ -18,7 +19,8 @@
     </div>
     <div style="text-align: center; padding-bottom: 20px;"><a href="javascript:findMyIdPopUp()">아이디 찾기</a> | <a href="javascript:findMyPasswordPopUp()">비밀번호 찾기</a></div>
     <input class="btn btn-staffriends btn-lg center-div" type="button" value="로그인" onclick="loginProc()">
-    <a href="https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code"><img src="/img/kakao_login_medium_wide.png" class="btn-block" style="margin-top: 5px;height: 50px"></a>
+    <a href="https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_REST_API_KEY}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code"><img src="/img/kakao_login_medium.png" style="margin-top: 5px;height: 50px; width: 49%"></a>
+    <a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&cliend_id=${NAVER_CLIEND_ID}&redirect_uri=${NAVER_REDIRECT_URI}&state="><img src="/img/naver_login_small.png" style="margin-top: 5px;height: 50px;width: 49%"></a>
 </form>
 </div>
 </section>

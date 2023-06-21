@@ -50,15 +50,15 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public Map<String, Integer> paging(String tempPage) throws Exception {
         Map<String, Integer> map = new HashMap<>();
+
         int cPage; // 현재 위치한 페이지의 번호
-        int currentBlock; // 페이지 블록의 갯수
+        int currentBlock; // 현재 위치한 페이지 블럭
         int pageLength = 10; // 보여줄 게시글의 갯수
         int startPage; // 페이지 블록의 시작 번호
         int endPage; // 페이지 블록의 마지막 번호
         int totalPages; // 전체 페이지의 갯수
-        int start; // SQL 쿼리의 LIMIT에 들어갈 변수
-
-
+        int start; // SQL 쿼리의 LIMIT에 들어갈 변수(~번 부터 pageLength개를 출력)
+        int totalRows = getTotalRows(); // 전체 게시글의 갯수
 
 //        // cPage(현재 위치한 페이지의 번호 정하기)
 //        if (tempPage == null || tempPage.length() == 0 || tempPage.equals("0")) { // 파라미터로 전달받은 페이지 정보가 없거나 0이면 1페이지로 이동
@@ -71,29 +71,24 @@ public class BoardServiceImpl implements BoardService {
             cPage = 1;
         }
 
-        int totalRows = getTotalRows(); // 전체 게시글의 갯수
+        System.out.println("totalRows: " + totalRows);
+        System.out.println("pageLength: " + pageLength);
+        System.out.println("totalRows / pageLength: " + totalRows / pageLength);
+        // 필요한 총 페이지의 개수는 데이터의 개수를 보여줄 게시글의 개수로 나누어 딱맞으면 0, 초과하면 1개의 페이지를 더 생성(최소 1개의 페이지 생성)
+        totalPages = totalRows % pageLength == 0 ? totalRows / pageLength : (totalRows / pageLength) + 1;
+        System.out.println("totalPages: " + totalPages);
 
-        totalPages = totalRows % pageLength == 0 ? totalRows / pageLength : (totalRows / pageLength) + 1; // 필요한 총 페이지의 개수는 데이터의 개수를 보여줄 게시글의 개수로 나누어 딱맞으면 0, 초과하면 1개의 페이지를 더 생성
-        if (totalPages == 0) { // 현재 게시글 데이터의 수가 페이지 최소 단위보다 적은 경우 최소 1개의 페이지를 생성
-            totalPages = 1;
-        }
-
-        if (cPage > totalPages || cPage <= 0) { // 페이지가 최소 또는 최대 페이지 범위를 벗어난 경우 1로 설정
+        if (cPage > totalPages || cPage <= 0) { // 페이지가 최소 또는 최대 페이지 범위를 벗어난 경우 1로 설정(반드시 총 페이지의 개수가 구해진 후 연산)
             cPage = 1;
         }
 
-        // currentBlock: 현재 위치한 페이지 블럭
-        // cPage: 현재 페이지
-        // pageLength: 전체 페이지 길이
-        // startPage: 페이지 블럭의 가장 첫번째 번호
-        // endPage: 페이지 블럭의 가장 마지막 번호
-
         // 페이지 처음과 끝을 지정하는 부분
         currentBlock = cPage % pageLength == 0 ? cPage / pageLength : (cPage / pageLength) + 1; // 현재 위치한 페이지 블록 구하기(ex. cPage=1, pageLength=10 -> 1)
+        System.out.println("currentBlock: " + currentBlock);
         startPage = (currentBlock - 1) * pageLength + 1; // 페이지 블럭의 시작 번호 구하기(ex. currentBlock=1, pageLength=10 -> 1)
         endPage = startPage + pageLength - 1; // 페이지 블럭의 마지막 번호 구하기(ex. startPage=1, pageLength=10 -> 10)
 
-        // 마지막 페이지 묶음에서 총 페이지수를 넘어가면 끝 페이지를 마지막 페이지 숫자로 지정
+        // 총 페이지 갯수보다 endPage가 높으면 endPage를 총 페이지 갯수로 지정
         if (endPage > totalPages) {
             endPage = totalPages;
         }

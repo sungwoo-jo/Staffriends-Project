@@ -137,8 +137,12 @@ function join() { // 회원가입
             if (resp.status === 500) {
                 alert("에러가 발생했습니다.");
             } else {
-                alert("회원가입이 완료되었습니다.");
-                location.href = "/";
+                if (resp === "insertSuccess") {
+                    alert("회원가입이 완료되었습니다.");
+                    location.href = "/";
+                } else {
+                    alert("회원가입을 완료하지 못했습니다.");
+                }
             }
         } else {
             console.log(xhr.responseText);
@@ -442,7 +446,7 @@ function updateInfo() { // 회원 정보 수정
         };
 
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", "/user/updateProc");
+        xhr.open("PATCH", "/user/updateProc");
         xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
         xhr.onload = function() {
             if (xhr.status === 200 || xhr.status === 201) {
@@ -450,8 +454,12 @@ function updateInfo() { // 회원 정보 수정
                 if (resp.status === 500) {
                     alert("에러가 발생했습니다.");
                 } else {
-                    alert("정보수정이 완료되었습니다.");
-                    location.href = "/";
+                    if (resp === "success") {
+                        alert("정보수정이 완료되었습니다.");
+                        location.href = "/";
+                    } else {
+                        alert("정보수정을 완료하지 못했습니다.");
+                    }
                 }
             } else {
                 console.log(xhr.responseText);

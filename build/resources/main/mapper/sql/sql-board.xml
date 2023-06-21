@@ -28,6 +28,8 @@
                 count(*)
             FROM
                 board
+            WHERE
+                deleted_yn = 'N'
         ]]>
     </select>
     
