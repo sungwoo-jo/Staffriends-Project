@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="board.mapper.BoardMapper">
-    <select id="selectBoardList" resultType="board.vo.BoardVo" parameterType="Map">
+    <select id="selectBoardList" resultType="board.vo.BoardVo" parameterType="board.vo.PagingVo">
         <![CDATA[
             SELECT
                 board_idx,

@@ -2,6 +2,7 @@ package board.controller;
 
 import board.vo.BoardVo;
 import board.service.BoardService;
+import board.vo.PagingVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class BoardController {
@@ -27,19 +27,12 @@ public class BoardController {
     public ModelAndView boardList(HttpServletRequest request) throws Exception {
         System.out.println("page:"+request.getParameter("page"));
         ModelAndView mv = new ModelAndView();
-        Map<String, Integer> map = boardService.paging(request.getParameter("page")); // 쿼리 스트링의 페이지 번호를 전달
+        PagingVo pagingVo = boardService.paging(request.getParameter("page")); // 쿼리 스트링의 페이지 번호를 전달
 
-        List<BoardVo> list = boardService.selectBoardList(map); // 게시글 정보(BoardVo)
-        int startPage = map.get("startPage"); // 시작 페이지 번호
-        int endPage = map.get("endPage"); // 끝 페이지 번호
-        int totalPages = map.get("totalPages"); // 전체 페이지 갯수
-        int cPage = map.get("cPage"); // 현재 페이지 번호
+        List<BoardVo> list = boardService.selectBoardList(pagingVo);
 
-        mv.addObject("list", list);
-        mv.addObject("startPage", startPage);
-        mv.addObject("endPage", endPage);
-        mv.addObject("totalPages", totalPages);
-        mv.addObject("cPage", cPage);
+        mv.addObject("list", list); // 게시글 정보(BoardVo)
+        mv.addObject("paging", pagingVo); // 페이징 정보(PagingVo)
         mv.setViewName("/board/boardList");
         return mv;
     }

@@ -1,6 +1,7 @@
 package board.service;
 
 import board.vo.BoardVo;
+import board.vo.PagingVo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.Map;
 
 @Service
 public interface BoardService {
-    List<BoardVo> selectBoardList(Map<String, Integer> map) throws Exception;
+    List<BoardVo> selectBoardList(PagingVo pagingVo) throws Exception;
 
     void insertBoard(BoardVo boardVo) throws Exception;
 
@@ -20,5 +21,5 @@ public interface BoardService {
 
     int getTotalRows();
 
-    Map<String, Integer> paging(String tempPage) throws Exception;
+    PagingVo paging(String tempPage) throws Exception;
 }

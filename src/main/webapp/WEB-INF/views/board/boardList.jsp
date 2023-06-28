@@ -47,18 +47,18 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
                 <c:choose>
-                    <c:when test="${startPage == 1}"> <%-- 첫 페이지일 때 Previous 버튼 비활성화 --%>
+                    <c:when test="${paging.startPage == 1}"> <%-- 첫 페이지일 때 Previous 버튼 비활성화 --%>
                         <li class="page-item disabled"><a class="page-link" href="#" aria-disabled="true">Previous</a></li>
                     </c:when>
                     <c:otherwise>
-                        <li class="page-item"><a class="page-link" href="boardList?page=${startPage-1}" aria-disabled="true">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="boardList?page=${paging.startPage-1}" aria-disabled="true">Previous</a></li>
                     </c:otherwise>
                 </c:choose>
                 <c:choose>
-                    <c:when test="${startPage <= endPage}"> <%-- 끝 페이지 이하일 경우 --%>
-                        <c:forEach var="pageNumber" begin="${startPage}" end="${endPage}" step="1"> <%-- 페이지 번호 출력 --%>
+                    <c:when test="${paging.startPage <= paging.endPage}"> <%-- 끝 페이지 이하일 경우 --%>
+                        <c:forEach var="pageNumber" begin="${paging.startPage}" end="${paging.endPage}" step="1"> <%-- 페이지 번호 출력 --%>
                             <c:choose>
-                                <c:when test="${pageNumber != cPage}"> <%-- 버튼 별 이동할 페이지 링크 설정 --%>
+                                <c:when test="${pageNumber != paging.CPage}"> <%-- 버튼 별 이동할 페이지 링크 설정 --%>
                                     <li class="page-item">
                                         <a class="page-link" href="boardList?page=${pageNumber}">${pageNumber}</a></li>
                                 </c:when>
@@ -73,12 +73,12 @@
                 <c:choose>
                     <%-- 마지막 페이지 숫자와 startPage에서 pageLength 더해준 값이 일치할 때 --%>
                     <%-- 즉 마지막 페이지 블럭일 때 Next 버튼 비활성화 --%>
-                    <c:when test="${totalPages == endPage}">
+                    <c:when test="${paging.totalPages == paging.endPage}">
                         <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
                     </c:when>
                     <c:otherwise>
                         <li class="page-item">
-                            <a class="page-link" href="boardList?page=${endPage+1}">Next</a>
+                            <a class="page-link" href="boardList?page=${paging.endPage+1}">Next</a>
                         </li>
                     </c:otherwise>
                 </c:choose>
