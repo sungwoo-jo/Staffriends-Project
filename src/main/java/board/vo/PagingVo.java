@@ -12,4 +12,5 @@ public class PagingVo {
     private int totalPages; // 전체 페이지의 갯수
     private int offsetStartNumber; // SQL 쿼리의 LIMIT에 들어갈 변수(~번 부터 pageLength개를 출력)
     private int totalRows; // 전체 게시글의 갯수
+    private int bgno; // 게시판 종류
 }

@@ -6,6 +6,7 @@
 <head>
     <title>커뮤니티</title>
 </head>
+bgno: <c:out value="${paging.bgno}"/>
 <body>
     <div class="container">
         <h2 style="text-align: center; margin-top: 30px; margin-bottom: 20px; font-family: KakaoBold;">게시글 목록</h2>
@@ -51,7 +52,7 @@
                         <li class="page-item disabled"><a class="page-link" href="#" aria-disabled="true">Previous</a></li>
                     </c:when>
                     <c:otherwise>
-                        <li class="page-item"><a class="page-link" href="list?page=${paging.startPage-1}" aria-disabled="true">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="list?page=${paging.startPage-1}&bgno=${paging.bgno}" aria-disabled="true">Previous</a></li>
                     </c:otherwise>
                 </c:choose>
                 <c:choose>
@@ -60,7 +61,7 @@
                             <c:choose>
                                 <c:when test="${pageNumber != paging.CPage}"> <%-- 버튼 별 이동할 페이지 링크 설정 --%>
                                     <li class="page-item">
-                                        <a class="page-link" href="list?page=${pageNumber}">${pageNumber}</a></li>
+                                        <a class="page-link" href="list?page=${pageNumber}&bgno=${paging.bgno}">${pageNumber}</a></li>
                                 </c:when>
                                 <c:otherwise> <%-- 클릭한 페이지 번호 비활성화 --%>
                                     <li class="page-item">
@@ -78,7 +79,7 @@
                     </c:when>
                     <c:otherwise>
                         <li class="page-item">
-                            <a class="page-link" href="list?page=${paging.endPage+1}">Next</a>
+                            <a class="page-link" href="list?page=${paging.endPage+1}&bgno=${paging.bgno}">Next</a>
                         </li>
                     </c:otherwise>
                 </c:choose>

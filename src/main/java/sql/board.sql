@@ -7,11 +7,12 @@ CREATE TABLE board
     `contents`          text            NOT NULL    COMMENT '내용',
     `hit_cnt`           smallint(10)    NOT NULL    DEFAULT 0 COMMENT '조회수',
     `created_datetime`  datetime        NOT NULL    COMMENT '작성 일자',
-    `username`        varchar(50)     NOT NULL    COMMENT '작성 회원 id',
+    `username`        varchar(50)     NOT NULL      COMMENT '작성 회원 id',
     `updated_datetime`  datetime        NULL        COMMENT '수정 일자',
     `updater_id`        varchar(50)     NULL        COMMENT '수정 회원 id',
     `deleted_yn`        char(1)         NOT NULL    DEFAULT 'N' COMMENT '삭제 여부',
     `reply_count`       int             NULL        DEFAULT 0 COMMENT '댓글 갯수',
+    `bgno`              int             NOT NULL    COMMENT '게시판종 류',
      PRIMARY KEY (board_idx)
 );
 

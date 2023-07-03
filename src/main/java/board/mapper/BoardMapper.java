@@ -21,5 +21,5 @@ public interface BoardMapper {
 
     void deleteBoard(int boardIdx) throws Exception;
 
-    int getTotalRows();
+    int getTotalRows(int bgno);
 }
