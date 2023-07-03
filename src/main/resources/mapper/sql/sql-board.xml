@@ -16,20 +16,20 @@
             FROM
                 board
             WHERE
-                deleted_yn = 'N'
+                deleted_yn = 'N' AND bgno = #{bgno}
             ORDER BY board_idx DESC
             LIMIT #{offsetStartNumber}, #{pageLength}
         ]]>
     </select>
 
-    <select id="getTotalRows" resultType="int">
+    <select id="getTotalRows" resultType="int" parameterType="int">
         <![CDATA[
             SELECT
                 count(*)
             FROM
                 board
             WHERE
-                deleted_yn = 'N'
+                deleted_yn = 'N' AND bgno = #{bgno}
         ]]>
     </select>
     
@@ -41,7 +41,8 @@
                     contents,
                     created_datetime,
                     username,
-                    nickname
+                    nickname,
+                    bgno
                 )
             VALUES
                 (
@@ -49,7 +50,8 @@
                    #{contents},
                    now(),
                    #{username},
-                   #{nickname}
+                   #{nickname},
+                   #{bgno}
                 )
             ]]>
     </insert>

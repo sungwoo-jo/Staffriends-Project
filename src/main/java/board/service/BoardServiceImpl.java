@@ -44,15 +44,14 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public int getTotalRows() { // 전체 행 조회
-        return boardMapper.getTotalRows();
+    public int getTotalRows(int bgno) { // 전체 행 조회
+        return boardMapper.getTotalRows(bgno);
     }
 
     @Override
     public PagingVo paging(String tempPage) throws Exception {
-        Map<String, Integer> map = new HashMap<>();
         PagingVo pagingVo = new PagingVo();
-        pagingVo.setTotalRows(getTotalRows());
+        pagingVo.setTotalRows(getTotalRows(pagingVo.getBgno()));
 
         try {
             pagingVo.setCPage(Integer.parseInt(tempPage)); // 파라미터로 전달받은 페이지 번호를 현재 페이지에 변환하여 담아줌

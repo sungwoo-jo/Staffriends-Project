@@ -19,7 +19,7 @@ public interface BoardService {
 
     void deleteBoard(int boardIdx) throws Exception;
 
-    int getTotalRows();
+    int getTotalRows(int bgno);
 
     PagingVo paging(String tempPage) throws Exception;
 }

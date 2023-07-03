@@ -26,9 +26,13 @@ public class BoardController {
     @GetMapping("/board/list") // 게시글 리스트 출력 및 페이징
     public ModelAndView boardList(HttpServletRequest request) throws Exception {
         System.out.println("page:"+request.getParameter("page"));
+        System.out.println("bgno:"+request.getParameter("bgno"));
         ModelAndView mv = new ModelAndView();
-        PagingVo pagingVo = boardService.paging(request.getParameter("page")); // 쿼리 스트링의 페이지 번호를 전달
-
+        PagingVo pagingVo = new PagingVo();
+        pagingVo.setBgno(Integer.parseInt(request.getParameter("bgno")));
+        System.out.println("bgno:"+pagingVo.getBgno());
+        pagingVo = boardService.paging(request.getParameter("page")); // 쿼리 스트링의 페이지 번호를 전달
+        System.out.println("bgno:"+pagingVo.getBgno());
         List<BoardVo> list = boardService.selectBoardList(pagingVo);
 
         mv.addObject("list", list); // 게시글 정보(BoardVo)
