@@ -184,7 +184,9 @@ END;;
 
 call testDataInsert;
 
-commit;]]></console>
+commit;
+
+select * from user;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">

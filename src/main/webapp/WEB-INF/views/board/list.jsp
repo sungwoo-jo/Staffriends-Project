@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <h2 style="text-align: center; margin-top: 30px; margin-bottom: 20px; font-family: KakaoBold;">게시글 목록</h2>
-            <h5 style="text-align: right"><a href="/board/insertBoard" class="btn btn-success justify-content-end">글 쓰기</a></h5>
+            <h5 style="text-align: right"><a href="/board/write" class="btn btn-success justify-content-end">글 쓰기</a></h5>
         <table class="table table-striped border-bottom" >
             <colgroup>
                 <col width="10%"/>
@@ -51,7 +51,7 @@
                         <li class="page-item disabled"><a class="page-link" href="#" aria-disabled="true">Previous</a></li>
                     </c:when>
                     <c:otherwise>
-                        <li class="page-item"><a class="page-link" href="boardList?page=${paging.startPage-1}" aria-disabled="true">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="list?page=${paging.startPage-1}" aria-disabled="true">Previous</a></li>
                     </c:otherwise>
                 </c:choose>
                 <c:choose>
@@ -60,7 +60,7 @@
                             <c:choose>
                                 <c:when test="${pageNumber != paging.CPage}"> <%-- 버튼 별 이동할 페이지 링크 설정 --%>
                                     <li class="page-item">
-                                        <a class="page-link" href="boardList?page=${pageNumber}">${pageNumber}</a></li>
+                                        <a class="page-link" href="list?page=${pageNumber}">${pageNumber}</a></li>
                                 </c:when>
                                 <c:otherwise> <%-- 클릭한 페이지 번호 비활성화 --%>
                                     <li class="page-item">
@@ -78,7 +78,7 @@
                     </c:when>
                     <c:otherwise>
                         <li class="page-item">
-                            <a class="page-link" href="boardList?page=${paging.endPage+1}">Next</a>
+                            <a class="page-link" href="list?page=${paging.endPage+1}">Next</a>
                         </li>
                     </c:otherwise>
                 </c:choose>

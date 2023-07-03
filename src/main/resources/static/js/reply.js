@@ -95,7 +95,11 @@ function getAllReply() { // 댓글 목록 출력
                 for(let i=0; i<parseData.length; i++) {
                     replyForm += '<div class="card" style="margin: 0 auto; width: 80%; height: auto; margin-bottom:10px; left: ' + parseData[i].replyDepth * 10 + 'px;">';
                     replyForm +=    '<div class="card-header">';
+                    if (parseData[i].replyDepth >= 1) {
+                        replyForm +=        '<h7>'+'ㄴ 작성자: '+parseData[i].nickname+'</h7>';
+                    } else {
                     replyForm +=        '<h7>'+'작성자: '+parseData[i].nickname+'</h7>';
+                    }
                     replyForm +=        '<td><span class="card-text text-right" style="font-size: small; float: right">'+parseData[i].createdDatetime+'</span></td>';
                     replyForm +=    '</div>';
                     replyForm +=    '<div class="border-bottom">';

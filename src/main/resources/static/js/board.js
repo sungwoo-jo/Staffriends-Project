@@ -20,12 +20,12 @@ function editAndDelete(boardIdx) {
     editButton.insertAdjacentElement("afterend", deleteButton);
 
     document.getElementById("edit").onclick = function (event) {
-        location.href = "/board/updateForm/" + boardIdx;
+        location.href = "/board/update/" + boardIdx;
     }
 
     document.getElementById("delete").onclick = function (event) {
         let xhr = new XMLHttpRequest();
-        xhr.open("DELETE", "/board/deleteBoard/" + boardIdx);
+        xhr.open("DELETE", "/board/delete/" + boardIdx);
         xhr.onload = function() {
             if (xhr.status === 200 || xhr.status === 201) {
                 let resp = xhr.responseText;
@@ -34,7 +34,7 @@ function editAndDelete(boardIdx) {
                 } else {
                     if (resp === "deleteSuccess") { // 게시글 삭제에 성공한 경우
                         alert("게시글이 삭제되었습니다.");
-                        location.href = "/boardList";
+                        location.href = "/board/list";
                     } else { // 게시글 삭제에 실패한 경우
                         alert("게시글 삭제에 실패했습니다.");
                     }
@@ -59,16 +59,20 @@ function showBoardDetail() {
         })
 
     document.getElementById("list").onclick = function(event) {
-        location.href = "/boardList";
+        history.back();
     }
 }
 
 function insertBoard() {
     document.getElementById("save").onclick = function(event) {
         let frm = document.getElementById("frm");
-        frm.action = "/board/insertBoard";
+        frm.action = "/board/write";
         frm.submit();
         alert('글 작성이 완료되었습니다.');
+    }
+
+    document.getElementById("list").onclick = function(event) {
+        history.back();
     }
 }
 
@@ -83,12 +87,12 @@ function modifyBoard() {
     let frm = document.getElementById("frm");
     document.getElementById("successEdit").onclick = function(event) {
         let boardIdx = document.getElementById('boardIdx');
-        frm.action = "/board/modifyBoard";
+        frm.action = "/board/update";
         frm.submit();
         alert('수정이 완료되었습니다.');
     }
 
     document.getElementById("list").onclick = function(event) {
-        location.href = "/boardList";
+        history.back();
     }
 }

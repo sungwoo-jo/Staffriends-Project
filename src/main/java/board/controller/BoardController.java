@@ -23,7 +23,7 @@ public class BoardController {
         return "/index";
     }
 
-    @GetMapping("/boardList") // 게시글 리스트 출력 및 페이징
+    @GetMapping("/board/list") // 게시글 리스트 출력 및 페이징
     public ModelAndView boardList(HttpServletRequest request) throws Exception {
         System.out.println("page:"+request.getParameter("page"));
         ModelAndView mv = new ModelAndView();
@@ -33,21 +33,21 @@ public class BoardController {
 
         mv.addObject("list", list); // 게시글 정보(BoardVo)
         mv.addObject("paging", pagingVo); // 페이징 정보(PagingVo)
-        mv.setViewName("/board/boardList");
+        mv.setViewName("/board/list");
         return mv;
     }
 
-    @GetMapping("/board/insertBoard") // 글 작성 페이지
+    @GetMapping("/board/write") // 글 작성 페이지
     public String boardWrite() {
-        return "/board/boardWrite";
+        return "/board/write";
     }
 
-    @PostMapping("/board/insertBoard") // 글 작성 로직
+    @PostMapping("/board/write") // 글 작성 로직
     public String insertBoard(BoardVo boardVo, @RequestParam String username, @RequestParam String nickname) throws Exception {
         boardVo.setUsername(username);
         boardVo.setNickname(nickname);
         boardService.insertBoard(boardVo);
-        return "redirect:/boardList";
+        return "redirect:/board/list";
     }
 
     @GetMapping("/board/{boardIdx}") // 글 상세 보기
@@ -56,18 +56,18 @@ public class BoardController {
         BoardVo boardVo = boardService.selectBoardDetail(boardIdx);
         model.addAttribute("board", boardVo);
 
-        return "/board/boardDetail";
+        return "/board/detail";
     }
 
-    @GetMapping("/board/updateForm/{boardIdx}") // 글 수정 폼 요청
+    @GetMapping("/board/update/{boardIdx}") // 글 수정 폼 요청
     public String updateForm(@PathVariable("boardIdx") int boardIdx, Model model) throws Exception {
         System.out.println("updateForm 진입");
         BoardVo boardVo = boardService.selectBoardDetail(boardIdx);
         model.addAttribute("boardVo", boardVo);
-        return "/board/updateForm";
+        return "/board/update";
     }
 
-    @PostMapping("/board/modifyBoard") // 글 수정 요청
+    @PostMapping("/board/update") // 글 수정 요청
     public String modifyBoard(Model model, BoardVo boardVo) throws Exception {
         boardService.updateBoard(boardVo);
         model.addAttribute("boardVo", boardVo);
@@ -75,7 +75,7 @@ public class BoardController {
     }
 
     @ResponseBody
-    @DeleteMapping("/board/deleteBoard/{boardIdx}") // 글 삭제
+    @DeleteMapping("/board/delete/{boardIdx}") // 글 삭제
     public String deleteBoard(@PathVariable("boardIdx") int boardIdx) throws Exception {
         System.out.println("@@@ DELETE BOARD 진입 완료 @@@ ");
         boardService.deleteBoard(boardIdx);

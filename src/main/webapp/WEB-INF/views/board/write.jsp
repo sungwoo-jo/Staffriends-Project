@@ -37,7 +37,10 @@
         <input type="hidden" value="${signIn.nickname}" name="nickname" id="nickname">
       </table>
     </form>
-    <h5 style="text-align: center"><button class="btn btn-success" id="save" style="margin-top: 20px; margin-bottom: 20px;">글 작성 완료</button></h5>
+    <h5 style="text-align: center">
+        <button type="button" class="btn btn-warning" id="list" style="margin-top: 20px; margin-bottom: 20px;">작성 취소</button>
+        <button class="btn btn-success" id="save" style="margin-top: 20px; margin-bottom: 20px;">글 작성 완료</button>
+    </h5>
       <script>
           insertBoard();
       </script>
