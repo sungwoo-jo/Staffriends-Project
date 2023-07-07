@@ -45,7 +45,3 @@ http://staffriends.duckdns.org/
 3. 카카오 REST API OAuth2.0 로그인 구현
 4. 게시판, 회원, 댓글 CRUD 구현
 5. 페이지네이션
-<br/><br/>
-
-# 🏆수상내역
-![수상사진](https://github.com/sungwoo-jo/Staffriends-Project/assets/110444315/4ebb1461-7a3e-4f19-8701-3a1f82653579)
