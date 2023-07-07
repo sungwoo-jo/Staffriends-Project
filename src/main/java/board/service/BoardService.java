@@ -21,5 +21,5 @@ public interface BoardService {
 
     int getTotalRows(int bgno);
 
-    PagingVo paging(String tempPage) throws Exception;
+    PagingVo paging(String tempPage, int bgno) throws Exception;
 }

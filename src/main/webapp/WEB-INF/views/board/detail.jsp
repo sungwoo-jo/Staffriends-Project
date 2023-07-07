@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../layout/header.jsp"%>
-<c:if test="${signIn == null}"><c:redirect url="http://staffriends.duckdns.org/user/needLogin"/></c:if>
+<%--<c:if test="${signIn == null}"><c:redirect url="http://staffriends.duckdns.org/user/needLogin"/></c:if>--%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,6 +38,7 @@
                     </tbody>
                 </table>
                 <input type="hidden" name="boardIdx" value="${board.boardIdx}">
+                <input type="hidden" name="bgno" value="${bgno}" id="bgno">
             </form>
             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
             <button type="button" class="btn btn-success" id="list" style="margin-top: 20px; margin-bottom: 20px;">목록</button>

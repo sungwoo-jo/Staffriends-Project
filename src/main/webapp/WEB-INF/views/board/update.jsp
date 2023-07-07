@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../layout/header.jsp"%>
-<c:if test="${signIn == null}"><c:redirect url="http://staffriends.duckdns.org/user/needLogin"/></c:if>
+<%--<c:if test="${signIn == null}"><c:redirect url="http://staffriends.duckdns.org/user/needLogin"/></c:if>--%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +15,7 @@
 <div style="text-align:center">
 <div class="container">
   <div class="container justify-content-center">
+      bgno: <c:out value="${bgno}"/>
     <h2 style="text-align: center; margin-top: 30px; margin-bottom: 20px; font-family: KakaoBold;">게시글 수정</h2>
   <form id="frm" method="post">
     <table style="margin-left:auto;margin-right:auto; margin: 0 auto">
@@ -36,6 +37,7 @@
     </tbody>
   </table>
   <input type="hidden" id="boardIdx" name="boardIdx" value="${boardVo.boardIdx}">
+  <input type="hidden" id="bgno" name="bgno" value="${bgno}">
   </form>
     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
         <button type="button" class="btn btn-warning" id="list" style="margin-top: 20px; margin-bottom: 20px;">되돌아가기</button>

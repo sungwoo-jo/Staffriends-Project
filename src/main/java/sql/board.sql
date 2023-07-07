@@ -12,7 +12,7 @@ CREATE TABLE board
     `updater_id`        varchar(50)     NULL        COMMENT '수정 회원 id',
     `deleted_yn`        char(1)         NOT NULL    DEFAULT 'N' COMMENT '삭제 여부',
     `reply_count`       int             NULL        DEFAULT 0 COMMENT '댓글 갯수',
-    `bgno`              int             NOT NULL    COMMENT '게시판종 류',
+    `bgno`              int             NOT NULL    COMMENT '게시판종류',
      PRIMARY KEY (board_idx)
 );
 

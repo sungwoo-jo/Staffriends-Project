@@ -49,9 +49,10 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public PagingVo paging(String tempPage) throws Exception {
+    public PagingVo paging(String tempPage, int bgno) throws Exception {
         PagingVo pagingVo = new PagingVo();
-        pagingVo.setTotalRows(getTotalRows(pagingVo.getBgno()));
+        pagingVo.setBgno(bgno);
+        pagingVo.setTotalRows(getTotalRows(bgno));
 
         try {
             pagingVo.setCPage(Integer.parseInt(tempPage)); // 파라미터로 전달받은 페이지 번호를 현재 페이지에 변환하여 담아줌

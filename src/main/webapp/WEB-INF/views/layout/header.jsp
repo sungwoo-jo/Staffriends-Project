@@ -40,7 +40,7 @@
         <%-- 로그인 시 --%>
               <ul class="navbar-nav">
                 <li class="nav-item">
-                  <a class="nav-link" href="/qna"><h5>QnA</h5></a>
+                  <a class="nav-link" href="/board/list?bgno=2"><h5>QnA</h5></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="javascript:transUserInfo('${signIn.serialNum}')"><h5>보호자페이지</h5></a>
@@ -48,9 +48,9 @@
                 <li class="nav-item">
                   <a class="nav-link" href="/board/list?bgno=1"><h5>커뮤니티</h5></a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/board/write"><h5>글쓰기</h5></a>
-                </li>
+<%--                <li class="nav-item">--%>
+<%--                  <a class="nav-link" href="/board/write"><h5>글쓰기</h5></a>--%>
+<%--                </li>--%>
                 <li class="nav-item">
                   <a class="nav-link" href="/user/updateForm"><h5>${signIn.nickname}님</h5></a>
                 </li>

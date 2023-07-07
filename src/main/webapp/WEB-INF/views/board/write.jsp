@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../layout/header.jsp"%>
-<c:if test="${signIn == null}"><c:redirect url="http://staffriends.duckdns.org/user/needLogin"/></c:if>
+<%--<c:if test="${signIn == null}"><c:redirect url="http://staffriends.duckdns.org/user/needLogin"/></c:if>--%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,6 +35,7 @@
         </tr>
         <input type="hidden" value="${signIn.username}" name="username" id="username">
         <input type="hidden" value="${signIn.nickname}" name="nickname" id="nickname">
+        <input type="hidden" value="${bgno}" name="bgno" id="bgno">
       </table>
     </form>
     <h5 style="text-align: center">

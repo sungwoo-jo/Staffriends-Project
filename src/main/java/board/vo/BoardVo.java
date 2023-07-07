@@ -15,4 +15,5 @@ public class BoardVo {
     private String updatedDateTime; // 수정일
     private int replyCount; // 댓글 갯수
     private String deletedYn; // 삭제 여부
+    private int bgno; // 게시글 종류
 }
