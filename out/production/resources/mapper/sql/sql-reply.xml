@@ -129,14 +129,14 @@
         ]]>
     </update>
 
-    <update id="updateReplyContents" parameterType="board.vo.ReplyVo">
+    <select id="updateReplyContents" parameterType="board.vo.ReplyVo">
         <![CDATA[
             UPDATE
-                reply
+                reply_contents
             SET
-                reply_contents = #{replyContents}
+                #{replyContents}
             WHERE
                 reply_idx = #{replyIdx}
         ]]>
-    </update>
+    </select>
 </mapper>
