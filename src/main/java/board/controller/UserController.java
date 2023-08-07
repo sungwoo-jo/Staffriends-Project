@@ -96,6 +96,14 @@ public class UserController {
         return "redirect:/";
     }
 
+    @GetMapping("/naver")
+    public String naverLogin(@RequestParam String code, @RequestParam String state) { // 네이버 로그인
+        System.out.println("네이버 로그인 요청 API 호출");
+        System.out.println("code:"+code);
+        System.out.println("state:"+state);
+        return "naver";
+    }
+
     @GetMapping("/findMyId") // 아이디 찾기 페이지
     public String findMyId() {
         return "/user/findMyId";

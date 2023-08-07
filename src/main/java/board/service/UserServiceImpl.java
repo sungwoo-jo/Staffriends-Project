@@ -14,6 +14,7 @@ import board.mapper.UserMapper;
 import java.io.*;
 import java.math.BigInteger;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.util.Map;
@@ -53,7 +54,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String getAccessTokenFromKakao(String code) { // 액세스 토큰 발급 받기
+    public String getAccessTokenFromKakao(String code) { // 카카오 액세스 토큰 발급 받기
         String accessToken = "";
         String refreshToken = "";
         String reqURL = "https://kauth.kakao.com/oauth/token";
@@ -71,8 +72,8 @@ public class UserServiceImpl implements UserService {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=69eddbebb2b07d6a316fc057c32fdbdf"); // REST API KEY
-//            sb.append("&redirect_uri=http://localhost/user/kakao"); // redirect uri
-            sb.append("&redirect_uri=http://staffriends.duckdns.org/user/kakao"); // service redirect uri
+            sb.append("&redirect_uri=http://localhost/user/kakao"); // redirect uri
+//            sb.append("&redirect_uri=http://staffriends.duckdns.org/user/kakao"); // service redirect uri
             sb.append("&code=" + code); // 인가코드
             bw.write(sb.toString());
             bw.flush();
@@ -107,6 +108,32 @@ public class UserServiceImpl implements UserService {
         }
 
         return accessToken;
+    }
+
+    @Override
+    public String getAccessTokenFromNaver(String code) { // 액세스 토큰 발급 받기
+        String accessToken = "";
+        String reqURL = "https://nid.naver.com/oauth2.0/token";
+
+        try {
+            URL url = new URL(reqURL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+            conn.setRequestMethod("POST");
+            conn.setDoOutput(true);
+
+            BufferedReader bw = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            StringBuilder sb = new StringBuilder();
+            sb.append("grant_type=authorization_code");
+            sb.append("&client_id=7qqLASP70SF5B7AX2r7H");
+            sb.append("&client_secret=tFsTy0qHEP");
+            String line = "";
+            String result = "";
+
+            while ((line = bw.readLine()) != null) {
+
+            }
+        }
     }
 
     @Override

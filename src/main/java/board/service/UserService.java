@@ -17,6 +17,8 @@ public interface UserService {
 
     String getAccessTokenFromKakao(String authorize_code);
 
+    String getAccessTokenFromNaver(String authorize_code);
+
     UserVo getUserInfoFromKakao(String accessToken);
 
     String findMyId(UserVo userVo);
