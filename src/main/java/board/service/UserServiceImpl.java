@@ -6,7 +6,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import board.vo.UserVo;
 import board.mapper.UserMapper;
@@ -14,10 +13,10 @@ import board.mapper.UserMapper;
 import java.io.*;
 import java.math.BigInteger;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -49,7 +48,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(UserVo userVo) throws Exception { // 비밀번호 암호화 후 회원 정보 수정
-        messageDigest(userVo, userVo.getPassword());
+        System.out.println((userVo.getOauth()));
+        if (Objects.equals(userVo.getOauth(), "false")) {
+            messageDigest(userVo, userVo.getPassword());
+        }
+        System.out.println(userVo.getUsername() + userVo.getName() + userVo.getNickname() + userVo.getOauth());
         userMapper.updateUser(userVo);
     }
 
@@ -111,7 +114,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String getAccessTokenFromNaver(String code) { // 액세스 토큰 발급 받기
+    public String getAccessTokenFromNaver(String code, String state) { // 네이버 액세스 토큰 발급 받기
         String accessToken = "";
         String reqURL = "https://nid.naver.com/oauth2.0/token";
 
@@ -122,22 +125,46 @@ public class UserServiceImpl implements UserService {
             conn.setRequestMethod("POST");
             conn.setDoOutput(true);
 
-            BufferedReader bw = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=7qqLASP70SF5B7AX2r7H");
             sb.append("&client_secret=tFsTy0qHEP");
+            sb.append("&code=" + code); // 인가코드
+            sb.append("&state=" + state); // 상태 토큰 값(test)
+            bw.write(sb.toString());
+            bw.flush();
+
+            // 결과 코드가 200이라면 성공
+            int responseCode = conn.getResponseCode();
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String line = "";
             String result = "";
 
-            while ((line = bw.readLine()) != null) {
-
+            while ((line = br.readLine()) != null) {
+                result += line;
             }
+
+            System.out.println("result:" + result);
+            System.out.println(responseCode);
+
+            JsonParser parser = new JsonParser();
+            JsonElement element = parser.parse(result);
+
+            accessToken = element.getAsJsonObject().get("access_token").getAsString();
+
+            System.out.println("accessToken:" + accessToken);
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+        return accessToken;
     }
 
     @Override
-    public UserVo getUserInfoFromKakao(String accessToken) { // 사용자 정보 가져오기
+    public UserVo getUserInfoFromKakao(String accessToken) { // 카카오 사용자 정보 가져오기
         UserVo userInfo = new UserVo();
         String reqURL = "https://kapi.kakao.com/v2/user/me"; // 요청 URL 주소
 
@@ -167,8 +194,7 @@ public class UserServiceImpl implements UserService {
                 // jackson objectmapper 객체 생성
                 ObjectMapper objectMapper = new ObjectMapper();
                 // JSON String -> Map
-                Map<String, Object> jsonMap = objectMapper.readValue(result, new TypeReference<Map<String, Object>>() {
-                });
+                Map<String, Object> jsonMap = objectMapper.readValue(result, new TypeReference<Map<String, Object>>() {});
 
                 System.out.println("properties: "+jsonMap.get("properties"));
                 Map<String, Object> properties = (Map<String, Object>) jsonMap.get("kakao_account");
@@ -195,6 +221,70 @@ public class UserServiceImpl implements UserService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return userInfo;
+    }
+
+    @Override
+    public UserVo getUserInfoFromNaver(String accessToken) { // 네이버 사용자 정보 가져오기
+        UserVo userInfo = new UserVo();
+        String reqURL = "https://openapi.naver.com/v1/nid/me";
+
+        try {
+            URL url = new URL(reqURL);
+            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Authorization", "Bearer " + accessToken);
+
+            int responseCode = conn.getResponseCode();
+            System.out.println(responseCode);
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+            String line = "";
+            String result = "";
+
+            while ((line = br.readLine()) != null) {
+                result += line;
+            }
+
+            System.out.println("result:" + result);
+
+            try {
+                // jackson objectmapper 객체 생성
+                ObjectMapper objectMapper = new ObjectMapper();
+                // JSON String -> Map
+                Map<String, Object> jsonMap = objectMapper.readValue(result, new TypeReference<Map<String, Object>>() {});
+
+                System.out.println(jsonMap);
+
+                System.out.println("response:" + jsonMap.get("response"));
+
+                Map<String, Object> response = (Map<String, Object>) jsonMap.get("response");
+                System.out.println(response.get("id"));
+
+                // 회원정보 설정
+                String id = (String)response.get("id");
+                String nickname = (String)response.get("nickname");
+                String email = (String)response.get("email");
+                String name = (String)response.get("name");
+
+                System.out.println(id + " " + nickname + " " + email + " " + name);
+
+                userInfo.setUsername(id);
+                userInfo.setPassword("1234");
+                userInfo.setNickname(nickname);
+                userInfo.setEmail(email);
+                userInfo.setName(name);
+                userInfo.setOauth("naver");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return userInfo;
     }
 

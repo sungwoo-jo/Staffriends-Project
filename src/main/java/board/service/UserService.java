@@ -17,9 +17,11 @@ public interface UserService {
 
     String getAccessTokenFromKakao(String authorize_code);
 
-    String getAccessTokenFromNaver(String authorize_code);
+    String getAccessTokenFromNaver(String authorize_code, String state);
 
     UserVo getUserInfoFromKakao(String accessToken);
+
+    UserVo getUserInfoFromNaver(String accessToken);
 
     String findMyId(UserVo userVo);
 

@@ -11,10 +11,18 @@
 <section style="padding-bottom: 50px;">
     <div class="container center-div">
 <form method="post" class="container center-div container-size">
-    <div class="form-group">
-        <h5>아이디</h5><input type="text" name="username" id="username" class="form-control" disabled style="text-align: center" value="${signIn.username}"><p/>
-    </div>
-    <c:if test="${empty signIn.oauth}"> <%-- 일반 유저는 비밀번호 수정이 가능 --%>
+    <c:choose>
+        <c:when test="${empty signIn.oauth}"> <%-- 일반 유저는 아이디 확인 가능 --%>
+        <div class="form-group">
+            <h5>아이디</h5><input type="text" name="username" id="username" class="form-control" disabled style="text-align: center" value="${signIn.username}"><p/>
+        </div>
+        </c:when>
+        <c:otherwise>
+            <input type="hidden" name="username" id="username" value="${signIn.username}">
+        </c:otherwise>
+    </c:choose>
+
+    <c:if test="${empty signIn.oauth}">
     <div class="form-group">
         <h5>비밀번호</h5><input type="password" class="form-control" placeholder="문자/숫자 포함 8자리 이상" name="password" id="password" style="text-align: center" oninput="pwCheck()">
         <span style="display: none; text-align: center; color: red; " id="notInputPw">비밀번호를 입력해주세요.</span>
@@ -47,7 +55,13 @@
         <h5>시리얼번호</h5><input type="text" class="form-control" placeholder="시리얼번호를 입력하세요." name="serialNum" id="serialNum" value="${signIn.serialNum}" style="text-align: center">
     </div>
     <div class="form-group text-center">
-        <input class="btn btn-staffriends btn-lg center-div" type="button" value="정보수정" id="updateBtn" onclick="updateInfo()">
+        <c:if test="${empty signIn.oauth}">
+            <input class="btn btn-staffriends btn-lg center-div" type="button" value="정보수정" id="updateBtn" onclick="updateInfo()">
+        </c:if>
+        <c:if test="${not empty signIn.oauth}">
+            <input class="btn btn-staffriends btn-lg center-div" type="button" value="정보수정" id="updateBtn" onclick="updateInfoOauth()">
+        </c:if>
+
     </div>
 </form>
     </div>

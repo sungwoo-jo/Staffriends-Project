@@ -62,17 +62,28 @@
     </select>
 
     <update id="updateUser" parameterType="board.vo.UserVo">
-        <![CDATA[
             UPDATE
                 user
             SET
-                password = #{password},
-                nickname = #{nickname},
-                email = #{email},
-                serial_num = #{serialNum}
+                <choose>
+                    <when test='oauth == "false"'>
+                        <![CDATA[
+                        password = #{password},
+                        nickname = #{nickname},
+                        email = #{email},
+                        serial_num = #{serialNum}
+                        ]]>
+                    </when>
+                    <otherwise>
+                        <![CDATA[
+                        nickname = #{nickname},
+                        email = #{email},
+                        serial_num = #{serialNum}
+                        ]]>
+                    </otherwise>
+                </choose>
             WHERE
                 username = #{username}
-        ]]>
     </update>
 
     <select id="findMyId" parameterType="board.vo.UserVo" resultType="String">

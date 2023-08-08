@@ -428,13 +428,13 @@ function findMyPasswordPopUp() { // 비밀번호 찾기 팝업창 열기
     window.open(url, "findMyPasswordPopUp", windowStatus);
 }
 
-function updateInfo() { // 회원 정보 수정
+function updateInfo() { // 일반 회원 정보 수정
     if(validPassword === true && validSamePassword === true && validNickname === true && validEmail === true) {
-        const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
         const nickname = document.getElementById('nickname').value;
         const email = document.getElementById('email').value;
         const serialNum = document.getElementById('serialNum').value;
+        const username = document.getElementById('username').value;
 
         // 유효성 검사 완료 후 실행할 로직
         let data = {
@@ -442,7 +442,54 @@ function updateInfo() { // 회원 정보 수정
             password:password,
             nickname:nickname,
             email:email,
+            oauth:false,
             serialNum:serialNum
+        };
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("PATCH", "/user/updateProc");
+        xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+        xhr.onload = function() {
+            if (xhr.status === 200 || xhr.status === 201) {
+                let resp = xhr.responseText;
+                if (resp.status === 500) {
+                    alert("에러가 발생했습니다.");
+                } else {
+                    if (resp === "success") {
+                        alert("정보수정이 완료되었습니다.");
+                        location.href = "/";
+                    } else {
+                        alert("정보수정을 완료하지 못했습니다.");
+                    }
+                }
+            } else {
+                console.log(xhr.responseText);
+                alert("에러가 발생했습니다. \n에러 코드: " + xhr.status);
+            }
+        };
+        xhr.onerror = function() {
+            alert("에러가 발생했습니다. \n에러 코드: " + xhr.status);
+        };
+        xhr.send(JSON.stringify(data));
+    } else {
+        alert('입력하신 정보를 다시 한 번 확인해주세요.');
+    }
+}
+
+function updateInfoOauth() { // oauth 회원 정보 수정
+    if(validNickname === true && validEmail === true) {
+        const nickname = document.getElementById('nickname').value;
+        const email = document.getElementById('email').value;
+        const serialNum = document.getElementById('serialNum').value;
+        const username = document.getElementById('username').value;
+
+        // 유효성 검사 완료 후 실행할 로직
+        let data = {
+            username:username,
+            nickname:nickname,
+            email:email,
+            serialNum:serialNum,
+            oauth:true
         };
 
         let xhr = new XMLHttpRequest();

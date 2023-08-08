@@ -1,6 +1,7 @@
 package board.controller;
 
 import board.service.UserService;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -69,6 +70,7 @@ public class UserController {
     @PatchMapping("/updateProc") // 정보 업데이트
     @ResponseBody
     public String updateUser(@RequestBody UserVo userVo) throws Exception {
+        System.out.println("userVo:"+userVo);
         userService.updateUser(userVo);
         return "success";
     }
@@ -96,12 +98,24 @@ public class UserController {
         return "redirect:/";
     }
 
-    @GetMapping("/naver")
-    public String naverLogin(@RequestParam String code, @RequestParam String state) { // 네이버 로그인
+    @GetMapping("/naver") // 네이버 로그인 요청
+    public String naverLogin(@RequestParam String code, @RequestParam String state, HttpSession session) throws Exception { // 네이버 로그인
         System.out.println("네이버 로그인 요청 API 호출");
         System.out.println("code:"+code);
         System.out.println("state:"+state);
-        return "naver";
+        String accessToken = userService.getAccessTokenFromNaver(code, state); // accessToken 요청
+        UserVo userInfo = userService.getUserInfoFromNaver(accessToken);
+        String originalPassword = userInfo.getPassword(); // Oauth 계정에 설정하는 디폴트 패스워드 값(originalPassword)
+        String username = userService.loginProc(userInfo); // 기존 가입자 여부 확인
+        if (username == null) { // 가입 정보가 존재하지 않으면 회원가입 진행
+            userInfo.setPassword(originalPassword); // 패스워드 설정
+            userService.insertUser(userInfo); // 회원 정보 insert
+            session.setAttribute("signIn", userInfo); // 회원 세션 생성
+        } else { // 가입 정보가 존재하면 로그인
+            UserVo userVo = userService.getUserInfo(username); // 회원 id로 회원 정보를 조회
+            session.setAttribute("signIn", userVo); // 회원 세션 생성
+        }
+        return "redirect:/";
     }
 
     @GetMapping("/findMyId") // 아이디 찾기 페이지
