@@ -147,7 +147,9 @@ SET @COUNT = 0;
 UPDATE board SET board_idx = @COUNT:=@COUNT+1;
 
 alter table board add nickname varchar(100) not null; 
-alter table reply add nickname varchar(100) not null;]]></console>
+alter table reply add nickname varchar(100) not null;
+
+desc board;]]></console>
       <console name="staffriends 1" type="STANDARD" schema="staffriends" session="Main"><![CDATA[use staffriends;
 
 

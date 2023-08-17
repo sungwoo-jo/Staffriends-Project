@@ -53,7 +53,6 @@ public class BoardServiceImpl implements BoardService {
         PagingVo pagingVo = new PagingVo();
         pagingVo.setBgno(bgno);
         pagingVo.setTotalRows(getTotalRows(bgno));
-
         try {
             pagingVo.setCPage(Integer.parseInt(tempPage)); // 파라미터로 전달받은 페이지 번호를 현재 페이지에 변환하여 담아줌
         } catch (NumberFormatException e) { // 에러 발생 시(숫자가 아닌 문자가 들어오는 경우) 1로 설정

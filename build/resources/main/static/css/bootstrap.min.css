@@ -64,6 +64,8 @@ body {
     min-width: 350px;
 }
 
+
+
 .body-center-text {
     text-align: center;
 }
@@ -10517,4 +10519,5 @@ a.text-dark:focus, a.text-dark:hover {
         border-color: #dee2e6
     }
 }
+
 /*# sourceMappingURL=bootstrap.min.css.map */

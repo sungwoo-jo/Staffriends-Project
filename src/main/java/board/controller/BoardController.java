@@ -27,8 +27,6 @@ public class BoardController {
     public ModelAndView boardList(HttpServletRequest request) throws Exception {
         int bgno = Integer.parseInt(request.getParameter("bgno"));
         String page = request.getParameter("page");
-        System.out.println("page:"+page);
-        System.out.println("bgno:"+bgno);
         ModelAndView mv = new ModelAndView();
         PagingVo pagingVo = boardService.paging(page, bgno); // 쿼리 스트링의 페이지 번호를 전달
         List<BoardVo> list = boardService.selectBoardList(pagingVo);
