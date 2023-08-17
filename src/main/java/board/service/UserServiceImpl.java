@@ -75,8 +75,8 @@ public class UserServiceImpl implements UserService {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=69eddbebb2b07d6a316fc057c32fdbdf"); // REST API KEY
-            sb.append("&redirect_uri=http://localhost/user/kakao"); // redirect uri
-//            sb.append("&redirect_uri=http://staffriends.duckdns.org/user/kakao"); // service redirect uri
+//            sb.append("&redirect_uri=http://localhost/user/kakao"); // redirect uri
+            sb.append("&redirect_uri=http://staffriends.duckdns.org/user/kakao"); // service redirect uri
             sb.append("&code=" + code); // 인가코드
             bw.write(sb.toString());
             bw.flush();
