@@ -25,10 +25,11 @@
 <html>
 <body>
 <c:set var="KAKAO_REST_API_KEY" value="69eddbebb2b07d6a316fc057c32fdbdf"/>
-<c:set var="KAKAO_REDIRECT_URI" value="http://localhost/user/kakao"/>
+<%--<c:set var="KAKAO_REDIRECT_URI" value="http://localhost/user/kakao"/>--%>
 <c:set var="NAVER_CLIENT_ID" value="7qqLASP70SF5B7AX2r7H"/>
-<c:set var="NAVER_REDIRECT_URI" value="http://localhost/user/naver"/>
-<%--<c:set var="NAVER_REDIRECT_URI" value="http://172.30.1.99/user/naver"/>--%>
+<%--<c:set var="NAVER_REDIRECT_URI" value="http://localhost/user/naver"/>--%>
+<c:set var="KAKAO_REDIRECT_URI" value="http://staffriends.duckdns.org/user/kakao"/>
+<c:set var="NAVER_REDIRECT_URI" value="http://staffriends.duckdns.org/user/naver"/>
 <h2 style="text-align: center; margin-top: 30px; margin-bottom: 70px; font-family: KakaoBold;">로그인</h2>
 <section style="padding-bottom: 10px;">
 <div class="container center-div">
