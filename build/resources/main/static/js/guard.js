@@ -16,11 +16,9 @@ function getAddr(latitude, longitude, txTime, index) { // 주소 변환 메서�
     geocoder.coord2Address(coords.getLng(), coords.getLat(), callback); // 좌표 주소 변환하기
 };
 
-async function getRandomImage() { // 랜덤 이미지 가져오기
-    const response = await fetch('https://picsum.photos/450/320');
-    const blob = await response.blob();
-    const imgUrl = URL.createObjectURL(blob);
-    imgElement.src = imgUrl;
+async function getRandomImage(i) { // 샘플 이미지 가져오기
+            let response = "/img/road_sample_img/road_sample_img_" + i + ".jpg";
+            imgElement.src = response;
 }
 
 function transUserInfo(serialNum) {

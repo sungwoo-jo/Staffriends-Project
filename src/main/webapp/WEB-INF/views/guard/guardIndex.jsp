@@ -65,14 +65,18 @@
 
     </div>
     <div class="screen_bottom_2"> <!-- 우하단 실시간 이미지 표시(랜덤 이미지로 대체) -->
-        <img id="random-image" alt="Random Image" style="cursor:pointer; width: 100%; height: 100%;" onclick="window.open('/img/road_sample_img.jpg');" onerror="this.src='/image/road_sample_img.jpg'">
+        <img id="road-image" style="cursor:pointer; width: 100%; height: 100%;" onclick="window.open('/img/road_sample_img.jpg');">
         <script>
-            const imgElement = document.querySelector('#random-image');
+            let imgElement = document.querySelector('#road-image');
+            let i = 0;
+                setInterval(() => {
 
-            setInterval(() => {
-                getRandomImage();
-            }, 1000);
-            getRandomImage();
+                    getRandomImage(i);
+                    i+=1;
+                    if (i == 17) {
+                        i = 0;
+                    }
+                }, 1000);
         </script>
     </div>
 </div>

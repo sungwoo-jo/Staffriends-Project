@@ -58,18 +58,12 @@ public class BoardServiceImpl implements BoardService {
         } catch (NumberFormatException e) { // 에러 발생 시(숫자가 아닌 문자가 들어오는 경우) 1로 설정
             pagingVo.setCPage(1);
         }
-        System.out.println("cPage: " + pagingVo.getCPage());
-        System.out.println("totalRows: " + pagingVo.getTotalRows());
-        System.out.println("pageLength: " + pagingVo.getPageLength());
-        System.out.println("totalRows / pageLength: " + pagingVo.getTotalRows() / pagingVo.getPageLength());
-        // 필요한 총 페이지의 개수는 데이터의 개수를 보여줄 게시글의 개수로 나누어 딱맞으면 0, 초과하면 1개의 페이지를 더 생성(최소 1개의 페이지 생성)
+        // 필요한 총 페이지의 개수는 데이터의 개수를 보여줄 게시글의 개수로 나누어 딱맞으면 몫 만큼, 초과하면 +1개의 페이지를 더 생성(최소 1개의 페이지 생성)
         if (pagingVo.getTotalRows() % pagingVo.getPageLength() == 0) {
             pagingVo.setTotalPages(pagingVo.getTotalRows() / pagingVo.getPageLength());
         } else {
             pagingVo.setTotalPages((pagingVo.getTotalRows() / pagingVo.getPageLength()) + 1);
         }
-
-        System.out.println("totalPages: " + pagingVo.getTotalPages());
 
         if (pagingVo.getCPage() > pagingVo.getTotalPages() || pagingVo.getCPage() <= 0) { // 페이지가 최소 또는 최대 페이지 범위를 벗어난 경우 1로 설정(반드시 총 페이지의 개수가 구해진 후 연산)
             pagingVo.setCPage(1);
