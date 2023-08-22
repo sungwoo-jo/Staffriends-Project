@@ -69,7 +69,6 @@ public class BoardServiceImpl implements BoardService {
             pagingVo.setCPage(1);
         }
 
-        // 페이지 처음과 끝을 지정하는 부분
         // 현재 위치한 페이지 블록의 순번(1~10: 1번째, 11~20: 2번째, 21~30: 3번째)
         if(pagingVo.getCPage() % pagingVo.getPageLength() == 0) {
             pagingVo.setCurrentBlock(pagingVo.getCPage() / pagingVo.getPageLength());
@@ -77,6 +76,7 @@ public class BoardServiceImpl implements BoardService {
             pagingVo.setCurrentBlock((pagingVo.getCPage() / pagingVo.getPageLength()) + 1);
         }
 
+        // 페이지 처음과 끝을 지정
         pagingVo.setStartPage((pagingVo.getCurrentBlock() - 1) * pagingVo.getPageLength() + 1); // 페이지 블럭의 시작 번호 구하기(1~10은 1로 시작, 11~20은 11로 시작, 21~30은 21로 시작)
         pagingVo.setEndPage(pagingVo.getCurrentBlock() * pagingVo.getPageLength()); // 페이지 블럭의 마지막 번호 구하기(1~10의 끝 번호는 10, 11~20의 끝 번호는 20, 21~30의 끝 번호는 30)
 

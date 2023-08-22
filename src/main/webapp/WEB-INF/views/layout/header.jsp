@@ -50,7 +50,7 @@
                   <a class="nav-link" href="/board/list?bgno=2"><h5>QnA</h5></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="javascript:transUserInfo('${signIn.serialNum}')"><h5>보호자페이지</h5></a>
+                  <a class="nav-link" href="javascript:doGuardPage('${signIn.serialNum}')"><h5>보호자페이지</h5></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/board/list?bgno=1"><h5>커뮤니티</h5></a>

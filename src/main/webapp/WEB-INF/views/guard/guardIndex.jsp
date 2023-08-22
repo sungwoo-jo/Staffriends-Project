@@ -32,15 +32,12 @@
             imageOption = {offset: new kakao.maps.Point(14,69)};
         let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 
-        // 마커 정보 배열 선언 & 초기화
-        let markerPosition = new Array();
-        let marker = new Array();
-        let iwContent = new Array();
-        let iwPosition = new Array();
-        let infoWindow = new Array();
-
+        // 마커 정보를 담아줄 변수들
+        let markerPosition, marker, iwContent, iwPosition, infoWindow;
+        // 경로 정보를 담아줄 history 배열
         let history = [];
 
+        console.log("history:", history);
         <c:forEach var="history" items="${history}" varStatus="status"> <%-- 가져온 경로 정보를 카카오맵에 표시 --%>
             history.push("${history}");
 
@@ -50,7 +47,7 @@
 
             marker.setMap(map); // 마커가 지도 위에 표시되도록 설정
 
-            // JSTL 태그로 tx_time을 원하는 포맷대로 출력(yyyy-MM-dd HH:mm:ss)
+            // 마커와 함께 표시되는 인포윈도우의 내용을 원하는 포맷대로 출력(yyyy-MM-dd HH:mm:ss)
             iwContent ='<div style="padding: 4px; font-size:0.6rem;">'+'<b style="color: blue">'+'${history.serial_num}'+'</b>'+':&nbsp' +'<fmt:formatDate value="${history.tx_time}" pattern="yyyy-MM-dd HH:mm:ss"/>'+'</div>';
             iwPosition = new kakao.maps.LatLng(${history.latitude}, ${history.longitude});
             infoWindow = new kakao.maps.InfoWindow({ position : iwPosition, content : iwContent });
@@ -64,14 +61,13 @@
         <%@include file="log.jsp"%>
 
     </div>
-    <div class="screen_bottom_2"> <!-- 우하단 실시간 이미지 표시(랜덤 이미지로 대체) -->
+    <div class="screen_bottom_2"> <!-- 우하단 실시간 이미지 표시(샘플 이미지로 대체) -->
         <img id="road-image" style="cursor:pointer; width: 100%; height: 100%;" onclick="window.open('/img/road_sample_img.jpg');">
         <script>
             let imgElement = document.querySelector('#road-image');
             let i = 0;
-                setInterval(() => {
-
-                    getRandomImage(i);
+                setInterval(() => { // 17개의 샘플 이미지를 순서대로 출력
+                    getSampleImage(i);
                     i+=1;
                     if (i == 17) {
                         i = 0;
